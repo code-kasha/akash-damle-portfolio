@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+A modern, animated portfolio website showcasing my projects and expertise. Built with Next.js, React, and Tailwind CSS for a smooth, interactive user experience.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Responsive Design** – Fully responsive and optimized for all devices
+- **Smooth Animations** – Framer Motion-powered animations for an engaging UI
+- **Modern UI Components** – Built with Shadcn/UI and Radix UI
+- **Project Showcase** – Display of featured projects with descriptions and links
+- **Icon Library** – HugeIcons integration for professional iconography
+- **TypeScript** – Type-safe development with full TypeScript support
+- **Dark/Light Theme Ready** – Tailwind CSS for easy theming
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework:** [Next.js 16.2](https://nextjs.org) with React 19
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com)
+- **Animation:** [Framer Motion](https://www.framer.com/motion)
+- **UI Components:** [Shadcn/UI](https://ui.shadcn.com) & [Radix UI](https://radix-ui.com)
+- **Icons:** [HugeIcons](https://hugeicons.com)
+- **Language:** [TypeScript](https://www.typescriptlang.org)
+- **Linting:** [ESLint](https://eslint.org)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎨 Customization
 
-## Learn More
+- **Colors & Theme:** Update Tailwind CSS configuration in `tailwind.config.ts`
+- **Components:** Add or modify UI components in `components/ui/`
+- **Content:** Edit `app/page.tsx` to add/modify projects and content
+- **Fonts & Images:** Place assets in the `public/` directory
 
-To learn more about Next.js, take a look at the following resources:
+## 📚 Learn More
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Framer Motion Guide](https://www.framer.com/motion)
+- [Shadcn/UI Documentation](https://ui.shadcn.com)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📝 License
 
-## Deploy on Vercel
+This project is open source and available under the MIT License.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Connect
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GitHub: [@code-kasha](https://github.com/code-kasha)
+- Feel free to reach out with questions or collaboration opportunities!
