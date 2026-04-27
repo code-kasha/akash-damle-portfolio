@@ -34,7 +34,7 @@ export default function Portfolio() {
 	]
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black text-white p-6">
+		<div className="min-h-screen bg-linear-to-br from-black via-zinc-900 to-black text-white p-6">
 			<div className="max-w-6xl mx-auto">
 				{/* Hero */}
 				<motion.div
@@ -98,8 +98,8 @@ export default function Portfolio() {
 				</div>
 
 				{/* Footer */}
-				<div className="mt-20 text-center text-zinc-500">
-					<p>Contact: akash.damle@outlook.com</p>
+				<div className="mt-20 text-center text-zinc-300">
+					<p>2026, Akash Damle - akash.damle@outlook.com</p>
 				</div>
 			</div>
 		</div>
