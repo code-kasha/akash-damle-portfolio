@@ -1,65 +1,107 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import Image from "next/image"
+
+export default function Portfolio() {
+	const projects = [
+		{
+			title: "XO Anime",
+			desc: "Multi-source anime platform aggregating 6 APIs with optimized backend handling 2000+ users and custom M3U8 streaming.",
+			link: "https://github.com/code-kasha/xoanime",
+			image: "/xo.png",
+		},
+		{
+			title: "Shoppy Globe",
+			desc: "E-commerce backend with product management, cart, orders, and scalable API design.",
+			link: "https://github.com/code-kasha/is_shoppy_globe",
+			image: "/shoppy-globe.png",
+		},
+		{
+			title: "Online Library",
+			desc: "Backend system for managing books, users, and borrowing workflows with clean architecture.",
+			link: "https://github.com/code-kasha/online-library",
+			image: "/online-library.png",
+		},
+		{
+			title: "Youtube Clone",
+			desc: "A full-stack YouTube clone built with Django REST Framework and React, featuring video uploads, user authentication, and real-time comments.",
+			link: "https://github.com/code-kasha/yt-clone",
+			image: "/yt-clone.png",
+		},
+	]
+
+	return (
+		<div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black text-white p-6">
+			<div className="max-w-6xl mx-auto">
+				{/* Hero */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					className="mb-16"
+				>
+					<h1 className="text-5xl font-bold mb-4 tracking-tight">
+						Akash Damle
+					</h1>
+					<p className="text-lg text-zinc-400 max-w-2xl">
+						Backend Developer (Django, Node.js) with 6+ years of experience
+						building scalable APIs and high-performance systems.
+					</p>
+					<div className="mt-6 flex gap-4">
+						<Button asChild className="rounded-xl">
+							<a href="https://github.com/code-kasha" target="_blank">
+								GitHub
+							</a>
+						</Button>
+					</div>
+				</motion.div>
+
+				{/* Projects */}
+				<div className="grid md:grid-cols-2 gap-8">
+					{projects.map((p, i) => (
+						<motion.div
+							key={i}
+							initial={{ opacity: 0, y: 30 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: i * 0.1 }}
+						>
+							<Card className="rounded-3xl overflow-hidden bg-zinc-900/70 backdrop-blur border border-zinc-800 hover:border-zinc-700 transition-all duration-300 shadow-xl hover:shadow-2xl">
+								{/* Image */}
+								<div className="overflow-hidden">
+									<Image
+										src={p.image}
+										alt={p.title}
+										width={800}
+										height={400}
+										className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
+									/>
+								</div>
+
+								<CardContent className="p-6">
+									<h2 className="text-2xl font-semibold mb-2 text-gray-200">
+										{p.title}
+									</h2>
+									<p className="text-gray-100 mb-4 leading-relaxed">{p.desc}</p>
+									<a
+										href={p.link}
+										target="_blank"
+										className="text-blue-400 hover:text-blue-300 transition-colors"
+									>
+										View Project →
+									</a>
+								</CardContent>
+							</Card>
+						</motion.div>
+					))}
+				</div>
+
+				{/* Footer */}
+				<div className="mt-20 text-center text-zinc-500">
+					<p>Contact: akash.damle@outlook.com</p>
+				</div>
+			</div>
+		</div>
+	)
 }
