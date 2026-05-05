@@ -50,9 +50,27 @@ export default function Portfolio() {
 						building scalable APIs and high-performance systems.
 					</p>
 					<div className="mt-6 flex gap-4">
-						<Button asChild className="rounded-xl">
+						<Button asChild variant="outline" className="rounded-xl">
 							<a href="https://github.com/code-kasha" target="_blank">
 								GitHub
+							</a>
+						</Button>
+						<Button asChild variant="outline" className="rounded-xl">
+							<a
+								href="https://www.linkedin.com/in/akash-damle-58a808258/"
+								target="_blank"
+							>
+								LinkedIn
+							</a>
+						</Button>
+						<Button asChild variant="outline" className="rounded-xl">
+							<a href="/Resume.pdf" target="_blank">
+								Resume
+							</a>
+						</Button>
+						<Button asChild variant="outline" className="rounded-xl">
+							<a href="/Resume(Long).pdf" target="_blank">
+								Resume (Long)
 							</a>
 						</Button>
 					</div>
