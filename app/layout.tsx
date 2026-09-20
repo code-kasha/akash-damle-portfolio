@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next"
 import { Geist_Mono, Inter } from "next/font/google"
 import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
+import { DEFAULT_THEME, THEME_INIT_SCRIPT } from "@/lib/themes"
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -40,8 +42,8 @@ export const metadata: Metadata = {
 	},
 	robots: { index: true, follow: true },
 	manifest: "/site.webmanifest",
-	// One palette, so one icon: no media queries and no script needed.
-	// favicon.ico is the fallback for anything that will not take the SVG.
+	// One fixed icon. It deliberately does not follow the theme: no `media`
+	// on the links and nothing in script touches them.
 	icons: {
 		icon: [
 			{ url: "/favicon.ico", sizes: "32x32" },
@@ -52,8 +54,10 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-	// Matches the paper canvas; there is only one palette now.
-	themeColor: "#F3F3F0",
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#F4F3F0" },
+		{ media: "(prefers-color-scheme: dark)", color: "#000000" },
+	],
 }
 
 export default function RootLayout({
@@ -62,16 +66,30 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
+		<html
+			lang="en"
+			data-theme={DEFAULT_THEME}
+			suppressHydrationWarning
+			className={`${inter.variable} ${geistMono.variable}`}
+		>
+			<head>
+				{/* Applies the stored theme before first paint, so switching
+				    themes survives a reload without a flash of the default. */}
+				<script
+					dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+				/>
+			</head>
 			<body className="min-h-svh">
-				<a
-					href="#main"
-					className="bg-primary text-primary-foreground focus:ring-ring sr-only rounded-b-lg px-4 py-2 text-sm font-semibold focus:not-sr-only focus:absolute focus:left-1/2 focus:top-0 focus:z-[70] focus:-translate-x-1/2"
-				>
-					Skip to content
-				</a>
-				<SiteHeader />
-				{children}
+				<ThemeProvider>
+					<a
+						href="#main"
+						className="bg-primary text-primary-foreground focus:ring-ring sr-only rounded-b-lg px-4 py-2 text-sm font-semibold focus:not-sr-only focus:absolute focus:left-1/2 focus:top-0 focus:z-[70] focus:-translate-x-1/2"
+					>
+						Skip to content
+					</a>
+					<SiteHeader />
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	)
