@@ -16,44 +16,15 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { getFeatured } from "@/lib/projects"
-
-const skills = [
-	{ group: "Backend", items: ["Django", "DRF", "Node.js", "Express", "REST"] },
-	{ group: "Languages", items: ["Python", "TypeScript", "JavaScript", "SQL"] },
-	{ group: "Data", items: ["PostgreSQL", "MongoDB", "Redis", "Query tuning"] },
-	{ group: "Platform", items: ["Docker", "CI/CD", "Linux", "AWS", "Vercel"] },
-	{ group: "Quality", items: ["Vitest", "Pytest", "Zod", "OpenAPI"] },
-	{ group: "Frontend", items: ["React", "Next.js", "Tailwind", "Redux"] },
-]
-
-const marqueeItems = skills.flatMap((s) => s.items)
-
-// Ordered high to low, so the eye descends and the strongest signal leads.
-const stats = [
-	{ value: "100%", label: "Endpoint coverage on my latest API" },
-	{ value: "27+", label: "Client systems built and self-hosted" },
-	{ value: "6+", label: "Years shipping production code" },
-	{ value: "3", label: "Stacks in production: Django, Node, TS" },
-]
-
-const experience = [
-	{
-		period: "2021 — Present",
-		role: "Freelance Software Engineer",
-		company: "Independent · Remote",
-		description:
-			"Design, build and host Django CRM systems for schools, clinics and small businesses. Employee management, payroll, attendance and analytics, running on self-managed Linux servers with ongoing support.",
-		tags: ["Django", "PostgreSQL", "Linux", "Self-hosted"],
-	},
-	{
-		period: "2018 — 2021",
-		role: "Junior Software Developer",
-		company: "Matalli Infotech · Dombivli",
-		description:
-			"Built and maintained internal web applications on Django 2.2 LTS. Wrote unit and database tests, implemented CI/CD pipelines, and managed deployments across AWS and Heroku with minimal downtime.",
-		tags: ["Django", "CI/CD", "AWS", "Testing"],
-	},
-]
+import {
+	contact,
+	experience,
+	identity,
+	skillTicker,
+	skills,
+	stats,
+	summary,
+} from "@/lib/profile"
 
 export default function HomePage() {
 	const featured = getFeatured()
@@ -74,7 +45,7 @@ export default function HomePage() {
 								<span className="relative inline-flex size-2 rounded-full bg-primary" />
 							</span>
 							<span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-								Available for remote roles
+								{identity.availability}
 							</span>
 						</div>
 					</Reveal>
@@ -82,13 +53,12 @@ export default function HomePage() {
 					{/* The name sits in the navbar, so the hero leads with the
 					    positioning line instead. */}
 					<h1 className="font-display mb-8 max-w-4xl text-[clamp(2.25rem,6.5vw,4.75rem)] font-bold tracking-[-0.035em]">
-						<SplitText text="Backend engineer, six years in." delay={0.1} />
+						<SplitText text={identity.positioning} delay={0.1} />
 					</h1>
 
 					<Reveal delay={0.5}>
 						<p className="text-muted-foreground mb-10 max-w-2xl text-lg leading-relaxed text-balance sm:text-xl">
-							I build the unglamorous parts properly — typed APIs, real test
-							suites, deployments that hold up on a Tuesday afternoon.
+							{summary}
 						</p>
 					</Reveal>
 
@@ -141,7 +111,7 @@ export default function HomePage() {
 			>
 				<div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
 					<div className="marquee-track flex shrink-0 items-center gap-10 pr-10">
-						{[...marqueeItems, ...marqueeItems].map((item, i) => (
+						{[...skillTicker, ...skillTicker].map((item, i) => (
 							<span
 								key={`${item}-${i}`}
 								className="text-muted-foreground font-mono text-sm whitespace-nowrap"
@@ -244,7 +214,7 @@ export default function HomePage() {
 									className="mt-8 h-10 rounded-full px-5"
 								>
 									<a
-										href="https://github.com/code-kasha"
+										href={contact.github}
 										target="_blank"
 										rel="noopener noreferrer"
 									>
@@ -386,7 +356,7 @@ export default function HomePage() {
 									asChild
 									className="h-12 rounded-full px-7 text-sm font-semibold"
 								>
-									<a href="mailto:akashdamle07@gmail.com">Email me</a>
+									<a href={`mailto:${contact.email}`}>Email me</a>
 								</Button>
 							</Magnetic>
 							<Magnetic>
@@ -396,7 +366,7 @@ export default function HomePage() {
 									className="h-12 rounded-full px-7 text-sm font-semibold"
 								>
 									<a
-										href="https://www.linkedin.com/in/akash-damle-58a808258/"
+										href={contact.linkedin}
 										target="_blank"
 										rel="noopener noreferrer"
 									>
@@ -411,7 +381,7 @@ export default function HomePage() {
 									className="h-12 rounded-full px-7 text-sm font-semibold"
 								>
 									<a
-										href="https://github.com/code-kasha"
+										href={contact.github}
 										target="_blank"
 										rel="noopener noreferrer"
 									>
@@ -426,7 +396,7 @@ export default function HomePage() {
 									className="h-12 rounded-full px-7 text-sm font-semibold"
 								>
 									<a
-										href="/Resume.pdf"
+										href={contact.resumePdf}
 										target="_blank"
 										rel="noopener noreferrer"
 									>
@@ -443,8 +413,10 @@ export default function HomePage() {
 				<div className="mx-auto max-w-6xl">
 					<Separator className="mb-8" />
 					<div className="text-muted-foreground flex flex-col items-center justify-between gap-3 text-xs sm:flex-row">
-						<p>© {new Date().getFullYear()} Akash Damle</p>
-						<p className="font-mono">Dombivli, India · Working remotely</p>
+						<p>© {new Date().getFullYear()} {identity.name}</p>
+						<p className="font-mono">
+							{identity.location} · {identity.workingStyle}
+						</p>
 					</div>
 				</div>
 			</footer>

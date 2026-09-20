@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
 import { DEFAULT_THEME, THEME_INIT_SCRIPT } from "@/lib/themes"
+import { contact, identity } from "@/lib/profile"
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -17,11 +18,13 @@ const geistMono = Geist_Mono({
 	display: "swap",
 })
 
+const TITLE = `${identity.name} — ${identity.title}`
+
 export const metadata: Metadata = {
-	metadataBase: new URL("https://www.akashdamle.in"),
+	metadataBase: new URL(contact.site),
 	title: {
-		default: "Akash Damle — Backend Engineer",
-		template: "%s — Akash Damle",
+		default: TITLE,
+		template: `%s — ${identity.name}`,
 	},
 	description:
 		"Backend engineer with 6+ years building scalable systems in Django, Node.js and TypeScript. Case studies, experience and contact.",
@@ -29,14 +32,14 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: "website",
 		url: "/",
-		siteName: "Akash Damle",
-		title: "Akash Damle — Backend Engineer",
+		siteName: identity.name,
+		title: TITLE,
 		description:
 			"Backend engineer with 6+ years building scalable systems in Django, Node.js and TypeScript.",
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Akash Damle — Backend Engineer",
+		title: TITLE,
 		description:
 			"Backend engineer with 6+ years building scalable systems in Django, Node.js and TypeScript.",
 	},
