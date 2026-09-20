@@ -35,11 +35,13 @@ export function SiteHeader() {
 							: "mt-0 w-full max-w-none rounded-none border-transparent px-6 py-5",
 					)}
 				>
+					{/* The name lives here rather than in a hero headline, so
+					    it stays on screen the whole way down the page. */}
 					<Link
 						href="/"
-						className="font-display text-lg font-bold tracking-tight"
+						className="font-display text-base font-bold tracking-tight whitespace-nowrap sm:text-lg"
 					>
-						Akash<span className="text-primary">.</span>
+						Akash Damle<span className="text-primary">.</span>
 					</Link>
 
 					<nav aria-label="Primary" className="hidden md:block">

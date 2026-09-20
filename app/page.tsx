@@ -77,15 +77,16 @@ export default function HomePage() {
 						</div>
 					</Reveal>
 
-					<h1 className="font-display mb-6 text-[clamp(3rem,11vw,7.5rem)] leading-[0.92] font-bold tracking-[-0.04em]">
-						<SplitText text="Akash Damle" delay={0.15} />
+					{/* The name sits in the navbar, so the hero leads with the
+					    positioning line instead. */}
+					<h1 className="font-display mb-8 max-w-4xl text-[clamp(2.25rem,6.5vw,4.75rem)] leading-[1.02] font-bold tracking-[-0.035em]">
+						<SplitText text="Backend engineer, six years in." delay={0.1} />
 					</h1>
 
-					<Reveal delay={0.55}>
+					<Reveal delay={0.5}>
 						<p className="text-muted-foreground mb-10 max-w-2xl text-lg leading-relaxed text-balance sm:text-xl">
-							Backend engineer, six years in. I build the unglamorous parts
-							properly — typed APIs, real test suites, deployments that hold up
-							on a Tuesday afternoon.
+							I build the unglamorous parts properly — typed APIs, real test
+							suites, deployments that hold up on a Tuesday afternoon.
 						</p>
 					</Reveal>
 

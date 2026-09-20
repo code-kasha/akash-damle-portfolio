@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Geist_Mono, Inter, Instrument_Serif } from "next/font/google"
+import { Geist_Mono, Inter, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 	display: "swap",
 })
 
-const serifDisplay = Instrument_Serif({
+// Display face for the two light themes. Geometric sans, deliberately not
+// a calligraphic/serif face.
+const displayAlt = Space_Grotesk({
 	subsets: ["latin"],
-	weight: "400",
-	style: ["normal", "italic"],
-	variable: "--font-serif-display",
+	variable: "--font-display-alt",
 	display: "swap",
 })
 
@@ -52,10 +52,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "#FAF7F2" },
-		{ media: "(prefers-color-scheme: dark)", color: "#0A0118" },
-	],
+	// Matches the default (acid) theme's canvas.
+	themeColor: "#000000",
 }
 
 export default function RootLayout({
@@ -68,7 +66,7 @@ export default function RootLayout({
 			lang="en"
 			data-theme={DEFAULT_THEME}
 			suppressHydrationWarning
-			className={`${inter.variable} ${geistMono.variable} ${serifDisplay.variable}`}
+			className={`${inter.variable} ${geistMono.variable} ${displayAlt.variable}`}
 		>
 			<head>
 				{/* Applies the stored theme before first paint, so switching

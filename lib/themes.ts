@@ -27,7 +27,7 @@ export const THEMES = [
 
 export type ThemeId = (typeof THEMES)[number]["id"]
 
-export const DEFAULT_THEME: ThemeId = "editorial"
+export const DEFAULT_THEME: ThemeId = "acid"
 
 export const THEME_IDS = THEMES.map((t) => t.id) as readonly ThemeId[]
 
