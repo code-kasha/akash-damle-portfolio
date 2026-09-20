@@ -41,6 +41,7 @@ export const metadata: Metadata = {
 			"Backend engineer with 6+ years building scalable systems in Django, Node.js and TypeScript.",
 	},
 	robots: { index: true, follow: true },
+	manifest: "/site.webmanifest",
 }
 
 export const viewport: Viewport = {

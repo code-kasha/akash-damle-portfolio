@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Akash Damle">
+  <style>
+    /* Defaults are the dark palette, so the mark is still correct in
+       browsers that ignore media queries inside favicons. */
+    .tile { fill: #000000; }
+    .mark { stroke: #DCFB00; }
+    @media (prefers-color-scheme: light) {
+      .tile { fill: #567A65; }
+      .mark { stroke: #FAFAF9; }
+    }
+  </style>
+
+  <!-- Square corners, matching the dark theme's zero border radius. -->
+  <rect class="tile" width="64" height="64"/>
+
+  <!-- Monogram drawn as geometry, not text: a favicon has no dependable
+       access to webfonts, so a text element would render in whatever the
+       browser falls back to. The mitred apex gives the brutalist point. -->
+  <g class="mark" fill="none" stroke-width="9" stroke-linecap="butt" stroke-linejoin="miter">
+    <path d="M12 56 L32 16 L52 56"/>
+    <path d="M19.5 40 H44.5" stroke-width="7.5"/>
+  </g>
+</svg>
