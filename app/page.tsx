@@ -30,8 +30,9 @@ const marqueeItems = skills.flatMap((s) => s.items)
 
 const stats = [
 	{ value: "6+", label: "Years shipping production code" },
-	{ value: "27+", label: "CRM deployments for real clients" },
-	{ value: "2", label: "Industries: healthcare and education" },
+	{ value: "27+", label: "Client systems built and self-hosted" },
+	{ value: "100%", label: "Endpoint coverage on my latest API" },
+	{ value: "3", label: "Stacks in production: Django, Node, TS" },
 ]
 
 const experience = [
@@ -113,7 +114,7 @@ export default function HomePage() {
 					</Reveal>
 
 					<Reveal delay={0.8}>
-						<dl className="mt-20 grid max-w-3xl grid-cols-1 gap-8 sm:grid-cols-3">
+						<dl className="mt-20 grid max-w-4xl grid-cols-2 gap-8 lg:grid-cols-4">
 							{stats.map((stat) => (
 								<div key={stat.label} className="border-t pt-4">
 									<dt className="font-display text-4xl font-bold tracking-tight">
