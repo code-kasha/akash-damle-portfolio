@@ -161,7 +161,7 @@ export default function HomePage() {
 							<p className="text-muted-foreground mb-3 font-mono text-xs tracking-widest uppercase">
 								Selected work
 							</p>
-							<h2 className="font-display text-[clamp(2.25rem,6vw,4rem)] leading-[1.02] font-bold tracking-tight">
+							<h2 className="font-display text-[clamp(2.25rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight">
 								Case studies
 							</h2>
 						</div>
@@ -266,7 +266,7 @@ export default function HomePage() {
 						<p className="text-muted-foreground mb-3 font-mono text-xs tracking-widest uppercase">
 							Toolkit
 						</p>
-						<h2 className="font-display text-[clamp(2.25rem,6vw,4rem)] leading-[1.02] font-bold tracking-tight">
+						<h2 className="font-display text-[clamp(2.25rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight">
 							What I reach for
 						</h2>
 					</Reveal>
@@ -308,7 +308,7 @@ export default function HomePage() {
 						<p className="text-muted-foreground mb-3 font-mono text-xs tracking-widest uppercase">
 							Track record
 						</p>
-						<h2 className="font-display text-[clamp(2.25rem,6vw,4rem)] leading-[1.02] font-bold tracking-tight">
+						<h2 className="font-display text-[clamp(2.25rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight">
 							Experience
 						</h2>
 					</Reveal>
@@ -367,7 +367,7 @@ export default function HomePage() {
 						<p className="text-muted-foreground mb-4 font-mono text-xs tracking-widest uppercase">
 							Contact
 						</p>
-						<h2 className="font-display mb-6 text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.95] font-bold tracking-[-0.03em]">
+						<h2 className="font-display mb-6 text-[clamp(2.5rem,8vw,5.5rem)] leading-[1.15] font-bold tracking-[-0.03em]">
 							<span className="text-gradient">Let&apos;s build something</span>
 						</h2>
 						<p className="text-muted-foreground mx-auto mb-12 max-w-xl leading-relaxed">

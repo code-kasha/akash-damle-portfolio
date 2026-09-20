@@ -81,7 +81,7 @@ export default async function ProjectPage({
 							<span>{project.role}</span>
 						</div>
 
-						<h1 className="font-display mb-6 text-[clamp(2.5rem,8vw,5rem)] leading-[0.98] font-bold tracking-[-0.03em]">
+						<h1 className="font-display mb-6 text-[clamp(2.5rem,8vw,5rem)] leading-[1.15] font-bold tracking-[-0.03em]">
 							{project.title}
 						</h1>
 
