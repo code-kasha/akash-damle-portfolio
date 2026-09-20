@@ -28,10 +28,11 @@ const skills = [
 
 const marqueeItems = skills.flatMap((s) => s.items)
 
+// Ordered high to low, so the eye descends and the strongest signal leads.
 const stats = [
-	{ value: "6+", label: "Years shipping production code" },
-	{ value: "27+", label: "Client systems built and self-hosted" },
 	{ value: "100%", label: "Endpoint coverage on my latest API" },
+	{ value: "27+", label: "Client systems built and self-hosted" },
+	{ value: "6+", label: "Years shipping production code" },
 	{ value: "3", label: "Stacks in production: Django, Node, TS" },
 ]
 
