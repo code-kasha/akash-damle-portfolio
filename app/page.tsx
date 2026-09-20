@@ -6,36 +6,13 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 export default function Portfolio() {
-	const projects = [
-		{
-			title: "XO Anime",
-			desc: "Streaming platform aggregating 6 APIs with custom HLS player and unified search. Optimized for 2000+ concurrent users.",
-			link: "https://github.com/code-kasha/xoanime",
-			image: "/xo.png",
-			tags: ["Django", "HLS Streaming", "API Integration"],
-		},
-		{
-			title: "Shoppy Globe",
-			desc: "E-commerce backend with Node.js/Express and MongoDB. Features product management, cart, orders, and RESTful APIs.",
-			link: "https://github.com/code-kasha/is_shoppy_globe",
-			image: "/shoppy-globe.png",
-			tags: ["Node.js", "MongoDB", "Express"],
-		},
-		{
-			title: "Online Library",
-			desc: "Full-stack library system with React and Django. Manages books, users, and borrowing workflows with clean architecture.",
-			link: "https://github.com/code-kasha/online-library",
-			image: "/online-library.png",
-			tags: ["React", "Django", "Redux"],
-		},
-		{
-			title: "YouTube Clone",
-			desc: "Complete MERN stack application with video uploads, JWT authentication, comments, and real-time interactions.",
-			link: "https://github.com/code-kasha/yt-clone",
-			image: "/yt-clone.png",
-			tags: ["MERN", "JWT", "Media Handling"],
-		},
-	]
+	const projects: {
+		title: string
+		desc: string
+		link: string
+		image: string
+		tags: string[]
+	}[] = []
 
 	const skills = [
 		{
