@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Akash Damle">
+  <rect width="64" height="64" fill="#567A65"/>
+  <g transform="translate(32 32) scale(1.04) translate(-29.93 -33)">
+  <path fill="#FAFAF9" d="M26 10 L48 56 H38 L26 31 L14 56 H4 Z"/>
+  <path fill="#FAFAF9" d="M15 37 H37 V45 H15 Z"/>
+  <path fill="#567A65" d="M33 19 H39 A 19 19 0 0 1 39 59 H33 Z"/>
+  <path fill="#FAFAF9" d="M36 23 H40 A 15 15 0 0 1 40 55 H36 Z"/>
+  <path fill="#567A65" d="M44 32 A 7.5 7.5 0 0 1 44 46 Z"/>
+  </g>
+</svg>

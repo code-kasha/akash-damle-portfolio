@@ -42,6 +42,27 @@ export const metadata: Metadata = {
 	},
 	robots: { index: true, follow: true },
 	manifest: "/site.webmanifest",
+	// Two SVGs rather than one with an internal media query: `media` on the
+	// link is honoured more widely than prefers-color-scheme evaluated
+	// inside a favicon. favicon.ico is the universal fallback and carries
+	// the dark mark, so a browser that ignores both still gets a correct
+	// icon rather than a broken one.
+	icons: {
+		icon: [
+			{ url: "/favicon.ico", sizes: "32x32" },
+			{
+				url: "/icon-light.svg",
+				type: "image/svg+xml",
+				media: "(prefers-color-scheme: light)",
+			},
+			{
+				url: "/icon-dark.svg",
+				type: "image/svg+xml",
+				media: "(prefers-color-scheme: dark)",
+			},
+		],
+		apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+	},
 }
 
 export const viewport: Viewport = {
