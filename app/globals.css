@@ -73,7 +73,10 @@
 	--ring: oklch(0.545 0.052 158);
 
 	--radius: 0.25rem;
-	--display-family: var(--font-display-alt);
+	/* Inter, same as dark. Space Grotesk ends its g/y descenders in a wide
+	   flat terminal (44px of ink on the bottom row at 120px, vs Inter's 13)
+	   which reads as a razor cut rather than a tail. */
+	--display-family: var(--font-sans);
 
 	--glow: oklch(0.545 0.052 158 / 0.16);
 	--mesh-1: oklch(0.78 0.06 158 / 0.22);

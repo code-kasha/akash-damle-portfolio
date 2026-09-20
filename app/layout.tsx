@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Geist_Mono, Inter, Space_Grotesk } from "next/font/google"
+import { Geist_Mono, Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
@@ -14,14 +14,6 @@ const inter = Inter({
 const geistMono = Geist_Mono({
 	subsets: ["latin"],
 	variable: "--font-mono",
-	display: "swap",
-})
-
-// Display face for the two light themes. Geometric sans, deliberately not
-// a calligraphic/serif face.
-const displayAlt = Space_Grotesk({
-	subsets: ["latin"],
-	variable: "--font-display-alt",
 	display: "swap",
 })
 
@@ -68,7 +60,7 @@ export default function RootLayout({
 			lang="en"
 			data-theme={DEFAULT_THEME}
 			suppressHydrationWarning
-			className={`${inter.variable} ${geistMono.variable} ${displayAlt.variable}`}
+			className={`${inter.variable} ${geistMono.variable}`}
 		>
 			<head>
 				{/* Applies the stored theme before first paint, so switching
