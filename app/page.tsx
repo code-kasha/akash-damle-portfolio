@@ -79,7 +79,7 @@ export default function HomePage() {
 
 					{/* The name sits in the navbar, so the hero leads with the
 					    positioning line instead. */}
-					<h1 className="font-display mb-8 max-w-4xl text-[clamp(2.25rem,6.5vw,4.75rem)] leading-[1.02] font-bold tracking-[-0.035em]">
+					<h1 className="font-display mb-8 max-w-4xl text-[clamp(2.25rem,6.5vw,4.75rem)] font-bold tracking-[-0.035em]">
 						<SplitText text="Backend engineer, six years in." delay={0.1} />
 					</h1>
 

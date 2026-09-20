@@ -123,7 +123,7 @@ export function SplitText({
 		// the gap matches the font's own space metric. Real space characters
 		// sit between the wrappers so the headline still copies and reads
 		// correctly; the gap is not faked with margins.
-		<span className={`${className ?? ""} [word-spacing:0.035em]`}>
+		<span className={`split-text ${className ?? ""} [word-spacing:0.035em]`}>
 			{words.map((word, i) => (
 				<React.Fragment key={`${word}-${i}`}>
 					<span className="inline-block overflow-hidden align-bottom">

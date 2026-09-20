@@ -9,6 +9,7 @@ import {
 } from "@/lib/themes"
 
 const THEME_EVENT = "ad-themechange"
+const LIGHT_QUERY = "(prefers-color-scheme: light)"
 
 /**
  * The live theme lives on <html data-theme>, written by the pre-paint script
@@ -20,7 +21,29 @@ const THEME_EVENT = "ad-themechange"
 function subscribe(onChange: () => void) {
 	window.addEventListener(THEME_EVENT, onChange)
 
-	// Also catch a switch made in another tab.
+	// Follow the OS as it changes, unless the visitor has chosen explicitly.
+	const media = window.matchMedia(LIGHT_QUERY)
+
+	const onSystemChange = (event: MediaQueryListEvent) => {
+		let stored: string | null = null
+		try {
+			stored = localStorage.getItem(THEME_STORAGE_KEY)
+		} catch {
+			// Storage unavailable; treat as "no explicit choice".
+		}
+
+		if (stored === "light" || stored === "dark") return
+
+		document.documentElement.setAttribute(
+			"data-theme",
+			event.matches ? "light" : "dark",
+		)
+		onChange()
+	}
+
+	media.addEventListener("change", onSystemChange)
+
+	// Keep a switch made in another tab in sync.
 	const onStorage = (event: StorageEvent) => {
 		if (event.key !== THEME_STORAGE_KEY || !event.newValue) return
 
@@ -35,6 +58,7 @@ function subscribe(onChange: () => void) {
 
 	return () => {
 		window.removeEventListener(THEME_EVENT, onChange)
+		media.removeEventListener("change", onSystemChange)
 		window.removeEventListener("storage", onStorage)
 	}
 }
@@ -54,6 +78,7 @@ function getServerSnapshot(): ThemeId {
 type ThemeContextValue = {
 	theme: ThemeId
 	setTheme: (theme: ThemeId) => void
+	toggleTheme: () => void
 }
 
 const ThemeContext = React.createContext<ThemeContextValue | null>(null)
@@ -91,7 +116,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 		window.dispatchEvent(new Event(THEME_EVENT))
 	}, [])
 
-	const value = React.useMemo(() => ({ theme, setTheme }), [theme, setTheme])
+	const toggleTheme = React.useCallback(() => {
+		setTheme(getSnapshot() === "dark" ? "light" : "dark")
+	}, [setTheme])
+
+	const value = React.useMemo(
+		() => ({ theme, setTheme, toggleTheme }),
+		[theme, setTheme, toggleTheme],
+	)
 
 	return <ThemeContext value={value}>{children}</ThemeContext>
 }

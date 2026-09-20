@@ -52,8 +52,10 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-	// Matches the default (acid) theme's canvas.
-	themeColor: "#000000",
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#F4F3F0" },
+		{ media: "(prefers-color-scheme: dark)", color: "#000000" },
+	],
 }
 
 export default function RootLayout({
