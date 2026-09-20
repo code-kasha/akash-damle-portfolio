@@ -5,6 +5,7 @@ import {
 	DEFAULT_THEME,
 	THEME_IDS,
 	THEME_STORAGE_KEY,
+	syncThemeIcon,
 	type ThemeId,
 } from "@/lib/themes"
 
@@ -34,10 +35,9 @@ function subscribe(onChange: () => void) {
 
 		if (stored === "light" || stored === "dark") return
 
-		document.documentElement.setAttribute(
-			"data-theme",
-			event.matches ? "light" : "dark",
-		)
+		const next: ThemeId = event.matches ? "light" : "dark"
+		document.documentElement.setAttribute("data-theme", next)
+		syncThemeIcon(next)
 		onChange()
 	}
 
@@ -51,6 +51,7 @@ function subscribe(onChange: () => void) {
 		if (!THEME_IDS.includes(next)) return
 
 		document.documentElement.setAttribute("data-theme", next)
+		syncThemeIcon(next)
 		onChange()
 	}
 
@@ -105,6 +106,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 		}
 
 		root.setAttribute("data-theme", next)
+		syncThemeIcon(next)
 
 		try {
 			localStorage.setItem(THEME_STORAGE_KEY, next)
