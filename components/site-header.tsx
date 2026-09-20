@@ -3,7 +3,6 @@
 import * as React from "react"
 import Link from "next/link"
 import { motion, useMotionValueEvent, useScroll } from "motion/react"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { ScrollProgress } from "@/components/motion-primitives"
 import { cn } from "@/lib/utils"
 
@@ -76,8 +75,6 @@ export function SiteHeader() {
 								))}
 							</ul>
 						</nav>
-
-						<ThemeToggle />
 					</div>
 				</motion.div>
 			</header>

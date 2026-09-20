@@ -43,10 +43,10 @@
 }
 
 /* ===============================================================
-   LIGHT — "Nordic": paper, slate, sage and ochre
+   Palette — "Nordic": paper, slate, sage and ochre
    =============================================================== */
 
-[data-theme="light"] {
+:root {
 	--background: oklch(0.962 0.004 106);
 	--foreground: oklch(0.24 0.011 210);
 	--surface: oklch(0.938 0.005 106);
@@ -73,9 +73,6 @@
 	--ring: oklch(0.545 0.052 158);
 
 	--radius: 0.25rem;
-	/* Inter, same as dark. Space Grotesk ends its g/y descenders in a wide
-	   flat terminal (44px of ink on the bottom row at 120px, vs Inter's 13)
-	   which reads as a razor cut rather than a tail. */
 	--display-family: var(--font-sans);
 
 	--glow: oklch(0.545 0.052 158 / 0.16);
@@ -83,46 +80,6 @@
 	--mesh-2: oklch(0.82 0.07 78 / 0.18);
 	--mesh-3: oklch(0.8 0.03 210 / 0.2);
 	--grain-opacity: 0.03;
-}
-
-/* ===============================================================
-   DARK — "Acid": brutalist monochrome with a lime accent
-   =============================================================== */
-
-[data-theme="dark"] {
-	--background: oklch(0.03 0 0);
-	--foreground: oklch(0.99 0 0);
-	--surface: oklch(0.11 0 0);
-	--surface-raised: oklch(0.16 0 0);
-
-	--card: oklch(0.08 0 0);
-	--card-foreground: oklch(0.99 0 0);
-	--popover: oklch(0.11 0 0);
-	--popover-foreground: oklch(0.99 0 0);
-
-	--primary: oklch(0.93 0.24 118);
-	--primary-foreground: oklch(0.03 0 0);
-	--secondary: oklch(0.18 0 0);
-	--secondary-foreground: oklch(0.99 0 0);
-
-	--muted: oklch(0.16 0 0);
-	--muted-foreground: oklch(0.68 0 0);
-	--accent: oklch(0.93 0.24 118);
-	--accent-foreground: oklch(0.03 0 0);
-
-	--destructive: oklch(0.63 0.24 25);
-	--border: oklch(0.26 0 0);
-	--input: oklch(0.26 0 0);
-	--ring: oklch(0.93 0.24 118);
-
-	--radius: 0rem;
-	--display-family: var(--font-sans);
-
-	--glow: oklch(0.93 0.24 118 / 0.3);
-	--mesh-1: oklch(0.93 0.24 118 / 0.14);
-	--mesh-2: oklch(0.5 0 0 / 0.3);
-	--mesh-3: oklch(0.3 0 0 / 0.4);
-	--grain-opacity: 0.07;
 }
 
 /* ---------------------------------------------------------------
@@ -165,25 +122,6 @@
 	:focus-visible {
 		outline: 2px solid var(--ring);
 		outline-offset: 3px;
-	}
-}
-
-/* ---------------------------------------------------------------
-   Theme transition — cross-fades palettes without animating layout
-   --------------------------------------------------------------- */
-
-@layer base {
-	html.theme-transition,
-	html.theme-transition *,
-	html.theme-transition *::before,
-	html.theme-transition *::after {
-		transition:
-			background-color 400ms var(--ease-out-expo),
-			border-color 400ms var(--ease-out-expo),
-			color 400ms var(--ease-out-expo),
-			fill 400ms var(--ease-out-expo),
-			stroke 400ms var(--ease-out-expo) !important;
-		transition-delay: 0ms !important;
 	}
 }
 
