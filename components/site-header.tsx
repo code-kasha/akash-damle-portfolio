@@ -41,7 +41,7 @@ export function SiteHeader() {
 						href="/"
 						className="font-display text-base font-bold tracking-tight whitespace-nowrap sm:text-lg"
 					>
-						Akash Damle<span className="text-primary">.</span>
+						Akash Damle
 					</Link>
 
 					<nav aria-label="Primary" className="hidden md:block">

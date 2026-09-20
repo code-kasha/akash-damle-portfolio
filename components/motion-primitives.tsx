@@ -119,24 +119,27 @@ export function SplitText({
 	// being painted. The keyframes live in globals.css and are neutralised
 	// under prefers-reduced-motion.
 	return (
-		<span className={className}>
+		// word-spacing cancels the negative tracking on the space glyph, so
+		// the gap matches the font's own space metric. Real space characters
+		// sit between the wrappers so the headline still copies and reads
+		// correctly; the gap is not faked with margins.
+		<span className={`${className ?? ""} [word-spacing:0.035em]`}>
 			{words.map((word, i) => (
-				<span
-					key={`${word}-${i}`}
-					className="inline-block overflow-hidden align-bottom"
-				>
-					<span
-						className="word-rise"
-						style={
-							{
-								"--word-delay": `${Math.round((delay + i * 0.08) * 1000)}ms`,
-							} as React.CSSProperties
-						}
-					>
-						{word}
-						{i < words.length - 1 ? " " : ""}
+				<React.Fragment key={`${word}-${i}`}>
+					<span className="inline-block overflow-hidden align-bottom">
+						<span
+							className="word-rise"
+							style={
+								{
+									"--word-delay": `${Math.round((delay + i * 0.08) * 1000)}ms`,
+								} as React.CSSProperties
+							}
+						>
+							{word}
+						</span>
 					</span>
-				</span>
+					{i < words.length - 1 ? " " : ""}
+				</React.Fragment>
 			))}
 		</span>
 	)
