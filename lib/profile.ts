@@ -17,7 +17,7 @@ export const identity = {
 	/** The one job title. Used everywhere; do not vary it per document. */
 	title: "Backend Engineer",
 	/** Longer form for the hero and metadata. */
-	positioning: "Backend engineer, six years in.",
+	positioning: "Backend engineer, eight years in.",
 	location: "Dombivli, India",
 	availability: "Available for remote roles",
 	/** Shown in the footer and useful on a résumé for remote applications. */
@@ -39,6 +39,14 @@ export const summary =
 	"I build the unglamorous parts properly — typed APIs, real test suites, deployments that hold up on a Tuesday afternoon."
 
 /**
+ * One sentence, used for the meta description, OpenGraph and Twitter cards.
+ * It lived inline in app/layout.tsx three times over, which is how the years
+ * figure drifted out of step with the site in the first place.
+ */
+export const metaDescription =
+	"Backend engineer with 8 years building scalable systems in Django, Node.js and TypeScript."
+
+/**
  * Every number here has to survive being asked "measured how?".
  *
  * The unverifiable claims that used to sit on both the site and the résumé
@@ -51,7 +59,7 @@ export const summary =
 export const stats = [
 	{ value: "100%", label: "Endpoint coverage on my latest API" },
 	{ value: "27+", label: "Client systems built and self-hosted" },
-	{ value: "6+", label: "Years shipping production code" },
+	{ value: "8", label: "Years shipping production code" },
 	{ value: "3", label: "Stacks in production: Django, Node, TS" },
 ] as const
 

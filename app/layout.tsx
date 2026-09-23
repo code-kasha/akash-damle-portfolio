@@ -4,7 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
 import { DEFAULT_THEME, THEME_INIT_SCRIPT } from "@/lib/themes"
-import { contact, identity } from "@/lib/profile"
+import { contact, identity, metaDescription } from "@/lib/profile"
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -26,22 +26,19 @@ export const metadata: Metadata = {
 		default: TITLE,
 		template: `%s — ${identity.name}`,
 	},
-	description:
-		"Backend engineer with 6+ years building scalable systems in Django, Node.js and TypeScript. Case studies, experience and contact.",
+	description: `${metaDescription} Case studies, experience and contact.`,
 	alternates: { canonical: "/" },
 	openGraph: {
 		type: "website",
 		url: "/",
 		siteName: identity.name,
 		title: TITLE,
-		description:
-			"Backend engineer with 6+ years building scalable systems in Django, Node.js and TypeScript.",
+		description: metaDescription,
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: TITLE,
-		description:
-			"Backend engineer with 6+ years building scalable systems in Django, Node.js and TypeScript.",
+		description: metaDescription,
 	},
 	robots: { index: true, follow: true },
 	manifest: "/site.webmanifest",
