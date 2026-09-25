@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local likes/comments store used by next dev (lib/engagement/store.ts)
+/.data/

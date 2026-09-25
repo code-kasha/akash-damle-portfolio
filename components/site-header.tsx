@@ -8,12 +8,12 @@ import { ScrollProgress } from "@/components/motion-primitives"
 import { cn } from "@/lib/utils"
 import { getVisiblePosts } from "@/lib/posts"
 
-// "Writing" appears only once a post is visible (published, or any draft under next dev).
+// "Blog" appears only once a post is visible (published, or any draft under next dev).
 const links = [
 	{ label: "Work", href: "/#work" },
 	{ label: "Skills", href: "/#skills" },
 	{ label: "Experience", href: "/#experience" },
-	...(getVisiblePosts().length > 0 ? [{ label: "Writing", href: "/blog" }] : []),
+	...(getVisiblePosts().length > 0 ? [{ label: "Blog", href: "/blog" }] : []),
 	{ label: "Contact", href: "/#contact" },
 ]
 

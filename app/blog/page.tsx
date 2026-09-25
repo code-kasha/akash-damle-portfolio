@@ -1,12 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
 import { Reveal } from "@/components/motion-primitives"
 import { Aurora } from "@/components/aurora"
 import { formatPostDate, getVisiblePosts } from "@/lib/posts"
 
 export const metadata: Metadata = {
-	title: "Writing",
+	title: "Blog",
 	description:
 		"Notes from building and testing software: what worked, what broke, and how to reproduce it.",
 	alternates: { canonical: "/blog" },
@@ -36,7 +35,7 @@ export default function BlogIndexPage() {
 
 					<Reveal delay={0.05}>
 						<h1 className="font-display mb-6 text-[clamp(2.5rem,8vw,5rem)] leading-[1.15] font-bold tracking-[-0.03em]">
-							Writing
+							Blog
 						</h1>
 						<p className="text-muted-foreground max-w-2xl text-lg leading-relaxed text-balance">
 							Notes from building and testing software: what worked, what
@@ -67,14 +66,6 @@ export default function BlogIndexPage() {
 												</time>
 												<span aria-hidden>·</span>
 												<span>{post.readingMinutes} min read</span>
-												{post.status === "draft" && (
-													<Badge
-														variant="outline"
-														className="rounded-full font-mono text-xs"
-													>
-														Draft
-													</Badge>
-												)}
 											</div>
 											<h2 className="font-display group-hover:text-primary mb-3 text-2xl leading-snug font-bold tracking-tight text-balance transition-colors">
 												{post.title}

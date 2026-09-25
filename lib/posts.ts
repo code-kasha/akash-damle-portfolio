@@ -33,9 +33,9 @@ export const posts: Post[] = [
 		title: 'Local AI on a 12 GB GPU: what survived testing, and how to set it up',
 		description:
 			'Three local models, four apps, and the failures that decided the setup. Tested on one Windows PC with an RTX 3060 (12 GB) and 32 GB of RAM.',
-		published: null,
+		published: '2026-09-25',
 		updated: '2026-09-25',
-		status: 'draft',
+		status: 'published',
 		tags: ['Local AI', 'Ollama', 'Developer tools'],
 		readingMinutes: 12,
 	},

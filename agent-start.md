@@ -50,7 +50,11 @@ The 2026-09-20 publish was explicitly authorised and does not generalise.
 app/layout.tsx              metadata, fonts, theme init script, providers
 app/page.tsx                the single landing page (client component)
 app/projects/[slug]/page.tsx  case-study route, SSG, params is a Promise
-app/blog/page.tsx           blog index ("Writing")
+app/blog/page.tsx           blog index ("Blog" in the header)
+app/blog/[slug]/*-image.tsx  per-post share card (lib/post-card.tsx)
+app/api/blog/**            likes, comments, moderation route handlers
+lib/engagement/*           comment rules, storage (Redis or local file), request helpers
+components/post-engagement.tsx, share-buttons.tsx  like/comment UI, share row
 app/blog/[slug]/page.tsx    post route: imports content/blog/<slug>.mdx, SSG
 mdx-components.tsx          blog typography (required by @next/mdx)
 next.config.ts              the only Next config; wires @next/mdx + remark-gfm
@@ -58,7 +62,7 @@ app/globals.css             Tailwind import, theme tokens, keyframes, utilities
 
 lib/profile.ts              SINGLE SOURCE OF TRUTH for stated facts
 lib/projects.ts             case-study data — CURRENTLY AN EMPTY ARRAY
-lib/posts.ts                blog post metadata; drafts show only under next dev
+lib/posts.ts                blog post metadata; drafts (if any) show only under next dev
 content/blog/<slug>.mdx     blog post bodies
 lib/themes.ts               theme ids, storage key, pre-paint init script
 lib/utils.ts                shadcn cn()
@@ -217,14 +221,23 @@ Full detail, with per-project expansion plans, is in
 7. **Remove orphaned screenshots** — `public/xo.png`, `shoppy-globe.png`,
    `online-library.png`, `yt-clone.png` belong to projects no longer shown.
 8. **Visual review deferred.** Current design is accepted; do not redesign.
-9. **Blog section: built locally, 25 September; nothing published.** `/blog`
-   and `/blog/[slug]` reuse the case-study layout; `mdx-components.tsx` styles
-   the body with the existing tokens. Drafts render only under `next dev`
-   (with a Draft badge and noindex); production lists and routes published
-   posts only, and the header's "Writing" link and sitemap entries appear
-   only once a post is visible. The one post is a draft copied from the
-   owner's fact-checked text. To publish: set `status: 'published'` and
-   `published` in `lib/posts.ts` after the owner approves it.
+9. **Blog: built and published in data, 25 September; not deployed.** The
+   local AI article is `status: 'published'`, so the next deploy puts it live
+   at `/blog/local-ai-on-a-12gb-gpu` with share buttons, BlogPosting JSON-LD
+   and a per-post share card. **Likes and comments** need a store before they
+   appear; without one the section is not rendered and the API answers 503.
+   To enable on Vercel: add Upstash for Redis from the Marketplace (free tier;
+   the code reads `KV_REST_API_URL`/`KV_REST_API_TOKEN` or the
+   `UPSTASH_REDIS_REST_URL`/`_TOKEN` names), plus env vars
+   `MODERATION_TOKEN` (long random string) and `ENGAGEMENT_SALT` (random),
+   then redeploy. `next dev` uses `.data/engagement.json` (gitignored).
+   Comment rules (`lib/engagement/comments.ts`): 12+ words, 6+ specific
+   words, no all-caps or repeated runs, 2 links max, no exact duplicates,
+   honeypot, 4 s minimum fill time, 3 per sender per 10 min. Comments with
+   links or promotional terms wait for review; `COMMENTS_MODERATION=review`
+   holds every comment. Moderate with:
+   `curl -H "Authorization: Bearer $MODERATION_TOKEN" https://www.akashdamle.in/api/blog/moderation`
+   and POST `{"id":"...","action":"publish"|"hide"}` to the same URL.
 10. **Two lockfiles.** npm (`package-lock.json`) is the one agents update;
     `pnpm-lock.yaml` was regenerated with `pnpm install --lockfile-only` to
     match. Pick one package manager before the next deploy.
