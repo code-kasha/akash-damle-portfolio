@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { getFeatured } from "@/lib/projects"
+import { getPublishedPosts } from "@/lib/posts"
 import {
 	contact,
 	experience,
@@ -28,6 +29,7 @@ import {
 
 export default function HomePage() {
 	const featured = getFeatured()
+	const latestPost = getPublishedPosts()[0]
 
 	return (
 		<main id="main">
@@ -83,6 +85,28 @@ export default function HomePage() {
 							</Magnetic>
 						</div>
 					</Reveal>
+
+					{/* Newest blog post, surfaced in the hero because posts are a
+					    main route in from search and social. Hidden when none exist. */}
+					{latestPost && (
+						<Reveal delay={0.95} y={16}>
+							<Link
+								href={`/blog/${latestPost.slug}`}
+								className="group surface-glass hover:border-primary mt-8 inline-flex max-w-full items-center gap-3 rounded-full border py-1.5 pr-4 pl-1.5 text-sm shadow-lg shadow-black/5 transition-colors"
+							>
+								<span className="bg-primary text-primary-foreground shrink-0 rounded-full px-2.5 py-1 font-mono text-[0.65rem] tracking-widest uppercase">
+									New post
+								</span>
+								<span className="truncate">{latestPost.title}</span>
+								<span
+									aria-hidden
+									className="text-primary shrink-0 transition-transform group-hover:translate-x-0.5"
+								>
+									→
+								</span>
+							</Link>
+						</Reveal>
+					)}
 
 					<Reveal delay={0.8}>
 						<dl className="mt-20 grid max-w-4xl grid-cols-2 gap-8 lg:grid-cols-4">
