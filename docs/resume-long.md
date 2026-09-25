@@ -9,7 +9,7 @@ akashdamle07@gmail.com · +91 98333 58619
 
 ## Summary
 
-Backend engineer with 8 years building and operating production systems in
+Backend engineer with 8+ years of total experience, building and operating systems in
 Django and Node/TypeScript. Most of that time as the only engineer on the
 project, which means I have owned schema design, API surface, deployment and
 support rather than one slice of it.

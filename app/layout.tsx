@@ -39,6 +39,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: TITLE,
 		description: metaDescription,
+		images: [{ url: "/opengraph-image", alt: TITLE }],
 	},
 	robots: { index: true, follow: true },
 	manifest: "/site.webmanifest",

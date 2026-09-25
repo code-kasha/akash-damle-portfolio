@@ -44,3 +44,13 @@ This project is open source and available under the MIT License.
 
 - GitHub: [@code-kasha](https://github.com/code-kasha)
 - Feel free to reach out with questions or collaboration opportunities!
+
+## Search and sharing
+
+`app/robots.ts` and `app/sitemap.ts` derive canonical URLs from `lib/profile.ts`.
+The sitemap includes the homepage and every case study in `lib/projects.ts`.
+`app/opengraph-image.tsx` generates the 1200×630 social card using profile content
+and the existing favicon. Open Graph and Twitter metadata reference this image.
+Verify with `npm run build`, `npx eslint .`, then `npm run start`. Check
+`/robots.txt`, `/sitemap.xml`, `/opengraph-image` and the homepage metadata.
+These changes are local on v2; production publication remains separate.

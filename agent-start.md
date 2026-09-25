@@ -2,7 +2,7 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-09-20** · Last commit at time of writing: `60b693a`
+Last updated: **2026-09-25** · SEO and experience corrections verified locally on `v2`; not deployed.
 
 ---
 
@@ -19,7 +19,7 @@ goal decides most arguments:
 | **Target role** | Software / backend developer |
 | **Location** | Remote preferred (Akash is in Dombivli, India) |
 | **Compensation floor** | 15 LPA |
-| **Positioning** | Backend engineer, 8 years, Django + Node/TypeScript |
+| **Positioning** | Backend engineer, 8+ years of total experience, Django + Node/TypeScript |
 
 When a design or content question is genuinely balanced, pick the option a
 hiring reviewer would respect.
@@ -34,8 +34,8 @@ v2     working branch. All new work starts here.
 v1     archive of the pre-revamp site (ad9ccf0). Do not build on it.
 ```
 
-`v2` and `main` are currently identical. Work on `v2`, fast-forward `main`
-when ready. The history is linear; **no force-push has ever been needed and
+`v2` contains local changes ahead of `main`. Work on `v2`; publication remains
+a separate explicitly requested action. The history is linear; **no force-push has ever been needed and
 none should be**.
 
 Akash's standing preference: **commit locally, do not push or open PRs unless
@@ -179,8 +179,10 @@ Established by reading the actual repositories on 2026-09-20.
   sources.
 - **13 of 34 repos are duplicates or superseded** — four ShoppyGlobe, three
   yt-clone, four XO variants, two school APIs.
-- **Akash has 8 years of experience**, not the "6+" the old documents claim
-  (Aug 2018 → Sep 2026). The drafts in `docs/` use 8.
+- **Akash has 8+ years of total experience**, including trainee/intern work
+  omitted from the listed employment timeline (confirmed 25 September 2026).
+  The profile, metadata, manifest and Markdown drafts use this wording.
+  Existing job dates are unchanged; old public PDFs still need replacement.
 
 Full detail, with per-project expansion plans, is in
 `docs/project-audit.xlsx`.
@@ -193,8 +195,11 @@ Full detail, with per-project expansion plans, is in
    renders a "Case studies in progress" placeholder. This is the single
    biggest gap. Start with `lead-platform`, then `maxread-api`. The shape is
    narrative — problem, constraint, approach, outcome — not a feature list.
-2. **`robots.txt` and `sitemap.xml`.** Both 404.
-3. **OG image.** Links currently preview as bare URLs when shared.
+2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
+   Typed metadata routes use `contact.site`; the sitemap follows `projects`.
+3. **OG image: complete locally, 25 September.** `app/opengraph-image.tsx`
+   renders a 1200×630 PNG using profile content and the existing AD favicon.
+   Open Graph and Twitter metadata reference it. Publication is pending.
 4. **Fix the two dead demos** on `lead-platform` and `northpeak` (both 404).
    A dead demo link reads worse than no link.
 5. **Regenerate the résumé PDFs** from `docs/resume-*.md` and replace
@@ -205,8 +210,7 @@ Full detail, with per-project expansion plans, is in
    silently ignored.
 7. **Remove orphaned screenshots** — `public/xo.png`, `shoppy-globe.png`,
    `online-library.png`, `yt-clone.png` belong to projects no longer shown.
-8. **Unify light/dark geometry.** The themes differ in corner radius
-   (`0.25rem` vs `0`), so toggling changes shape as well as colour.
+8. **Visual review deferred.** Current design is accepted; do not redesign.
 
 ---
 
@@ -224,3 +228,11 @@ state inside an effect.
 Verify visual claims by measurement, not assumption: computed styles, element
 geometry, canvas ink bounds. Several confident visual diagnoses in this
 project's history turned out to be wrong, and measuring is what caught them.
+
+## 9. Verification — 25 September 2026
+
+Production build and TypeScript passed. Local production HTTP checks passed for
+robots, sitemap, PNG dimensions/content type, OG/Twitter image metadata and
+8+ total-experience text. The social image was visually inspected. New route
+files pass ESLint with zero warnings; full-repo ESLint has 49 pre-existing
+JSDoc warnings and zero errors. No push, merge to main or deployment.

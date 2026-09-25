@@ -12,12 +12,13 @@
  * the documents can be generated from the same data later.
  */
 
+/** Total experience includes trainee/intern work (confirmed by Akash, 25 September 2026). */
 export const identity = {
 	name: "Akash Damle",
 	/** The one job title. Used everywhere; do not vary it per document. */
 	title: "Backend Engineer",
 	/** Longer form for the hero and metadata. */
-	positioning: "Backend engineer, eight years in.",
+	positioning: "Backend engineer, 8+ years of total experience.",
 	location: "Dombivli, India",
 	availability: "Available for remote roles",
 	/** Shown in the footer and useful on a résumé for remote applications. */
@@ -44,7 +45,7 @@ export const summary =
  * figure drifted out of step with the site in the first place.
  */
 export const metaDescription =
-	"Backend engineer with 8 years building scalable systems in Django, Node.js and TypeScript."
+	"Backend engineer with 8+ years of total experience, building systems in Django, Node.js and TypeScript."
 
 /**
  * Every number here has to survive being asked "measured how?".
@@ -59,7 +60,7 @@ export const metaDescription =
 export const stats = [
 	{ value: "100%", label: "Endpoint coverage on my latest API" },
 	{ value: "27+", label: "Client systems built and self-hosted" },
-	{ value: "8", label: "Years shipping production code" },
+	{ value: "8+", label: "Years of total experience" },
 	{ value: "3", label: "Stacks in production: Django, Node, TS" },
 ] as const
 
