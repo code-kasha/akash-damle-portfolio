@@ -1,3 +1,16 @@
+## In short
+
+- **Context length decides whether a model fits.** The same 5.3 GB model took 18 GB and spilled onto
+  the CPU at a 131K context, but used 6.8 GB entirely on the GPU at 16K.
+- **Three models cover everything I need:** a 7B model for autocomplete, Qwen 3.5 9B for chat,
+  documents and small code changes, and Qwen 3 Coder 30B, a mixture-of-experts model that runs well
+  despite not fitting in VRAM, for larger coding tasks.
+- **The coding agent needs a 32K context and a small output reserve,** or it summarises its own
+  conversation in an endless loop.
+- **The dangerous failures looked like successes.** Models reported work as done when nothing was
+  saved, or when the saved file still had errors. Check files, diffs and tests, not summaries.
+- **A six-step setup, with a check for each step,** is at the end.
+
 ## Why I did this
 
 I write the core logic of my projects myself. I wanted local models for the work around it:
@@ -68,6 +81,15 @@ before you rule it out.
   show what works on this setup, not a general ranking of models.
 
 ## What I ended up with
+
+Every app here talks to [Ollama](https://ollama.com), which runs the models on the GPU. On top of it:
+
+- [T3 Code](https://t3.codes) ([source](https://github.com/pingdotgg/t3code)), an open-source
+  desktop app for running coding agents. Here it runs [OpenCode](https://opencode.ai), an
+  open-source coding agent, against the local models.
+- [Jan](https://jan.ai), a desktop chat app that can use tools.
+- [AnythingLLM](https://anythingllm.com), which answers questions from your own documents, with citations.
+- VS Code with [Twinny](https://github.com/twinnydotdev/twinny), for autocomplete only.
 
 I tried fourteen models; three stayed. They cover four jobs across four apps:
 
@@ -197,15 +219,27 @@ it worked.
 | `OLLAMA_CONTEXT_LENGTH` | `16384` |
 | `OLLAMA_FLASH_ATTENTION` | `1` |
 | `OLLAMA_KV_CACHE_TYPE` | `q8_0` |
-| `OLLAMA_ORIGINS` | `*` (desktop apps otherwise get a 403) |
+| `OLLAMA_ORIGINS` | `http://tauri.localhost` (see the warning below) |
 | `OLLAMA_MODELS` | optional: a folder on a data drive |
+
+**A warning about `OLLAMA_ORIGINS`.** In my setup I used `*`, which fixed a 403 error in Jan. But `*`
+also lets any website open in your browser send requests to Ollama in the background, including
+requests that delete models or start large downloads. Only Jan needed a change. Ollama's built-in
+list already allows `localhost` and `tauri://` origins, but not `http://tauri.localhost`, which
+appears to be what Jan's Windows app sends, and that matches the 403 I saw. I tested this on a
+temporary Ollama server. With `OLLAMA_ORIGINS=http://tauri.localhost`, that origin got through and
+an ordinary website was still blocked; with `*`, both got through. I have not re-run Jan itself
+with the narrower value. If Jan shows a 403 with it, check which origin Jan sends before falling
+back to `*`.
 
 Also set the context slider in Ollama's settings to 16K. Then **quit Ollama completely**, including
 the tray icon, and start it again. A process started before the change keeps the old environment.
 This caught me out three times. *Check:* after loading a model, `ollama ps` shows context 16384
 and `100% GPU` for the 9B.
 
-**2. Models.** Download three models, then create two 32K variants:
+**2. Models.** Download three models ([qwen3.5](https://ollama.com/library/qwen3.5),
+[qwen3-coder](https://ollama.com/library/qwen3-coder),
+[qwen2.5-coder](https://ollama.com/library/qwen2.5-coder)), then create two 32K variants:
 
 ```powershell
 ollama pull qwen3.5:9b
@@ -280,6 +314,20 @@ Twinny 4.2.5 (it has since updated itself to 4.2.7).
   documentation goes to a cloud model.
 - Apps update themselves. Twinny updated during testing and again before I wrote this. Re-run the
   checks after an update.
+
+## What I didn't use, and why
+
+- **Other runtimes.** I did not compare Ollama with [LM Studio](https://lmstudio.ai) or
+  [llama.cpp](https://github.com/ggml-org/llama.cpp)'s own server. Every app here could talk to
+  Ollama, so I kept one runtime and spent the time testing the apps. Another runtime may be faster
+  on the same card; I haven't measured it.
+- **Open WebUI.** It needs Docker, which I didn't want on this machine.
+- **An agent inside the editor.** Cline was my main assistant in the earlier setup; I replaced it
+  with T3, where agent work happens in its own threads and I review the diffs. VS Code keeps
+  autocomplete and deterministic hints only. I have not tested Continue in this setup.
+- **A model as a linter.** Ruff, Pylance and ErrorLens are instant and never invent a rule. A model
+  would be slower and less predictable at the same job.
+- **A code index.** Tested above: it lost to the agent searching the files live.
 
 ## What I would tell myself at the start
 

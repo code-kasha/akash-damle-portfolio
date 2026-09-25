@@ -37,7 +37,7 @@ export const posts: Post[] = [
 		updated: '2026-09-25',
 		status: 'published',
 		tags: ['Local AI', 'Ollama', 'Developer tools'],
-		readingMinutes: 12,
+		readingMinutes: 15,
 	},
 ]
 
