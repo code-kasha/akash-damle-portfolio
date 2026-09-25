@@ -221,9 +221,9 @@ Full detail, with per-project expansion plans, is in
 7. **Remove orphaned screenshots** — `public/xo.png`, `shoppy-globe.png`,
    `online-library.png`, `yt-clone.png` belong to projects no longer shown.
 8. **Visual review deferred.** Current design is accepted; do not redesign.
-9. **Blog: built and published in data, 25 September; not deployed.** The
-   local AI article is `status: 'published'`, so the next deploy puts it live
-   at `/blog/local-ai-on-a-12gb-gpu` with share buttons, BlogPosting JSON-LD
+9. **Blog: live since 25 September** (main `4c32be9`, Vercel deploy verified). The
+   local AI article is live at `/blog/local-ai-on-a-12gb-gpu` with share
+   buttons, BlogPosting JSON-LD
    and a per-post share card. **Likes and comments** need a store before they
    appear; without one the section is not rendered and the API answers 503.
    To enable on Vercel: add Upstash for Redis from the Marketplace (free tier;
