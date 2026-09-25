@@ -54,6 +54,8 @@ app/globals.css             Tailwind import, theme tokens, keyframes, utilities
 
 lib/profile.ts              SINGLE SOURCE OF TRUTH for stated facts
 lib/projects.ts             case-study data — CURRENTLY AN EMPTY ARRAY
+lib/posts.ts                blog post metadata; drafts are never listed or routed
+content/blog/<slug>.mdx     blog post bodies (no renderer or route yet)
 lib/themes.ts               theme ids, storage key, pre-paint init script
 lib/utils.ts                shadcn cn()
 
@@ -211,6 +213,12 @@ Full detail, with per-project expansion plans, is in
 7. **Remove orphaned screenshots** — `public/xo.png`, `shoppy-globe.png`,
    `online-library.png`, `yt-clone.png` belong to projects no longer shown.
 8. **Visual review deferred.** Current design is accepted; do not redesign.
+9. **Blog section: data only, 25 September.** `lib/posts.ts` holds one draft
+   post; its body is `content/blog/local-ai-on-a-12gb-gpu.mdx` (copied from the
+   owner's fact-checked draft). Not rendered yet: needs `@next/mdx` with
+   `remark-gfm` (the post has tables), `mdx-components.tsx`, `app/blog` routes
+   using `getPublishedPosts()`, sitemap entries and table/code styling that
+   fits the current design. Publish only after the owner approves the text.
 
 ---
 
