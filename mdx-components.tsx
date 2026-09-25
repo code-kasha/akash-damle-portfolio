@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 /**
@@ -106,6 +107,24 @@ const components: MDXComponents = {
 	),
 	td: ({ className, ...props }) => (
 		<td className={cn("border-b px-4 py-3 align-top leading-relaxed", className)} {...props} />
+	),
+	// Markdown images sit inside a <p>, so the figure is built from spans; the
+	// markdown title becomes the caption. The width and height only reserve
+	// space: h-auto lets the file's own aspect ratio win once it loads.
+	img: ({ src, alt, title }) => (
+		<span className="my-8 block">
+			<Image
+				src={typeof src === "string" ? src : ""}
+				alt={alt ?? ""}
+				width={1200}
+				height={675}
+				sizes="(min-width: 48rem) 48rem, 100vw"
+				className="bg-muted h-auto w-full rounded-2xl border"
+			/>
+			{title && (
+				<span className="text-muted-foreground mt-3 block text-sm leading-relaxed">{title}</span>
+			)}
+		</span>
 	),
 }
 

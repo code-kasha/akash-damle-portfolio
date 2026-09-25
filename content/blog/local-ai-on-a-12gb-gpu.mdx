@@ -134,6 +134,8 @@ The most important failures were the ones that looked like successes:
   suite passed, and the diff showed the deletion.
 - On a scaffolding task, the 30B's summary did not mention any of the three gaps the checker found.
 
+![The expense workbook saved by qwen2.5:14b, with the Travel utilization cell outlined in red and showing #DIV/0!](/blog/local-ai-on-a-12gb-gpu/div0-reported-as-na.png "The workbook qwen2.5:14b saved, drawn from the file itself. Its report said Travel utilization now shows “n.a.”; the saved cell still shows #DIV/0!. The red outline is mine.")
+
 A wrong answer is easy to spot. A false "done" is not. Read the diff, run the tests yourself, and
 open the saved file.
 
@@ -189,6 +191,10 @@ instead of calling the tool, and then stopped. It scored 7/19, the same as the u
 code. Inside T3 it also ran at only 2.3–2.5 tokens per second. A model listed as supporting tools
 still has to use them correctly inside the app you actually run.
 
+I had seen the same failure in my first setup, in August, with a different model:
+
+![OpenCode in a terminal, where the model prints two tool calls as JSON text with /home/user paths and nothing runs](/blog/local-ai-on-a-12gb-gpu/tool-calls-as-text.png "August, OpenCode with hhao/qwen2.5-coder-tools: the tool calls come out as JSON text, so nothing runs, and the paths are Linux paths on a Windows machine. That model is no longer in my setup.")
+
 ## Coding workflows that held up
 
 - **Docstrings.** I put the style rules (Google style for Python, TSDoc for TypeScript) in
@@ -231,6 +237,8 @@ temporary Ollama server. With `OLLAMA_ORIGINS=http://tauri.localhost`, that orig
 an ordinary website was still blocked; with `*`, both got through. I have not re-run Jan itself
 with the narrower value. If Jan shows a 403 with it, check which origin Jan sends before falling
 back to `*`.
+
+![Jan chat window showing Generation failed, Forbidden, under a user message](/blog/local-ai-on-a-12gb-gpu/jan-forbidden.png "The 403 in Jan, from my first setup in August, before I changed OLLAMA_ORIGINS.")
 
 Also set the context slider in Ollama's settings to 16K. Then **quit Ollama completely**, including
 the tray icon, and start it again. A process started before the change keeps the old environment.
