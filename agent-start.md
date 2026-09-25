@@ -17,7 +17,7 @@ goal decides most arguments:
 | | |
 |---|---|
 | **Target role** | Software / backend developer |
-| **Location** | Remote preferred (Akash is in Dombivli, India) |
+| **Location** | Remote preferred (Akash is in Badlapur, India) |
 | **Compensation floor** | 15 LPA |
 | **Positioning** | Backend engineer, 8+ years of total experience, Django + Node/TypeScript |
 

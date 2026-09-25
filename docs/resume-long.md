@@ -1,6 +1,6 @@
 # Akash Damle
 
-**Backend Engineer** · Dombivli, India · Open to remote
+**Backend Engineer** · Badlapur, India · Open to remote
 
 akashdamle07@gmail.com · +91 98333 58619
 [akashdamle.in](https://www.akashdamle.in) · [github.com/code-kasha](https://github.com/code-kasha) · [linkedin.com/in/akash-damle-58a808258](https://www.linkedin.com/in/akash-damle-58a808258/)

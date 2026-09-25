@@ -19,7 +19,7 @@ export const identity = {
 	title: "Backend Engineer",
 	/** Longer form for the hero and metadata. */
 	positioning: "Backend engineer, 8+ years of total experience.",
-	location: "Dombivli, India",
+	location: "Badlapur, India",
 	availability: "Available for remote roles",
 	/** Shown in the footer and useful on a résumé for remote applications. */
 	workingStyle: "Working remotely",
