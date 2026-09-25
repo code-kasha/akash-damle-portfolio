@@ -6,11 +6,14 @@ import { motion, useMotionValueEvent, useScroll } from "motion/react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { ScrollProgress } from "@/components/motion-primitives"
 import { cn } from "@/lib/utils"
+import { getVisiblePosts } from "@/lib/posts"
 
+// "Writing" appears only once a post is visible (published, or any draft under next dev).
 const links = [
 	{ label: "Work", href: "/#work" },
 	{ label: "Skills", href: "/#skills" },
 	{ label: "Experience", href: "/#experience" },
+	...(getVisiblePosts().length > 0 ? [{ label: "Writing", href: "/blog" }] : []),
 	{ label: "Contact", href: "/#contact" },
 ]
 

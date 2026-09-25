@@ -50,12 +50,16 @@ The 2026-09-20 publish was explicitly authorised and does not generalise.
 app/layout.tsx              metadata, fonts, theme init script, providers
 app/page.tsx                the single landing page (client component)
 app/projects/[slug]/page.tsx  case-study route, SSG, params is a Promise
+app/blog/page.tsx           blog index ("Writing")
+app/blog/[slug]/page.tsx    post route: imports content/blog/<slug>.mdx, SSG
+mdx-components.tsx          blog typography (required by @next/mdx)
+next.config.ts              the only Next config; wires @next/mdx + remark-gfm
 app/globals.css             Tailwind import, theme tokens, keyframes, utilities
 
 lib/profile.ts              SINGLE SOURCE OF TRUTH for stated facts
 lib/projects.ts             case-study data — CURRENTLY AN EMPTY ARRAY
-lib/posts.ts                blog post metadata; drafts are never listed or routed
-content/blog/<slug>.mdx     blog post bodies (no renderer or route yet)
+lib/posts.ts                blog post metadata; drafts show only under next dev
+content/blog/<slug>.mdx     blog post bodies
 lib/themes.ts               theme ids, storage key, pre-paint init script
 lib/utils.ts                shadcn cn()
 
@@ -208,17 +212,22 @@ Full detail, with per-project expansion plans, is in
    `public/Resume.pdf` and `public/Resume(Long).pdf`. Decide whether the long
    one should stay publicly reachable — anything in `public/` is served even
    if nothing links it.
-6. **Delete `next.config.js` or `next.config.ts`.** Both exist; one is
-   silently ignored.
+6. **Next config: done, 25 September.** `next.config.js` (which Next loads
+   first) was merged into `next.config.ts` and deleted.
 7. **Remove orphaned screenshots** — `public/xo.png`, `shoppy-globe.png`,
    `online-library.png`, `yt-clone.png` belong to projects no longer shown.
 8. **Visual review deferred.** Current design is accepted; do not redesign.
-9. **Blog section: data only, 25 September.** `lib/posts.ts` holds one draft
-   post; its body is `content/blog/local-ai-on-a-12gb-gpu.mdx` (copied from the
-   owner's fact-checked draft). Not rendered yet: needs `@next/mdx` with
-   `remark-gfm` (the post has tables), `mdx-components.tsx`, `app/blog` routes
-   using `getPublishedPosts()`, sitemap entries and table/code styling that
-   fits the current design. Publish only after the owner approves the text.
+9. **Blog section: built locally, 25 September; nothing published.** `/blog`
+   and `/blog/[slug]` reuse the case-study layout; `mdx-components.tsx` styles
+   the body with the existing tokens. Drafts render only under `next dev`
+   (with a Draft badge and noindex); production lists and routes published
+   posts only, and the header's "Writing" link and sitemap entries appear
+   only once a post is visible. The one post is a draft copied from the
+   owner's fact-checked text. To publish: set `status: 'published'` and
+   `published` in `lib/posts.ts` after the owner approves it.
+10. **Two lockfiles.** npm (`package-lock.json`) is the one agents update;
+    `pnpm-lock.yaml` was regenerated with `pnpm install --lockfile-only` to
+    match. Pick one package manager before the next deploy.
 
 ---
 

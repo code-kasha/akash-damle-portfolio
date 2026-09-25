@@ -7,7 +7,7 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   // TSDoc comments on exported functions and components (warnings only).
-  // Style guide: Ideas/local_ai_usage/DOCSTRING_STYLE.md
+  // Style guide: Ideas/local_ai_usage/data/DOCSTRING_STYLE.md
   {
     ...jsdoc.configs["flat/recommended-typescript"],
     files: ["**/*.{ts,tsx}"],
