@@ -68,12 +68,12 @@ export const metaDescription =
  * The unverifiable claims that used to sit on both the site and the résumé
  * ("2000+ users", "20-35% performance improvement") are deliberately absent:
  * nothing backs them, and a reviewer who probes one of them discredits the
- * rest. Replacements are traceable — the coverage figure is checkable in the
- * maxread-api repo, the client count comes from the CV's own 27+ CRM
- * deployments.
+ * rest. Replacements are traceable — the test count is checkable in the
+ * lead-platform v1.0.0 release (99 backend + 74 frontend), the client count
+ * comes from the CV's own 27+ CRM deployments.
  */
 export const stats = [
-	{ value: "100%", label: "Endpoint coverage on my latest API" },
+	{ value: "173", label: "Tests on my latest release" },
 	{ value: "27+", label: "Client systems built and self-hosted" },
 	{ value: "8+", label: "Years of total experience" },
 	{ value: "3", label: "Stacks in production: Django, Node, TS" },
