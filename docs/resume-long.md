@@ -105,21 +105,6 @@ Full-stack lead management, built to a short deadline as a qualification task.
   than a runtime bug.
 - **JWT authentication** with refresh tokens.
 
-### Django Starter Template
-
-*2026 · [Repository](https://github.com/code-kasha/dj-starter-skyset)*
-
-- Production-oriented Django starter encoding the settings layout,
-  environment handling and project structure I had been rebuilding by hand on
-  each client engagement.
-
-### School Management API
-
-*2026 · [Repository](https://github.com/code-kasha/school_management_api)*
-
-- REST API in Node.js, Express and MySQL for managing school records,
-  including proximity search returning nearby schools sorted by distance.
-
 ### XO Anime
 
 *2024 · Personal project, not licensed for distribution*

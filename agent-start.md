@@ -254,7 +254,12 @@ Full detail, with per-project expansion plans, is in
 4. **Dead demos: none left.** `lead-platform`'s demo works since v1.0.0.
    NorthPeak was scrapped on 26 September: Akash deleted the repo and its
    deployment, and it was removed from the résumé. Don't bring it back.
-5. **Regenerate the résumé PDFs** from `docs/resume-*.md` and replace
+5. **Private repos are not linked** (Akash, 26 September).
+   `dj-starter-skyset` and `school_management_api` are private and backed
+   up, so their résumé entries were removed; their skills stay listed under
+   Skills. Only link public repos. MaxRead's links stay, since it will be
+   published.
+   **Regenerate the résumé PDFs** from `docs/resume-*.md` and replace
    `public/Resume.pdf` and `public/Resume(Long).pdf`. Decide whether the long
    one should stay publicly reachable — anything in `public/` is served even
    if nothing links it.
