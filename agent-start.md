@@ -220,8 +220,12 @@ Full detail, with per-project expansion plans, is in
      Neon demo until 26 December 2026 (drop the `demo` link then). The
      write-up is the second entry, keeping the résumé's name and its
      "qualification task" line. `public/lead-platform.png` is the top of the
-     repo's `screenshots/leads.png`; it has no 2:1 `cover` yet. One gap
-     against the plan: CI runs the tests on SQLite, not real PostgreSQL.
+     repo's `screenshots/leads.png`; the 2:1 `cover` is
+     `public/lead-platform-social.png`, styled like bharat-post-dir's. CI runs
+     the tests on SQLite, not PostgreSQL, by decision (Akash, 26 September):
+     running CI against Neon's free tier is a hassle and not needed, and
+     SQLite shows the behaviour. The earlier "CI against real PostgreSQL"
+     plan item is dropped; don't reopen it.
    - **Then two new projects (decided 26 September), replacing maxread-api:**
      - **Operations APIs** for schools, clinics and small businesses/offices:
        Django, one repository and one entry, not one per sector. A shared

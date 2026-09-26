@@ -108,6 +108,7 @@ export const projects: Project[] = [
 		repo: "https://github.com/code-kasha/lead-platform",
 		demo: "https://lead-platform-c3mw.onrender.com/",
 		image: "/lead-platform.png",
+		cover: "/lead-platform-social.png",
 		featured: true,
 	},
 ]
