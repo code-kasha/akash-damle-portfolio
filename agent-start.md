@@ -205,8 +205,9 @@ Full detail, with per-project expansion plans, is in
    called "Projects" (renamed from "Case studies", which overstated personal
    work). The CRM, Akash's main product, leads the grid as a full-width
    "Coming soon" card from the separate `upcoming` list (no page, no sitemap
-   entry; it is still in planning). Bharat is the first write-up, with
-   `public/bharat.png`. Add
+   entry; it is still in planning). bharat-post-dir (formerly Bharat) is
+   the first write-up, with `public/bharat-post-dir.png` and its live demo,
+   which ends 26 December 2026: drop the `demo` link then. Add
    `lead-platform`, then `maxread-api`. The shape is narrative — problem,
    constraint, approach, outcome — not a feature list.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**

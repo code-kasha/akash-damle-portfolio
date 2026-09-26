@@ -31,19 +31,19 @@ export type Project = {
 export const projects: Project[] = [
 	{
 		slug: "bharat-post-dir",
-		title: "Bharat",
+		title: "bharat-post-dir",
 		tagline:
-			"A read-only API for India's postal directory: PIN lookup, office search and provenance for 155,599 offices.",
+			"India's postal directory as a lookup page, a JSON API and a one-file download: 155,599 offices, with every page stating where the data came from.",
 		year: "2023–2026",
 		role: "Sole developer",
 		problem:
 			"The official postal directory lives on data.gov.in and can only be downloaded with an API key. The key comes from a sign-up form whose captcha never displays, so no key can be issued and the latest data can't be fetched. The only usable data was my own slightly older 2023 snapshot.",
 		constraint:
-			"Serve the older data honestly now and be ready for current data the moment the portal works. The official data also has repeated office identities, coordinates outside India and no reliable source date, so the service must never serve a half-imported or silently altered directory.",
+			"Serve the older data honestly now and be ready for current data the moment the portal works. Government data lists some offices more than once, has coordinates outside India and no reliable source date, so the service must never serve a half-imported or silently altered directory. It also had to ship as a finished release that anyone can run, fork or host without me maintaining it.",
 		approach:
-			"The API ships with the verified 2023 snapshot and makes no claim about its freshness. All writes go through a single fetch command, ready for when a key can be obtained. It validates the complete download before touching anything, then replaces the whole directory and its metadata in one transaction; a failed fetch leaves the current data in service. I kept deliberate limits: one SQLite snapshot in WAL mode so reads continue during a refresh, no accounts, no fuzzy search and no runtime dependency on the upstream API.",
+			"The directory ships inside the repository as the verified 2023 snapshot, and every page and the API state its source, date and SHA256 without claiming freshness. Every import, whether the data.gov.in fetch or an uploaded CSV or JSON file, is validated in full before anything changes, then replaces the directory and its metadata in one transaction. Offices listed more than once are kept and counted, because government data can list an office twice legitimately. I kept deliberate limits: SQLite in WAL mode, no accounts, no JavaScript on the lookup page, and no runtime dependency on the upstream portal.",
 		outcome:
-			"A Django REST Framework API with PIN lookup, office search, state and district browsing, and a dataset endpoint that reports source, date and SHA256. OpenAPI docs are generated from the code. The Docker image bundles the 155,599-office 2023 snapshot and runs with no setup. Not yet hosted.",
+			"Released as v1.0.0 on 26 September 2026, complete and free to fork: a server-rendered lookup page, a read-only JSON API with OpenAPI docs, and the whole directory as one 1.4 MB gzipped download. The release ships the database and the export, and a public Docker image for amd64 and arm64. A live demo runs on Render's free tier until 26 December 2026, redeployed by CI after every push to main.",
 		stack: [
 			"Python",
 			"Django",
@@ -51,17 +51,19 @@ export const projects: Project[] = [
 			"SQLite",
 			"OpenAPI",
 			"Docker",
+			"GitHub Actions",
 			"pytest",
 		],
 		highlights: [
-			"Imports are all-or-nothing: exact duplicates collapse, conflicting records fail the fetch and are listed, and empty or short downloads are refused.",
-			"Provenance comes from the source itself. Freshness is never invented; an unreported date stays empty.",
-			"PINs stay six-character strings and may map to many offices. A PIN lookup is not treated as proof that an address is deliverable.",
-			"34 tests run against synthetic API-shaped fixtures and never reach the network, including rollback regressions.",
-			"The API key is read only from the environment, so it never appears in process listings.",
+			"The lookup page costs one HTTP request and three database queries: inline CSS, no JavaScript, fonts or images. It works by keyboard and screen reader, in light and dark, and on phones.",
+			"Imports are all-or-nothing. A short download is refused, identical rows merge, and offices listed more than once are kept and reported, never silently dropped.",
+			"The whole-directory download is versioned by its SHA256 and sent with an ETag, so an unchanged directory is never downloaded twice.",
+			"Anyone can load their own dataset. On a local clone an upload is temporary and private to one browser; in contributor mode it replaces the database and explains how to share it back. The hosted demo turns this off.",
+			"CI deploys each push to main and waits until the demo's health check reports the new commit. 119 tests run against synthetic fixtures and never reach the network.",
 		],
 		repo: "https://github.com/code-kasha/bharat-post-dir",
-		image: "/bharat.png",
+		demo: "https://bharat-post-dir.onrender.com/",
+		image: "/bharat-post-dir.png",
 		featured: true,
 	},
 ]
