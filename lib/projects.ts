@@ -30,7 +30,7 @@ export type Project = {
  */
 export const projects: Project[] = [
 	{
-		slug: "bharat",
+		slug: "bharat-post-dir",
 		title: "Bharat",
 		tagline:
 			"A read-only API for India's postal directory: PIN lookup, office search and provenance for 155,599 offices.",
@@ -60,7 +60,7 @@ export const projects: Project[] = [
 			"34 tests run against synthetic API-shaped fixtures and never reach the network, including rollback regressions.",
 			"The API key is read only from the environment, so it never appears in process listings.",
 		],
-		repo: "https://github.com/code-kasha/bharat",
+		repo: "https://github.com/code-kasha/bharat-post-dir",
 		image: "/bharat.png",
 		featured: true,
 	},
