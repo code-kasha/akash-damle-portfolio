@@ -250,6 +250,11 @@ Full detail, with per-project expansion plans, is in
        businesses). Built from scratch with fictional data; say so, since the
        client code is private. Keep to staff operations, not patient
        records, and don't claim statutory payroll compliance unless built.
+       **Next up (Akash, 27 September).** Choices so far: API only (Swagger,
+       ReDoc and the Django admin are the demo), one company per install.
+       Whether the three sectors ship together or one at a time is still
+       open. Estimated 9–11 working days. The handoff is
+       `../operations-api/agent-start.md`. MaxRead comes after it.
      - **A Node/TypeScript service that serves the CRM**, such as
        notification or webhook delivery (retries, signed payloads, a queue
        for failing deliveries). It carries the Node/TS side of the résumé;
