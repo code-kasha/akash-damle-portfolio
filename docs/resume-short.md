@@ -61,7 +61,7 @@ contracts, integration tests that run in CI, and deployments I maintain myself.
 
 ### Lead Management Platform — Django REST Framework, React, TypeScript
 
-*2026 · [github.com/code-kasha/lead-platform-digital_heroes](https://github.com/code-kasha/lead-platform-digital_heroes)*
+*2026 · [github.com/code-kasha/lead-platform](https://github.com/code-kasha/lead-platform)*
 
 - Role-based access control across the full lead lifecycle: creation,
   assignment, status transitions, notes and activity history.

@@ -91,7 +91,7 @@ reading.
 
 ### Lead Management Platform
 
-*2026 · [Repository](https://github.com/code-kasha/lead-platform-digital_heroes)*
+*2026 · [Repository](https://github.com/code-kasha/lead-platform)*
 
 Full-stack lead management, built to a short deadline as a qualification task.
 
@@ -104,16 +104,6 @@ Full-stack lead management, built to a short deadline as a qualification task.
   React frontend consumes, so a backend change surfaces as a type error rather
   than a runtime bug.
 - **JWT authentication** with refresh tokens.
-
-### NorthPeak Digital — agency site with enquiry API
-
-*2026 · [Repository](https://github.com/code-kasha/northpeak-digital-dh)*
-
-- Responsive marketing site in Vite, backed by a Django REST Framework API
-  handling contact enquiries.
-- **Separate CI pipelines** for frontend and backend, each running on its own
-  workflow.
-- Lighthouse results captured in the repository as part of the deliverable.
 
 ### Django Starter Template
 

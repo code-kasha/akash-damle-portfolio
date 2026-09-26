@@ -251,9 +251,9 @@ Full detail, with per-project expansion plans, is in
 3. **OG image: complete locally, 25 September.** `app/opengraph-image.tsx`
    renders a 1200×630 PNG using profile content and the existing AD favicon.
    Open Graph and Twitter metadata reference it. Publication is pending.
-4. **Fix the dead demo** on `northpeak` (404). The `lead-platform` demo
-   works again since its v1.0.0 release. A dead demo link reads worse than
-   no link.
+4. **Dead demos: none left.** `lead-platform`'s demo works since v1.0.0.
+   NorthPeak was scrapped on 26 September: Akash deleted the repo and its
+   deployment, and it was removed from the résumé. Don't bring it back.
 5. **Regenerate the résumé PDFs** from `docs/resume-*.md` and replace
    `public/Resume.pdf` and `public/Resume(Long).pdf`. Decide whether the long
    one should stay publicly reachable — anything in `public/` is served even
