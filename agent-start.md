@@ -224,9 +224,22 @@ Full detail, with per-project expansion plans, is in
      `../PORTFOLIO_REPOSITORY_SURVEY.md` for known defects (pytest.ini
      points at a missing settings module, no browser token refresh,
      duplicate generated types).
-   - **Then one more entry: undecided.** `maxread-api` was the plan; Akash
-     is weighing alternatives. Each project starts in its own thread,
-     started by Akash.
+   - **Then two new projects (decided 26 September), replacing maxread-api:**
+     - **Operations APIs** for schools, clinics and small businesses/offices:
+       Django, one repository and one entry, not one per sector. A shared
+       core (employees, attendance, payroll, reporting) with a module per
+       sector. This is the public evidence for the résumé's headline claim
+       (Django CRM systems for 27+ clients across schools, clinics and small
+       businesses). Built from scratch with fictional data; say so, since the
+       client code is private. Keep to staff operations, not patient
+       records, and don't claim statutory payroll compliance unless built.
+     - **A Node/TypeScript service that serves the CRM**, such as
+       notification or webhook delivery (retries, signed payloads, a queue
+       for failing deliveries). It carries the Node/TS side of the résumé;
+       React/TS frontends need no separate highlight. Django backend stays
+       the main positioning.
+     Each project starts in its own thread, started by Akash. Nothing of
+     these exists yet: no site card until each ships.
    - **Before go-live:** regenerate the résumé PDFs (item 5), remove the
      orphaned screenshots (item 7), settle the lockfiles (item 10; the
      uncommitted `pnpm-workspace.yaml` belongs with it), push `v2`.
