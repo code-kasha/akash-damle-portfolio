@@ -282,8 +282,12 @@ Full detail, with per-project expansion plans, is in
     `packageManager: pnpm@12.3.4`, and `pnpm-workspace.yaml` allows the
     install scripts of `sharp`, `unrs-resolver` and `msw`. Use pnpm only;
     `npm install` would recreate `package-lock.json`. Vercel's install
-    command is the default, not overridden (checked 26 September). Still to
-    check: the first deploy's log should show pnpm 12.3.4 and a built `sharp`.
+    command is the default, not overridden (checked 26 September), so it
+    always uses pnpm. Vercel only honours `packageManager` when the project
+    has the env var `ENABLE_EXPERIMENTAL_COREPACK=1`; without it, the
+    lockfile's version 9.0 gets pnpm 9 or 10. pnpm 10 was tested and installs
+    this lockfile cleanly, so both work. Still to check: the first deploy's
+    log should show which pnpm ran and no ignored build scripts.
 
 ---
 
