@@ -17,6 +17,8 @@ export type Project = {
 	repo?: string
 	demo?: string
 	image?: string
+	/** 2:1 article image for the write-up page and its share card; `image` is used when absent. */
+	cover?: string
 	featured?: boolean
 }
 
@@ -64,6 +66,7 @@ export const projects: Project[] = [
 		repo: "https://github.com/code-kasha/bharat-post-dir",
 		demo: "https://bharat-post-dir.onrender.com/",
 		image: "/bharat-post-dir.png",
+		cover: "/bharat-post-dir-social.png",
 		featured: true,
 	},
 ]

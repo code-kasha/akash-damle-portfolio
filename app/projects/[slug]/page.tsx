@@ -36,7 +36,20 @@ export async function generateMetadata({
 			url: `/projects/${project.slug}`,
 			title: project.title,
 			description: project.tagline,
+			...(project.cover && {
+				images: [
+					{ url: project.cover, width: 1280, height: 640, alt: project.title },
+				],
+			}),
 		},
+		...(project.cover && {
+			twitter: {
+				card: "summary_large_image",
+				title: project.title,
+				description: project.tagline,
+				images: [{ url: project.cover, alt: project.title }],
+			},
+		}),
 	}
 }
 
@@ -139,12 +152,14 @@ export default async function ProjectPage({
 				</div>
 			</section>
 
-			{project.image && (
+			{(project.cover || project.image) && (
 				<section className="px-6 pb-20">
 					<Reveal className="mx-auto max-w-5xl">
-						<div className="relative aspect-[16/9] overflow-hidden rounded-3xl border">
+						<div
+							className={`relative overflow-hidden rounded-3xl border ${project.cover ? "aspect-[2/1]" : "aspect-[16/9]"}`}
+						>
 							<Image
-								src={project.image}
+								src={project.cover ?? project.image!}
 								alt={`${project.title} interface`}
 								fill
 								priority
