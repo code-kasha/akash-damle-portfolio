@@ -20,6 +20,11 @@ export type Project = {
 	/** 2:1 article image for the write-up page and its share card; `image` is used when absent. */
 	cover?: string
 	featured?: boolean
+	/**
+	 * RESUME ONLY. Which `highlights`, by index, the one-page résumé shows.
+	 * The long résumé shows them all.
+	 */
+	resumeHighlights?: number[]
 }
 
 /**
@@ -72,6 +77,7 @@ export const projects: Project[] = [
 		image: "/lead-platform.png",
 		cover: "/lead-platform-social.png",
 		featured: true,
+		resumeHighlights: [2, 4],
 	},
 	{
 		slug: "bharat-post-dir",
@@ -110,6 +116,7 @@ export const projects: Project[] = [
 		image: "/bharat-post-dir.png",
 		cover: "/bharat-post-dir-social.png",
 		featured: true,
+		resumeHighlights: [1, 0],
 	},
 ]
 

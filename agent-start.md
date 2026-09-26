@@ -74,15 +74,17 @@ components/motion-primitives.tsx  Reveal, Stagger, SplitText, Parallax, Magnetic
 components/aurora.tsx       CSS-only animated background mesh
 components/ui/*             shadcn, style "radix-mira"
 
-docs/resume-short.md        one-page résumé draft
-docs/resume-long.md         long CV draft
+scripts/build-resumes.mjs   `pnpm resume`: builds public/Resume.pdf and Resume(Long).pdf
+scripts/resume.css          the résumés' print styles (the site's light palette)
 docs/project-audit.xlsx     audit of all 34 GitHub repos, with expansion plans
 ```
 
 **`lib/profile.ts` is the important one.** The site, the résumé and the CV had
 drifted into stating different facts about the same career. Anything asserted
 as fact — job title, years, client counts, contact details — belongs there and
-nowhere else. Do not restate a fact inline in a component.
+nowhere else. Do not restate a fact inline in a component. The two résumé
+PDFs are generated from it and `lib/projects.ts` by `pnpm resume`; there are
+no hand-edited résumé drafts any more.
 
 ---
 
@@ -105,6 +107,19 @@ Each of these was argued through and settled. Reopen only if Akash asks.
   improvement" were removed from the site because nothing backs them. They
   still appear in the old PDFs. Do not reintroduce them anywhere. Replacements
   must be checkable by a reviewer in about 30 seconds.
+- **The résumés mirror the site** (Akash, 27 September). Both PDFs are
+  generated: projects come from `lib/projects.ts` (tagline, highlights,
+  stack) and the CRM from `upcoming`; the one-page version picks each
+  project's `resumeHighlights`. A project that isn't on the site isn't on
+  the résumé either, so MaxRead and XO Anime are out until they have a
+  write-up. After changing profile or project data, run `pnpm resume` and
+  commit the PDFs. The one-page résumé must stay one page (the script fails
+  otherwise); the long one is two pages today.
+- **"Integration test suites that run against a real database in CI"** stays
+  in the long summary. Akash has done this on other work; the public
+  projects deliberately test on SQLite. Don't flag it again.
+- **The CRM will be paid software.** The public projects are a prelude to
+  it: solid, finished releases, not the product itself.
 
 ---
 
@@ -242,8 +257,8 @@ Full detail, with per-project expansion plans, is in
        the main positioning.
      Each project starts in its own thread, started by Akash. Nothing of
      these exists yet: no site card until each ships.
-   - **Before go-live:** regenerate the résumé PDFs (item 5), remove the
-     orphaned screenshots (item 7), push `v2`.
+   - **Before go-live:** remove the orphaned screenshots (item 7), push
+     `v2`.
    - **After go-live:** bharat-post-dir's README links the write-up at
      `localhost:3000`; its task 17 swaps in the public URL.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
@@ -257,12 +272,9 @@ Full detail, with per-project expansion plans, is in
 5. **Private repos are not linked** (Akash, 26 September).
    `dj-starter-skyset` and `school_management_api` are private and backed
    up, so their résumé entries were removed; their skills stay listed under
-   Skills. Only link public repos. MaxRead's links stay, since it will be
-   published.
-   **Regenerate the résumé PDFs** from `docs/resume-*.md` and replace
-   `public/Resume.pdf` and `public/Resume(Long).pdf`. Decide whether the long
-   one should stay publicly reachable — anything in `public/` is served even
-   if nothing links it.
+   Skills. Only link public repos.
+   **Résumé PDFs: done, 27 September.** `pnpm resume` generates both; the
+   site offers "Résumé · 1 page" and "Résumé · full" in the contact section.
 6. **Next config: done, 25 September.** `next.config.js` (which Next loads
    first) was merged into `next.config.ts` and deleted.
 7. **Remove orphaned screenshots** — `public/xo.png`, `shoppy-globe.png`,

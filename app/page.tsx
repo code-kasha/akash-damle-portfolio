@@ -449,7 +449,22 @@ export default function HomePage() {
 										target="_blank"
 										rel="noopener noreferrer"
 									>
-										Résumé
+										Résumé · 1 page
+									</a>
+								</Button>
+							</Magnetic>
+							<Magnetic>
+								<Button
+									asChild
+									variant="ghost"
+									className="h-12 rounded-full px-7 text-sm font-semibold"
+								>
+									<a
+										href={contact.resumeLongPdf}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Résumé · full
 									</a>
 								</Button>
 							</Magnetic>
