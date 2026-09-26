@@ -257,8 +257,7 @@ Full detail, with per-project expansion plans, is in
        the main positioning.
      Each project starts in its own thread, started by Akash. Nothing of
      these exists yet: no site card until each ships.
-   - **Before go-live:** remove the orphaned screenshots (item 7), push
-     `v2`.
+   - **Before go-live:** push `v2`.
    - **After go-live:** bharat-post-dir's README links the write-up at
      `localhost:3000`; its task 17 swaps in the public URL.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
@@ -277,8 +276,8 @@ Full detail, with per-project expansion plans, is in
    site offers "Résumé · 1 page" and "Résumé · full" in the contact section.
 6. **Next config: done, 25 September.** `next.config.js` (which Next loads
    first) was merged into `next.config.ts` and deleted.
-7. **Remove orphaned screenshots** — `public/xo.png`, `shoppy-globe.png`,
-   `online-library.png`, `yt-clone.png` belong to projects no longer shown.
+7. **Orphaned screenshots: removed, 27 September** (`xo.png`,
+   `shoppy-globe.png`, `online-library.png`, `yt-clone.png`).
 8. **Visual review deferred.** Current design is accepted; do not redesign.
 9. **Blog: live since 25 September** (main `4c32be9`, Vercel deploy verified). The
    local AI article is live at `/blog/local-ai-on-a-12gb-gpu` with share
