@@ -239,8 +239,7 @@ Full detail, with per-project expansion plans, is in
      Each project starts in its own thread, started by Akash. Nothing of
      these exists yet: no site card until each ships.
    - **Before go-live:** regenerate the résumé PDFs (item 5), remove the
-     orphaned screenshots (item 7), push `v2` and check its
-     preview build log (item 10).
+     orphaned screenshots (item 7), push `v2`.
    - **After go-live:** bharat-post-dir's README links the write-up at
      `localhost:3000`; its task 17 swaps in the public URL.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
@@ -277,7 +276,7 @@ Full detail, with per-project expansion plans, is in
    holds every comment. Moderate with:
    `curl -H "Authorization: Bearer $MODERATION_TOKEN" https://www.akashdamle.in/api/blog/moderation`
    and POST `{"id":"...","action":"publish"|"hide"}` to the same URL.
-10. **Lockfile: settled on pnpm, 26 September.** `package-lock.json` is
+10. **Lockfile: done, 26 September.** pnpm only. `package-lock.json` is
     deleted; `pnpm-lock.yaml` is the only lockfile. `package.json` pins
     `packageManager: pnpm@12.3.4`, and `pnpm-workspace.yaml` allows the
     install scripts of `sharp`, `unrs-resolver` and `msw`. Use pnpm only;
@@ -288,8 +287,6 @@ Full detail, with per-project expansion plans, is in
     26 September, so Vercel uses pnpm 12.3.4 through Corepack. Keep it:
     without it Vercel may pick pnpm 9, which rejects both pnpm 12's
     multi-document lockfile and a `pnpm-workspace.yaml` without `packages`.
-    Still to check: the first deploy's log should show pnpm 12.3.4 and no
-    ignored build scripts.
 
 ---
 
