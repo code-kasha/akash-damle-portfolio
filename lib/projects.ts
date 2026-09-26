@@ -69,6 +69,47 @@ export const projects: Project[] = [
 		cover: "/bharat-post-dir-social.png",
 		featured: true,
 	},
+	{
+		slug: "lead-platform",
+		title: "Lead Management Platform",
+		tagline:
+			"A Django REST API that moves sales leads through a validated pipeline and records every change on a timeline, with a React and TypeScript app whose types come from the API's schema.",
+		year: "2026",
+		role: "Sole developer",
+		problem:
+			"A sales team needs one place to capture leads, hand them to the right person and see what happened to each one. Leads also arrive from a public website form, where no one is signed in and anyone can send them.",
+		constraint:
+			"It began as a qualification task built to a short deadline, in two days in July 2026. That version worked but had gaps a reviewer would find quickly: the test suite didn't run, there was no CI, the browser app didn't refresh expired tokens, and the demo link was dead. The rules had to hold on the server whatever the client sends: a member must not see or change another member's leads, and a lead's status can only move along the pipeline.",
+		approach:
+			"Business rules live in one service layer. Each service is a single transaction and the only code that writes the activity timeline, so a change and its record are saved together or not at all. Allowed status changes are one mapping, and status can only change through its own endpoint. The lead queryset itself is filtered by role, so a member asking for someone else's lead gets 404 rather than learning it exists. The API is built schema-first: drf-spectacular generates the OpenAPI schema, the React app's TypeScript types are generated from it, and CI fails if either committed copy goes stale. In September I brought it to a finished release: a working test suite, CI, a single-flight token refresh in the browser, production settings that refuse to start when misconfigured, and one Docker image serving the API, admin and app.",
+		outcome:
+			"Released as v1.0.0 on 26 September 2026, complete and free to fork under the MIT licence. The API covers leads, assignment, a validated status pipeline, notes, an automatic timeline and a rate-limited public enquiry form, with OpenAPI docs. A Docker image for amd64 and arm64 is published to the GitHub Container Registry. A live demo runs on Render's free tier with Neon Postgres until 26 December 2026.",
+		stack: [
+			"Python",
+			"Django",
+			"Django REST Framework",
+			"PostgreSQL",
+			"OpenAPI",
+			"React",
+			"TypeScript",
+			"TanStack Query",
+			"Docker",
+			"GitHub Actions",
+			"pytest",
+			"Vitest",
+		],
+		highlights: [
+			"The status pipeline (New, Contacted, Qualified, Proposal, Won or Lost) is enforced in one service function; a blocked change returns 400 with the reason.",
+			"Every create, edit, status change, assignment and note is written to the timeline in the same transaction as the change.",
+			"Admins manage every lead; members see and work on only the leads they created or are assigned to, and anything else returns 404.",
+			"Access tokens last 15 minutes; refresh tokens rotate on every use and are blacklisted after use or on logout. The browser shares one refresh across every request waiting on it, because a rotated token works only once.",
+			"99 backend and 74 frontend tests. CI also runs flake8, a missing-migrations check, the stale-schema and stale-types check, and a Docker build with a smoke test of the running container.",
+		],
+		repo: "https://github.com/code-kasha/lead-platform",
+		demo: "https://lead-platform-c3mw.onrender.com/",
+		image: "/lead-platform.png",
+		featured: true,
+	},
 ]
 
 /** A product still being built, so there is nothing to write up yet. */

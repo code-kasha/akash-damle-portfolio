@@ -2,7 +2,7 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-09-26** · Projects section in progress on `v2` (4 commits ahead of `origin/v2`); not deployed.
+Last updated: **2026-09-26** · Projects section in progress on `v2` (local commits ahead of `origin/v2`); not deployed.
 
 ---
 
@@ -61,7 +61,7 @@ next.config.ts              the only Next config; wires @next/mdx + remark-gfm
 app/globals.css             Tailwind import, theme tokens, keyframes, utilities
 
 lib/profile.ts              SINGLE SOURCE OF TRUTH for stated facts
-lib/projects.ts             case-study data — CURRENTLY AN EMPTY ARRAY
+lib/projects.ts             project write-ups: bharat-post-dir, lead-platform
 lib/posts.ts                blog post metadata; drafts (if any) show only under next dev
 content/blog/<slug>.mdx     blog post bodies
 lib/themes.ts               theme ids, storage key, pre-paint init script
@@ -214,16 +214,14 @@ Full detail, with per-project expansion plans, is in
 
    **Go-live gate (Akash, 26 September):** `v2` merges to `main` only after
    2–3 entries beyond bharat-post-dir exist, alongside the CRM card.
-   - **Next: Lead Management Platform** (`lead-platform-digital_heroes`).
-     Keep that name, as on the résumé; no "CRM API" rename, no offline/PWA
-     frontend. Keep the résumé's "qualification task" line. Refine to
-     bharat-post-dir's standard: CI against real PostgreSQL, a working demo
-     (the Vercel URL 404s), a permission table, a licence, reframe the
-     README's AI note, then the write-up. It ends as a finished open-source
-     release like bharat-post-dir, not a maintained product. See
-     `../PORTFOLIO_REPOSITORY_SURVEY.md` for known defects (pytest.ini
-     points at a missing settings module, no browser token refresh,
-     duplicate generated types).
+   - **Done: Lead Management Platform** (`code-kasha/lead-platform`, renamed
+     from `lead-platform-digital_heroes`). Released as v1.0.0 on 26 September
+     with 99 backend and 74 frontend tests, CI, a GHCR image and a Render +
+     Neon demo until 26 December 2026 (drop the `demo` link then). The
+     write-up is the second entry, keeping the résumé's name and its
+     "qualification task" line. `public/lead-platform.png` is the top of the
+     repo's `screenshots/leads.png`; it has no 2:1 `cover` yet. One gap
+     against the plan: CI runs the tests on SQLite, not real PostgreSQL.
    - **Then two new projects (decided 26 September), replacing maxread-api:**
      - **Operations APIs** for schools, clinics and small businesses/offices:
        Django, one repository and one entry, not one per sector. A shared
@@ -250,8 +248,9 @@ Full detail, with per-project expansion plans, is in
 3. **OG image: complete locally, 25 September.** `app/opengraph-image.tsx`
    renders a 1200×630 PNG using profile content and the existing AD favicon.
    Open Graph and Twitter metadata reference it. Publication is pending.
-4. **Fix the two dead demos** on `lead-platform` and `northpeak` (both 404).
-   A dead demo link reads worse than no link.
+4. **Fix the dead demo** on `northpeak` (404). The `lead-platform` demo
+   works again since its v1.0.0 release. A dead demo link reads worse than
+   no link.
 5. **Regenerate the résumé PDFs** from `docs/resume-*.md` and replace
    `public/Resume.pdf` and `public/Resume(Long).pdf`. Decide whether the long
    one should stay publicly reachable — anything in `public/` is served even
