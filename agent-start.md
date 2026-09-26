@@ -118,7 +118,7 @@ served. Clearing `.next/static` and `.next/cache` is **not** enough:
 ```bash
 # stop the server, then
 rm -rf .next
-npm run dev
+pnpm dev
 ```
 
 Confirm by fetching the served stylesheet and grepping for a selector you know
@@ -239,8 +239,8 @@ Full detail, with per-project expansion plans, is in
      Each project starts in its own thread, started by Akash. Nothing of
      these exists yet: no site card until each ships.
    - **Before go-live:** regenerate the résumé PDFs (item 5), remove the
-     orphaned screenshots (item 7), settle the lockfiles (item 10; the
-     uncommitted `pnpm-workspace.yaml` belongs with it), push `v2`.
+     orphaned screenshots (item 7), check Vercel's install
+     command (item 10), push `v2`.
    - **After go-live:** bharat-post-dir's README links the write-up at
      `localhost:3000`; its task 17 swaps in the public URL.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
@@ -277,17 +277,21 @@ Full detail, with per-project expansion plans, is in
    holds every comment. Moderate with:
    `curl -H "Authorization: Bearer $MODERATION_TOKEN" https://www.akashdamle.in/api/blog/moderation`
    and POST `{"id":"...","action":"publish"|"hide"}` to the same URL.
-10. **Two lockfiles.** npm (`package-lock.json`) is the one agents update;
-    `pnpm-lock.yaml` was regenerated with `pnpm install --lockfile-only` to
-    match. Pick one package manager before the next deploy.
+10. **Lockfile: settled on pnpm, 26 September.** `package-lock.json` is
+    deleted; `pnpm-lock.yaml` is the only lockfile. `package.json` pins
+    `packageManager: pnpm@12.3.4`, and `pnpm-workspace.yaml` allows the
+    install scripts of `sharp`, `unrs-resolver` and `msw`. Use pnpm only;
+    `npm install` would recreate `package-lock.json`. Still to check: the
+    Vercel project's install command must not be overridden to npm, and the
+    first deploy's log should show pnpm 12.3.4 and a built `sharp`.
 
 ---
 
 ## 8. Checks before you commit
 
 ```bash
-npm run build      # must compile and type-check
-npx eslint .       # must be silent
+pnpm build              # must compile and type-check
+pnpm exec eslint .      # must be silent
 ```
 
 Both were clean at `60b693a`. `react-hooks/set-state-in-effect` is enforced —
