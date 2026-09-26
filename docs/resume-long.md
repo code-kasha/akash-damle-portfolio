@@ -67,6 +67,48 @@ applications.
 
 ## Selected Projects
 
+### Lead Management Platform
+
+*2026 · [Repository](https://github.com/code-kasha/lead-platform) · [Live demo](https://lead-platform-c3mw.onrender.com/) (until 26 December 2026)*
+
+Built as a qualification task in two days in July 2026, then brought to a
+finished v1.0.0 release in September.
+
+- **Django REST Framework API** that moves leads through a validated pipeline
+  (New, Contacted, Qualified, Proposal, Won or Lost). Business rules live in
+  one service layer; each service is a single transaction and the only code
+  that writes the activity timeline.
+- **Role-based access enforced server-side.** The lead queryset is filtered
+  by role, so a member asking for someone else's lead gets a 404.
+- **API-first.** drf-spectacular generates the OpenAPI schema, the React and
+  TypeScript app's types are generated from it, and CI fails if either
+  committed copy goes stale.
+- **JWT authentication** with rotating, blacklisted refresh tokens, and a
+  single-flight token refresh in the browser.
+- **99 backend and 74 frontend tests** (pytest, Vitest) in GitHub Actions,
+  plus lint, a missing-migrations check and a Docker smoke test.
+- **One Docker image** (amd64 and arm64) serving the API, admin and app,
+  published to the GitHub Container Registry.
+
+### bharat-post-dir
+
+*2026 · [Repository](https://github.com/code-kasha/bharat-post-dir) · [Live demo](https://bharat-post-dir.onrender.com/) (until 26 December 2026)*
+
+India's postal directory as a lookup page, a JSON API and a one-file
+download: 155,599 offices, released as v1.0.0.
+
+- **All-or-nothing imports.** Every import is validated in full, then
+  replaces the directory and its metadata in one transaction; offices listed
+  more than once are kept and reported, never silently dropped.
+- **Provenance on every page.** The page and the API state the data's
+  source, date and SHA256 without claiming freshness.
+- **A lookup page that costs one HTTP request:** server-rendered, no
+  JavaScript, built for keyboard and screen-reader use.
+- **Read-only JSON API** with OpenAPI docs, and the whole directory as one
+  1.4 MB gzipped download sent with an ETag.
+- **119 tests** against synthetic fixtures; Django, SQLite and a public
+  Docker image.
+
 ### MaxRead — API and reading client
 
 *2026 · [API](https://github.com/code-kasha/maxread-api) · [Frontend](https://github.com/code-kasha/maxread)*
@@ -89,21 +131,11 @@ reading.
   and a single centralised error shape across all responses.
 - Frontend is React, TypeScript and Vite, consuming the same API.
 
-### Lead Management Platform
+### CRM — in research and planning
 
-*2026 · [Repository](https://github.com/code-kasha/lead-platform)*
-
-Full-stack lead management, built to a short deadline as a qualification task.
-
-- **Django REST Framework backend** with a service-oriented structure
-  separating HTTP handling from business rules.
-- **Role-based access control** across the lead lifecycle — creation,
-  assignment, status transitions, notes and activity history — with
-  permissions enforced server-side rather than hidden in the UI.
-- **API-first.** The OpenAPI specification generates the TypeScript models the
-  React frontend consumes, so a backend change surfaces as a type error rather
-  than a runtime bug.
-- **JWT authentication** with refresh tokens.
+My main product: a CRM that arrives already set up for how a business works
+(sales, agency, real estate or field services) instead of making it
+configure everything first.
 
 ### XO Anime
 

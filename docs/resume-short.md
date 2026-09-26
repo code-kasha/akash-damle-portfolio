@@ -47,6 +47,26 @@ contracts, integration tests that run in CI, and deployments I maintain myself.
 
 ## Selected Projects
 
+### Lead Management Platform — Django REST Framework, React, TypeScript
+
+*2026 · [github.com/code-kasha/lead-platform](https://github.com/code-kasha/lead-platform) · v1.0.0 with a live demo*
+
+- Leads move through a validated status pipeline; business rules live in one
+  transactional service layer that also writes the activity timeline.
+- Role-based access enforced server-side, JWT with rotating refresh tokens,
+  and TypeScript types generated from the OpenAPI schema, checked in CI.
+- 99 backend and 74 frontend tests in GitHub Actions; one Docker image
+  serving the API, admin and app.
+
+### bharat-post-dir — Django, SQLite, Docker
+
+*2026 · [github.com/code-kasha/bharat-post-dir](https://github.com/code-kasha/bharat-post-dir) · v1.0.0 with a live demo*
+
+- India's postal directory (155,599 offices) as a lookup page, a JSON API
+  with OpenAPI docs and a one-file download.
+- All-or-nothing imports in one transaction, and the data's source and date
+  stated on every page; 119 tests.
+
 ### MaxRead API — Express, TypeScript, MongoDB
 
 *2026 · [github.com/code-kasha/maxread-api](https://github.com/code-kasha/maxread-api)*
@@ -59,15 +79,10 @@ contracts, integration tests that run in CI, and deployments I maintain myself.
   request.
 - Rate limiting and a single centralised error shape across all responses.
 
-### Lead Management Platform — Django REST Framework, React, TypeScript
+### CRM — in research and planning
 
-*2026 · [github.com/code-kasha/lead-platform](https://github.com/code-kasha/lead-platform)*
-
-- Role-based access control across the full lead lifecycle: creation,
-  assignment, status transitions, notes and activity history.
-- API-first — the OpenAPI specification generates the TypeScript client
-  models, keeping frontend and backend in step.
-- JWT authentication with token refresh, over a service-oriented backend.
+- My main product: a CRM that arrives already set up for how a business
+  works, instead of making it configure everything first.
 
 ---
 
