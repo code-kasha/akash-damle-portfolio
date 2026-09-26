@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 		default: TITLE,
 		template: `%s — ${identity.name}`,
 	},
-	description: `${metaDescription} Case studies, experience and contact.`,
+	description: `${metaDescription} Projects, experience and contact.`,
 	alternates: { canonical: "/" },
 	openGraph: {
 		type: "website",

@@ -201,10 +201,11 @@ Full detail, with per-project expansion plans, is in
 
 ## 7. Outstanding work, in priority order
 
-1. **Populate `lib/projects.ts`.** It is an empty array, so the work section
-   renders a "Case studies in progress" placeholder. This is the single
-   biggest gap. Start with `lead-platform`, then `maxread-api`. The shape is
-   narrative — problem, constraint, approach, outcome — not a feature list.
+1. **Populate `lib/projects.ts`: started 26 September.** The section is now
+   called "Projects" (renamed from "Case studies", which overstated personal
+   work). Bharat is the first entry, with `public/bharat.png`. Add
+   `lead-platform`, then `maxread-api`. The shape is narrative — problem,
+   constraint, approach, outcome — not a feature list.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
    Typed metadata routes use `contact.site`; the sitemap follows `projects`.
 3. **OG image: complete locally, 25 September.** `app/opengraph-image.tsx`

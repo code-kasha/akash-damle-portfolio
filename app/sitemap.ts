@@ -4,7 +4,7 @@ import { projects } from "@/lib/projects"
 import { getPublishedPosts } from "@/lib/posts"
 
 /**
- * List the homepage, the case studies and published blog posts (drafts never).
+ * List the homepage, the projects and published blog posts (drafts never).
  * @returns Canonical URLs for existing pages.
  */
 export default function sitemap(): MetadataRoute.Sitemap {

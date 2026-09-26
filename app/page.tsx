@@ -158,7 +158,7 @@ export default function HomePage() {
 								Selected work
 							</p>
 							<h2 className="font-display text-[clamp(2.25rem,6vw,4rem)] leading-[1.15] font-bold tracking-tight">
-								Case studies
+								Projects
 							</h2>
 						</div>
 						<p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
@@ -211,7 +211,7 @@ export default function HomePage() {
 													))}
 												</div>
 												<span className="text-primary mt-2 inline-flex items-center gap-1.5 text-sm font-semibold">
-													Read case study
+													Read the write-up
 													<span className="transition-transform duration-300 group-hover:translate-x-1">
 														→
 													</span>
@@ -226,7 +226,7 @@ export default function HomePage() {
 						<Reveal>
 							<div className="rounded-3xl border border-dashed px-8 py-20 text-center">
 								<p className="font-display mb-3 text-2xl font-bold tracking-tight">
-									Case studies in progress
+									Projects in progress
 								</p>
 								<p className="text-muted-foreground mx-auto max-w-md text-sm leading-relaxed">
 									Being rewritten as proper write-ups rather than repo links.
