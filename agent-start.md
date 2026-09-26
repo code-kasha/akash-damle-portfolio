@@ -284,10 +284,12 @@ Full detail, with per-project expansion plans, is in
     `npm install` would recreate `package-lock.json`. Vercel's install
     command is the default, not overridden (checked 26 September), so it
     always uses pnpm. Vercel only honours `packageManager` when the project
-    has the env var `ENABLE_EXPERIMENTAL_COREPACK=1`; without it, the
-    lockfile's version 9.0 gets pnpm 9 or 10. pnpm 10 was tested and installs
-    this lockfile cleanly, so both work. Still to check: the first deploy's
-    log should show which pnpm ran and no ignored build scripts.
+    has the env var `ENABLE_EXPERIMENTAL_COREPACK=1`, which Akash added on
+    26 September, so Vercel uses pnpm 12.3.4 through Corepack. Keep it:
+    without it Vercel may pick pnpm 9, which rejects both pnpm 12's
+    multi-document lockfile and a `pnpm-workspace.yaml` without `packages`.
+    Still to check: the first deploy's log should show pnpm 12.3.4 and no
+    ignored build scripts.
 
 ---
 
