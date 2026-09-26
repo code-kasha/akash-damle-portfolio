@@ -239,8 +239,8 @@ Full detail, with per-project expansion plans, is in
      Each project starts in its own thread, started by Akash. Nothing of
      these exists yet: no site card until each ships.
    - **Before go-live:** regenerate the résumé PDFs (item 5), remove the
-     orphaned screenshots (item 7), check Vercel's install
-     command (item 10), push `v2`.
+     orphaned screenshots (item 7), push `v2` and check its
+     preview build log (item 10).
    - **After go-live:** bharat-post-dir's README links the write-up at
      `localhost:3000`; its task 17 swaps in the public URL.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
@@ -281,9 +281,9 @@ Full detail, with per-project expansion plans, is in
     deleted; `pnpm-lock.yaml` is the only lockfile. `package.json` pins
     `packageManager: pnpm@12.3.4`, and `pnpm-workspace.yaml` allows the
     install scripts of `sharp`, `unrs-resolver` and `msw`. Use pnpm only;
-    `npm install` would recreate `package-lock.json`. Still to check: the
-    Vercel project's install command must not be overridden to npm, and the
-    first deploy's log should show pnpm 12.3.4 and a built `sharp`.
+    `npm install` would recreate `package-lock.json`. Vercel's install
+    command is the default, not overridden (checked 26 September). Still to
+    check: the first deploy's log should show pnpm 12.3.4 and a built `sharp`.
 
 ---
 
