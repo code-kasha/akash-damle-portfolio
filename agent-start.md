@@ -2,7 +2,7 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-09-25** · SEO and experience corrections verified locally on `v2`; not deployed.
+Last updated: **2026-09-26** · Projects section in progress on `v2` (4 commits ahead of `origin/v2`); not deployed.
 
 ---
 
@@ -207,9 +207,31 @@ Full detail, with per-project expansion plans, is in
    "Coming soon" card from the separate `upcoming` list (no page, no sitemap
    entry; it is still in planning). bharat-post-dir (formerly Bharat) is
    the first write-up, with `public/bharat-post-dir.png` and its live demo,
-   which ends 26 December 2026: drop the `demo` link then. Add
-   `lead-platform`, then `maxread-api`. The shape is narrative — problem,
-   constraint, approach, outcome — not a feature list.
+   which ends 26 December 2026: drop the `demo` link then. Its write-up
+   uses a 2:1 `cover` (`public/bharat-post-dir-social.png`) as the article
+   and share image; the card keeps the screenshot. The shape is narrative —
+   problem, constraint, approach, outcome — not a feature list.
+
+   **Go-live gate (Akash, 26 September):** `v2` merges to `main` only after
+   2–3 entries beyond bharat-post-dir exist, alongside the CRM card.
+   - **Next: Lead Management Platform** (`lead-platform-digital_heroes`).
+     Keep that name, as on the résumé; no "CRM API" rename, no offline/PWA
+     frontend. Keep the résumé's "qualification task" line. Refine to
+     bharat-post-dir's standard: CI against real PostgreSQL, a working demo
+     (the Vercel URL 404s), a permission table, a licence, reframe the
+     README's AI note, then the write-up. It ends as a finished open-source
+     release like bharat-post-dir, not a maintained product. See
+     `../PORTFOLIO_REPOSITORY_SURVEY.md` for known defects (pytest.ini
+     points at a missing settings module, no browser token refresh,
+     duplicate generated types).
+   - **Then one more entry: undecided.** `maxread-api` was the plan; Akash
+     is weighing alternatives. Each project starts in its own thread,
+     started by Akash.
+   - **Before go-live:** regenerate the résumé PDFs (item 5), remove the
+     orphaned screenshots (item 7), settle the lockfiles (item 10; the
+     uncommitted `pnpm-workspace.yaml` belongs with it), push `v2`.
+   - **After go-live:** bharat-post-dir's README links the write-up at
+     `localhost:3000`; its task 17 swaps in the public URL.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
    Typed metadata routes use `contact.site`; the sitemap follows `projects`.
 3. **OG image: complete locally, 25 September.** `app/opengraph-image.tsx`
