@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { getFeatured } from "@/lib/projects"
+import { getFeatured, upcoming } from "@/lib/projects"
 import { getPublishedPosts } from "@/lib/posts"
 import {
 	contact,
@@ -167,8 +167,33 @@ export default function HomePage() {
 						</p>
 					</Reveal>
 
-					{featured.length > 0 ? (
+					{upcoming.length + featured.length > 0 ? (
 						<Stagger className="grid gap-6 md:grid-cols-2">
+							{upcoming.map((project) => (
+								<StaggerItem key={project.slug} className="md:col-span-2">
+									<Card className="h-full rounded-3xl p-0">
+										<CardContent className="flex flex-col gap-4 p-7 md:p-10">
+											<div className="flex flex-wrap items-center justify-between gap-4">
+												<span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+													Main product
+												</span>
+												<Badge className="rounded-full font-mono text-[0.7rem]">
+													Coming soon
+												</Badge>
+											</div>
+											<h3 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
+												{project.title}
+											</h3>
+											<p className="text-muted-foreground max-w-2xl leading-relaxed">
+												{project.tagline}
+											</p>
+											<p className="text-muted-foreground font-mono text-xs">
+												{project.status}
+											</p>
+										</CardContent>
+									</Card>
+								</StaggerItem>
+							))}
 							{featured.map((project) => (
 								<StaggerItem key={project.slug}>
 									<Link

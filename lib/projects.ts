@@ -66,6 +66,29 @@ export const projects: Project[] = [
 	},
 ]
 
+/** A product still being built, so there is nothing to write up yet. */
+export type UpcomingProject = {
+	slug: string
+	title: string
+	tagline: string
+	/** Where it stands, stated plainly. */
+	status: string
+}
+
+/**
+ * Work in progress, shown ahead of the finished projects. These get a card
+ * but no /projects/<slug> page or sitemap entry until they ship.
+ */
+export const upcoming: UpcomingProject[] = [
+	{
+		slug: "crm",
+		title: "CRM",
+		tagline:
+			"A CRM that arrives already set up for how your business works — sales, agency, real estate or field services — instead of making you configure it first.",
+		status: "In research and planning",
+	},
+]
+
 export function getProject(slug: string): Project | undefined {
 	return projects.find((project) => project.slug === slug)
 }

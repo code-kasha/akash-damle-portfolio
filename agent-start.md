@@ -203,7 +203,10 @@ Full detail, with per-project expansion plans, is in
 
 1. **Populate `lib/projects.ts`: started 26 September.** The section is now
    called "Projects" (renamed from "Case studies", which overstated personal
-   work). Bharat is the first entry, with `public/bharat.png`. Add
+   work). The CRM, Akash's main product, leads the grid as a full-width
+   "Coming soon" card from the separate `upcoming` list (no page, no sitemap
+   entry; it is still in planning). Bharat is the first write-up, with
+   `public/bharat.png`. Add
    `lead-platform`, then `maxread-api`. The shape is narrative — problem,
    constraint, approach, outcome — not a feature list.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
