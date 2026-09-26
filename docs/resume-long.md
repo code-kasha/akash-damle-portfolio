@@ -10,9 +10,10 @@ akashdamle07@gmail.com · +91 98333 58619
 ## Summary
 
 Backend engineer with 8+ years of total experience, building and operating systems in
-Django and Node/TypeScript. Most of that time as the only engineer on the
-project, which means I have owned schema design, API surface, deployment and
-support rather than one slice of it.
+Django and Node/TypeScript. On client work I own the whole backend, sometimes
+as the only engineer and sometimes alongside a frontend developer, which means
+I have owned schema design, API surface, deployment and support rather than
+one slice of it.
 
 Recent work has focused on making that ownership repeatable: typed API
 contracts generated from a single schema definition, integration test suites

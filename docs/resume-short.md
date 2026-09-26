@@ -28,8 +28,9 @@ contracts, integration tests that run in CI, and deployments I maintain myself.
   provisioning, release and ongoing support.
 - Run the infrastructure directly — self-managed Linux servers with
   PostgreSQL, rather than handing off to a platform team.
-- Sole engineer on every engagement, working directly with non-technical
-  stakeholders to scope and prioritise.
+- Sole engineer on some engagements; on others, owned the backend alongside
+  a frontend developer. Worked directly with non-technical stakeholders to
+  scope and prioritise.
 
 ### Junior Software Developer — Matalli Infotech, Dombivli
 
