@@ -218,7 +218,7 @@ Full detail, with per-project expansion plans, is in
      from `lead-platform-digital_heroes`). Released as v1.0.0 on 26 September
      with 99 backend and 74 frontend tests, CI, a GHCR image and a Render +
      Neon demo until 26 December 2026 (drop the `demo` link then). The
-     write-up is the second entry, keeping the résumé's name and its
+     write-up leads the grid (Akash, 26 September), keeping the résumé's name and its
      "qualification task" line. `public/lead-platform.png` is the top of the
      repo's `screenshots/leads.png`; the 2:1 `cover` is
      `public/lead-platform-social.png`, styled like bharat-post-dir's. CI runs
