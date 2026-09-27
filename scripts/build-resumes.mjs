@@ -98,8 +98,12 @@ function experienceSection(long) {
 	return section("Experience", roles)
 }
 
+/** The one-page résumé has room for this many projects: the first ones, strongest first. */
+const ONE_PAGE_PROJECTS = 2
+
 function projectsSection(long) {
-	const shipped = projects.map((project) => {
+	const listed = long ? projects : projects.slice(0, ONE_PAGE_PROJECTS)
+	const shipped = listed.map((project) => {
 		const picks = project.resumeHighlights ?? [0, 1]
 		const highlights = long ? project.highlights : picks.map((i) => project.highlights[i])
 		const links = [

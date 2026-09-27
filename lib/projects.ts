@@ -34,6 +34,9 @@ export type Project = {
  * outcome — rather than a feature list, because that is what a hiring
  * reviewer actually reads. Add an entry here and both the landing grid and
  * its /projects/<slug> page are generated from it.
+ *
+ * The one-page résumé lists only the first two (see ONE_PAGE_PROJECTS in
+ * scripts/build-resumes.mjs); the long résumé lists them all.
  */
 export const projects: Project[] = [
 	{
@@ -78,6 +81,45 @@ export const projects: Project[] = [
 		cover: "/lead-platform-social.png",
 		featured: true,
 		resumeHighlights: [2, 4],
+	},
+	{
+		slug: "operations-api",
+		title: "Operations API",
+		tagline:
+			"A Django REST API for the staff side of a small organisation: staff and roles, shifts and attendance, leave, office timesheets and overtime, working-day payroll and reports, built from scratch with fictional data.",
+		year: "2026",
+		role: "Sole developer",
+		problem:
+			"Schools, clinics and small offices share the same staff paperwork: who works when, who is away, whose overtime was approved and what each person is paid this month. I have built systems like this for clients, but that code is private, so nothing public showed how I build them.",
+		constraint:
+			"Everything had to be fictional and say so: no client data, no patient records, and no statutory payroll compliance claimed without building it. Pay is where mistakes cost most, so the rules had to hold on the server whatever a client sends. A manager must not see another department's staff, and nobody approves their own leave or overtime. The same overtime must never be paid twice, and a finished pay run must never change. It also had to ship as a finished release that a reviewer can try in a minute.",
+		approach:
+			"One installation serves one organisation, with a shared core and a module per sector; the first release ships the core with the office module. Every write goes from view to serializer to service. Services recheck permissions, lock what they change, and save the record and its audit entry in one transaction; querysets are filtered by role, so hidden records return 404. Payroll pro-rates by working days: base pay times payable days over the month's standard working days, with absences and unpaid leave as loss of pay. Overtime is paid at a multiplier or a flat rate chosen per salary structure. Each approved request links to exactly one payslip, and a locked run keeps a snapshot of every input. One shared rule classifies each shift, so attendance, payroll and reports cannot disagree. Tests and CI use SQLite by decision; I verified the production image against PostgreSQL 17, which caught a PostgreSQL-only bug before release.",
+		outcome:
+			"Released as v1.0.0 on 27 September 2026, complete and free to fork under the MIT licence: 73 documented API operations with Swagger UI and ReDoc. A Docker image for amd64 and arm64 is published to the GitHub Container Registry. A live demo runs on Render's free tier with Neon Postgres until 27 December 2026, with published demo accounts, and resets to fresh fictional data whenever it restarts.",
+		stack: [
+			"Python",
+			"Django",
+			"Django REST Framework",
+			"PostgreSQL",
+			"OpenAPI",
+			"Docker",
+			"GitHub Actions",
+			"pytest",
+		],
+		highlights: [
+			"Four business roles (operations admin, HR, manager and employee) follow a documented permission matrix. Managers see their department and employees see themselves; anything else returns 404, and nobody reviews their own leave, timesheet or overtime.",
+			"Payroll pro-rates base pay by working days for joiners, leavers, absences and unpaid leave, rounds half-up to the paisa, pays each approved overtime request exactly once and locks finished pay runs. It calculates gross pay only and claims no statutory compliance.",
+			"Monthly attendance summary, payroll register and headcount reports reuse each module's role-scoped querysets, so a report never shows what its reader could not open.",
+			"One command loads a fictional office with a month of history and a locked pay run, all or nothing. The public demo resets to it on every start, and the reset refuses to run anywhere else.",
+			"346 tests, also run once against PostgreSQL 17. CI checks lint, formatting, missing migrations and a stale OpenAPI schema, smoke-tests the Docker image, publishes releases from tags and redeploys the demo after each push.",
+		],
+		repo: "https://github.com/code-kasha/operations-api",
+		demo: "https://operations-api-ji51.onrender.com/",
+		image: "/operations-api.png",
+		cover: "/operations-api-social.png",
+		featured: true,
+		resumeHighlights: [1],
 	},
 	{
 		slug: "bharat-post-dir",

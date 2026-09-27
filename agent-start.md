@@ -2,7 +2,7 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-09-26** · Projects section in progress on `v2` (local commits ahead of `origin/v2`); not deployed.
+Last updated: **2026-09-27** · Projects section in progress on `v2` (local commits ahead of `origin/v2`); not deployed.
 
 ---
 
@@ -228,7 +228,9 @@ Full detail, with per-project expansion plans, is in
    problem, constraint, approach, outcome — not a feature list.
 
    **Go-live gate (Akash, 26 September):** `v2` merges to `main` only after
-   2–3 entries beyond bharat-post-dir exist, alongside the CRM card.
+   2–3 entries beyond bharat-post-dir exist, alongside the CRM card. Two
+   exist as of 27 September (Lead Management Platform, Operations API), so
+   the minimum is met; merging and pushing still need Akash's request.
    - **Done: Lead Management Platform** (`code-kasha/lead-platform`, renamed
      from `lead-platform-digital_heroes`). Released as v1.0.0 on 26 September
      with 99 backend and 74 frontend tests, CI, a GHCR image and a Render +
@@ -242,7 +244,20 @@ Full detail, with per-project expansion plans, is in
      SQLite shows the behaviour. The earlier "CI against real PostgreSQL"
      plan item is dropped; don't reopen it.
    - **Then two new projects (decided 26 September), replacing maxread-api:**
-     - **Operations APIs** for schools, clinics and small businesses/offices:
+     - **Done: Operations API** (`code-kasha/operations-api`). Released as
+       v1.0.0 on 27 September 2026 with the shared core and the office
+       module (schools and clinics not built); 346 tests, CI, a GHCR image
+       and a Render + Neon demo until 27 December 2026 (drop the `demo` link
+       then). Demo accounts share the published password
+       `Explore-Operations-2026`. `public/operations-api.png` is the repo's
+       Swagger screenshot; the 2:1 `cover` is `public/operations-api-social.png`,
+       styled like the other two. It sits second in the grid. The one-page
+       résumé now lists only the first two projects (`ONE_PAGE_PROJECTS` in
+       `scripts/build-resumes.mjs`, Akash, 27 September): a third did not fit
+       even with fewer highlights, so bharat-post-dir is on the site and the
+       long résumé only. The project's own handoff moved out of its public
+       repo to `../operations-api-notes/agent-start.md`.
+     - **Operations APIs** (original plan, now shipped as above) for schools, clinics and small businesses/offices:
        Django, one repository and one entry, not one per sector. A shared
        core (employees, attendance, payroll, reporting) with a module per
        sector. This is the public evidence for the résumé's headline claim
@@ -253,8 +268,7 @@ Full detail, with per-project expansion plans, is in
        **Next up (Akash, 27 September).** Choices so far: API only (Swagger,
        ReDoc and the Django admin are the demo), one company per install.
        Whether the three sectors ship together or one at a time is still
-       open. Estimated 9–11 working days. The handoff is
-       `../operations-api/agent-start.md`. MaxRead comes after it.
+       open. Estimated 9–11 working days. MaxRead comes after it.
      - **A Node/TypeScript service that serves the CRM**, such as
        notification or webhook delivery (retries, signed payloads, a queue
        for failing deliveries). It carries the Node/TS side of the résumé;
