@@ -2,7 +2,7 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-09-27** · Projects section in progress on `v2` (local commits ahead of `origin/v2`); not deployed.
+Last updated: **2026-09-27** · Live since 27 September: `v2` pushed and fast-forwarded into `main` at `8603f36`, Vercel deploy verified.
 
 ---
 
@@ -114,7 +114,7 @@ Each of these was argued through and settled. Reopen only if Akash asks.
   the résumé either, so MaxRead and XO Anime are out until they have a
   write-up. After changing profile or project data, run `pnpm resume` and
   commit the PDFs. The one-page résumé must stay one page (the script fails
-  otherwise); the long one is two pages today.
+  otherwise); the long one is three pages today.
 - **"Integration test suites that run against a real database in CI"** stays
   in the long summary. Akash has done this on other work; the public
   projects deliberately test on SQLite. Don't flag it again.
@@ -207,7 +207,7 @@ Established by reading the actual repositories on 2026-09-20.
 - **Akash has 8+ years of total experience**, including trainee/intern work
   omitted from the listed employment timeline (confirmed 25 September 2026).
   The profile, metadata, manifest and Markdown drafts use this wording.
-  Existing job dates are unchanged; old public PDFs still need replacement.
+  Existing job dates are unchanged; the public PDFs were replaced at go-live on 27 September.
 
 Full detail, with per-project expansion plans, is in
 `docs/project-audit.xlsx`.
@@ -230,7 +230,7 @@ Full detail, with per-project expansion plans, is in
    **Go-live gate (Akash, 26 September):** `v2` merges to `main` only after
    2–3 entries beyond bharat-post-dir exist, alongside the CRM card. Two
    exist as of 27 September (Lead Management Platform, Operations API), so
-   the minimum is met; merging and pushing still need Akash's request.
+   the minimum is met. Merged and deployed on 27 September at Akash's request.
    - **Done: Lead Management Platform** (`code-kasha/lead-platform`, renamed
      from `lead-platform-digital_heroes`). Released as v1.0.0 on 26 September
      with 99 backend and 74 frontend tests, CI, a GHCR image and a Render +
@@ -276,14 +276,14 @@ Full detail, with per-project expansion plans, is in
        the main positioning.
      Each project starts in its own thread, started by Akash. Nothing of
      these exists yet: no site card until each ships.
-   - **Before go-live:** push `v2`.
+   - **Go-live: done, 27 September.** `v2` pushed, `main` fast-forwarded to it.
    - **After go-live:** bharat-post-dir's README links the write-up at
      `localhost:3000`; its task 17 swaps in the public URL.
 2. **`robots.txt` and `sitemap.xml`: complete locally, 25 September.**
    Typed metadata routes use `contact.site`; the sitemap follows `projects`.
 3. **OG image: complete locally, 25 September.** `app/opengraph-image.tsx`
    renders a 1200×630 PNG using profile content and the existing AD favicon.
-   Open Graph and Twitter metadata reference it. Publication is pending.
+   Open Graph and Twitter metadata reference it. Live since 27 September.
 4. **Dead demos: none left.** `lead-platform`'s demo works since v1.0.0.
    NorthPeak was scrapped on 26 September: Akash deleted the repo and its
    deployment, and it was removed from the résumé. Don't bring it back.
