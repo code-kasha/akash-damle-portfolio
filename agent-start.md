@@ -61,7 +61,7 @@ next.config.ts              the only Next config; wires @next/mdx + remark-gfm
 app/globals.css             Tailwind import, theme tokens, keyframes, utilities
 
 lib/profile.ts              SINGLE SOURCE OF TRUTH for stated facts
-lib/projects.ts             project write-ups: bharat-post-dir, lead-platform
+lib/projects.ts             project write-ups: lead-platform, operations-api, bharat-post-dir
 lib/posts.ts                blog post metadata; drafts (if any) show only under next dev
 content/blog/<slug>.mdx     blog post bodies
 lib/themes.ts               theme ids, storage key, pre-paint init script
