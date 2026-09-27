@@ -1,0 +1,266 @@
+/* Terminal: a developer's résumé; monospace headings and prompt-style markers on warm paper. */
+:root {
+	--paper: #fbfaf7;
+	--ink: #1f2328;
+	--muted: #6e7781;
+	--green: #1a7f37;
+	--purple: #8250df;
+	--rule: #e3e1da;
+	--sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+	--mono: "IBM Plex Mono", "Geist Mono", ui-monospace, Consolas, monospace;
+}
+
+@page {
+	size: A4;
+	margin: 14mm 16mm 12mm;
+	background: var(--paper);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+	background: var(--paper);
+}
+
+body {
+	font-family: var(--sans);
+	font-size: 8.5pt;
+	line-height: 1.48;
+	color: var(--ink);
+}
+
+body.long {
+	font-size: 9.2pt;
+	line-height: 1.52;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Header ----------------------------------------------------------- */
+
+header {
+	padding: 3.4mm 4mm;
+	border: 0.8pt solid var(--rule);
+	border-radius: 1.6mm;
+	background: #fff;
+}
+
+.name-row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 6mm;
+}
+
+h1 {
+	font-family: var(--mono);
+	font-size: 20pt;
+	font-weight: 500;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+}
+
+h1::before {
+	content: "~/";
+	color: var(--green);
+}
+
+.title {
+	font-family: var(--mono);
+	font-size: 8.4pt;
+	color: var(--purple);
+}
+
+.title::before {
+	content: "// ";
+	color: var(--muted);
+}
+
+.meta {
+	margin-top: 1.6mm;
+	color: var(--muted);
+}
+
+.contact {
+	font-family: var(--mono);
+	font-size: 7.6pt;
+	color: var(--ink);
+}
+
+p.contact {
+	margin-top: 0.8mm;
+}
+
+.dot {
+	color: var(--rule);
+	padding: 0 1.6mm;
+}
+
+/* Sections --------------------------------------------------------- */
+
+section {
+	margin-top: 4mm;
+}
+
+body.long section {
+	margin-top: 5.2mm;
+}
+
+h2 {
+	font-family: var(--mono);
+	font-size: 8.6pt;
+	font-weight: 500;
+	color: var(--green);
+	margin-bottom: 2mm;
+	text-transform: lowercase;
+}
+
+h2::before {
+	content: "$ ";
+	color: var(--muted);
+}
+
+h2::after {
+	content: " ▍";
+	color: var(--green);
+	opacity: 0.6;
+}
+
+.keep > p + p {
+	margin-top: 1.6mm;
+}
+
+article,
+.keep {
+	break-inside: avoid;
+}
+
+.keep + article,
+article + article {
+	margin-top: 3mm;
+}
+
+body.long .keep + article,
+body.long article + article {
+	margin-top: 4mm;
+}
+
+.row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 4mm;
+}
+
+h3 {
+	font-size: 9.6pt;
+	font-weight: 600;
+}
+
+.at {
+	font-weight: 400;
+	color: var(--purple);
+	margin-left: 1mm;
+}
+
+.when {
+	flex-shrink: 0;
+	font-family: var(--mono);
+	font-size: 7.4pt;
+	color: var(--muted);
+}
+
+.links {
+	font-family: var(--mono);
+	font-size: 7.4pt;
+	color: var(--green);
+	margin-top: 0.3mm;
+}
+
+.lede {
+	margin-top: 0.9mm;
+}
+
+ul {
+	list-style: none;
+	margin-top: 1mm;
+}
+
+li {
+	position: relative;
+	padding-left: 3.6mm;
+}
+
+li + li {
+	margin-top: 0.7mm;
+}
+
+li::before {
+	content: ">";
+	position: absolute;
+	left: 0.2mm;
+	font-family: var(--mono);
+	color: var(--green);
+}
+
+.stack {
+	margin-top: 1mm;
+	font-family: var(--mono);
+	font-size: 7.2pt;
+	color: var(--muted);
+}
+
+.stack::before {
+	content: "stack: ";
+	color: var(--purple);
+}
+
+.badge {
+	margin-left: 1.6mm;
+	font-family: var(--mono);
+	font-size: 7pt;
+	font-weight: 400;
+	color: var(--purple);
+	vertical-align: 1pt;
+}
+
+.badge::before {
+	content: "[";
+}
+
+.badge::after {
+	content: "]";
+}
+
+/* Skills ----------------------------------------------------------- */
+
+.skills {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.2mm 9mm;
+}
+
+.skill {
+	display: flex;
+	gap: 3mm;
+}
+
+dt {
+	flex: 0 0 18mm;
+	font-family: var(--mono);
+	font-weight: 500;
+	color: var(--purple);
+}
+
+.cert + .cert {
+	margin-top: 1mm;
+}

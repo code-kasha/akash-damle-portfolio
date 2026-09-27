@@ -75,7 +75,7 @@ components/aurora.tsx       CSS-only animated background mesh
 components/ui/*             shadcn, style "radix-mira"
 
 scripts/build-resumes.mjs   `pnpm resume`: builds public/Resume.pdf and Resume(Long).pdf
-scripts/resume.css          the résumés' print styles (the site's light palette)
+scripts/resume-templates/    the résumés' print styles; terminal.css is published, --template picks another
 docs/project-audit.xlsx     audit of all 34 GitHub repos, with expansion plans
 ```
 

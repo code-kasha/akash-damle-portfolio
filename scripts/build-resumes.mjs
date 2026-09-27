@@ -4,8 +4,8 @@
  * site says. Run with `pnpm resume`; needs Chrome or Edge installed (set
  * CHROME_PATH if it is somewhere unusual).
  *
- * `--template <name>` styles the résumés with scripts/resume-templates/<name>.css
- * instead of the default scripts/resume.css. `--out <dir>` writes the PDFs
+ * The résumés are styled by scripts/resume-templates/<name>.css; terminal is
+ * the published one. `--template <name>` picks another. `--out <dir>` writes the PDFs
  * there instead of public/, for comparing templates without replacing the
  * published files.
  */
@@ -34,10 +34,8 @@ const arg = (name) => {
 	return i === -1 ? undefined : process.argv[i + 1]
 }
 
-const TEMPLATE = arg("template")
-const STYLES = TEMPLATE
-	? join(import.meta.dirname, "resume-templates", `${TEMPLATE}.css`)
-	: join(import.meta.dirname, "resume.css")
+const TEMPLATE = arg("template") ?? "terminal"
+const STYLES = join(import.meta.dirname, "resume-templates", `${TEMPLATE}.css`)
 const OUT_DIR = arg("out") ? resolve(arg("out")) : join(ROOT, "public")
 const OUT = {
 	short: join(OUT_DIR, contact.resumePdf),

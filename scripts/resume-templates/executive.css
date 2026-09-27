@@ -1,0 +1,278 @@
+/* Executive: centred and spacious, navy with a gold rule; formal without being old-fashioned. */
+:root {
+	--ink: #1a2233;
+	--muted: #677085;
+	--navy: #1e3a5f;
+	--gold: #b8893b;
+	--rule: #dde1e8;
+	--sans: "Inter", "Segoe UI", system-ui, sans-serif;
+	--serif: "Source Serif 4", Georgia, serif;
+}
+
+@page {
+	size: A4;
+	margin: 14mm 17mm 12mm;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+body {
+	font-family: var(--sans);
+	font-size: 8.5pt;
+	line-height: 1.5;
+	color: var(--ink);
+}
+
+body.long {
+	font-size: 9.2pt;
+	line-height: 1.55;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Header ----------------------------------------------------------- */
+
+header {
+	text-align: center;
+	padding-bottom: 3.6mm;
+}
+
+header .name-row {
+	display: block;
+}
+
+h1 {
+	font-family: var(--serif);
+	font-size: 25pt;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	line-height: 1.1;
+	color: var(--navy);
+}
+
+.title {
+	margin-top: 1mm;
+	font-size: 8pt;
+	font-weight: 600;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: var(--gold);
+}
+
+.title::after {
+	content: "";
+	display: block;
+	width: 14mm;
+	height: 1pt;
+	margin: 2.4mm auto 0;
+	background: var(--gold);
+}
+
+.meta {
+	margin-top: 2.2mm;
+	color: var(--muted);
+}
+
+.meta .contact::before {
+	content: "·";
+	padding: 0 1.6mm;
+}
+
+p.contact {
+	margin-top: 0.6mm;
+}
+
+.dot {
+	color: var(--gold);
+	padding: 0 1.6mm;
+}
+
+/* Sections --------------------------------------------------------- */
+
+section {
+	margin-top: 4mm;
+}
+
+body.long section {
+	margin-top: 5.4mm;
+}
+
+h2 {
+	display: flex;
+	align-items: center;
+	gap: 3mm;
+	font-family: var(--serif);
+	font-size: 11pt;
+	font-weight: 600;
+	color: var(--navy);
+	margin-bottom: 2mm;
+}
+
+h2::after {
+	content: "";
+	flex: 1;
+	height: 0.6pt;
+	background: var(--rule);
+}
+
+.keep > p + p {
+	margin-top: 1.6mm;
+}
+
+article,
+.keep {
+	break-inside: avoid;
+}
+
+.keep + article,
+article + article {
+	margin-top: 3mm;
+}
+
+body.long .keep + article,
+body.long article + article {
+	margin-top: 4mm;
+}
+
+.row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 4mm;
+}
+
+h3 {
+	font-size: 9.6pt;
+	font-weight: 700;
+	color: var(--navy);
+}
+
+.at {
+	font-weight: 400;
+	color: var(--muted);
+	margin-left: 1mm;
+}
+
+.when {
+	flex-shrink: 0;
+	font-size: 7.8pt;
+	font-weight: 500;
+	color: var(--muted);
+}
+
+.links {
+	font-size: 7.6pt;
+	color: var(--gold);
+	margin-top: 0.3mm;
+}
+
+.lede {
+	margin-top: 0.9mm;
+	font-style: normal;
+}
+
+ul {
+	list-style: none;
+	margin-top: 1.1mm;
+}
+
+li {
+	position: relative;
+	padding-left: 3.6mm;
+}
+
+li + li {
+	margin-top: 0.7mm;
+}
+
+li::before {
+	content: "";
+	position: absolute;
+	left: 0.6mm;
+	top: 0.62em;
+	width: 1.2mm;
+	height: 1.2mm;
+	border-radius: 50%;
+	background: var(--gold);
+}
+
+.stack {
+	margin-top: 1mm;
+	font-size: 7.4pt;
+	color: var(--muted);
+}
+
+.badge {
+	margin-left: 1.6mm;
+	padding: 0.1mm 1.8mm;
+	border: 0.6pt solid var(--gold);
+	border-radius: 2mm;
+	color: var(--gold);
+	font-size: 6.8pt;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	vertical-align: 1pt;
+}
+
+/* Skills ----------------------------------------------------------- */
+
+.skills {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.2mm 9mm;
+}
+
+.skill {
+	display: flex;
+	gap: 3mm;
+}
+
+dt {
+	flex: 0 0 18mm;
+	font-weight: 700;
+	color: var(--navy);
+}
+
+.cert + .cert {
+	margin-top: 1mm;
+}
+
+/* One page: the same look, slightly closer set so it fits. */
+body.short {
+	line-height: 1.44;
+}
+
+body.short section {
+	margin-top: 2.8mm;
+}
+
+body.short .keep + article,
+body.short article + article {
+	margin-top: 2.3mm;
+}
+
+body.short header {
+	padding-bottom: 2.4mm;
+}
+
+@page short {
+	margin: 11mm 16mm 9mm;
+}
+
+body.short {
+	page: short;
+	font-size: 8.3pt;
+}
