@@ -26,6 +26,7 @@ import {
 	stats,
 	summary,
 } from "@/lib/profile"
+import { cn } from "@/lib/utils"
 
 export default function HomePage() {
 	const featured = getFeatured()
@@ -293,8 +294,17 @@ export default function HomePage() {
 					</Reveal>
 
 					<Stagger className="grid gap-px overflow-hidden rounded-3xl border bg-border sm:grid-cols-2 lg:grid-cols-3">
-						{skills.map((skill) => (
-							<StaggerItem key={skill.group} className="bg-background">
+						{skills.map((skill, i) => (
+							<StaggerItem
+								key={skill.group}
+								className={cn(
+									"bg-background",
+									// A card left alone on the last row spans it, so no empty cells show.
+									i === skills.length - 1 && skills.length % 2 === 1 && "sm:col-span-2",
+									i === skills.length - 1 &&
+										(skills.length % 3 === 1 ? "lg:col-span-3" : "lg:col-span-1"),
+								)}
+							>
 								<Parallax distance={10} className="h-full">
 									<div className="hover:bg-surface h-full p-8 transition-colors duration-500">
 										<h3 className="mb-5 font-mono text-xs tracking-widest uppercase">

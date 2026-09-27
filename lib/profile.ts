@@ -86,6 +86,7 @@ export const skills = [
 	{ group: "Platform", items: ["Docker", "CI/CD", "Linux", "AWS", "Vercel"] },
 	{ group: "Quality", items: ["Vitest", "Pytest", "Zod", "OpenAPI"] },
 	{ group: "Frontend", items: ["React", "Next.js", "Tailwind", "Redux"] },
+	{ group: "AI tools", items: ["Claude Code", "OpenAI Codex", "ChatGPT"] },
 ] as const
 
 export type Role = {
@@ -172,14 +173,14 @@ export const education = [
 	},
 ] as const
 
-/** RESUME ONLY. Shown on the long résumé. */
+/**
+ * RESUME ONLY. Shown on the long résumé. The same two as LinkedIn; the
+ * introductory Udemy courses were dropped as weak signals at 8+ years
+ * (Akash, 27 September 2026).
+ */
 export const certifications = [
 	{ course: "Full Stack Development", provider: "Internshala", period: "Oct 2025 – Apr 2026" },
-	{ course: "Master the Coding Interview: Data Structures + Algorithms", provider: "Udemy", period: "Apr 2025 – Jan 2026" },
-	{ course: "The Complete JavaScript Course: From Zero to Expert", provider: "Udemy", period: "Jun 2025 – Nov 2025" },
 	{ course: "Microservices with Node.js and React", provider: "Udemy", period: "Apr 2024 – Sep 2025" },
-	{ course: "The Complete Full-Stack Web Development Bootcamp", provider: "Udemy", period: "Jun 2023 – Feb 2024" },
-	{ course: "Python Django: The Practical Guide", provider: "Udemy", period: "Jan 2021 – Aug 2021" },
 ] as const
 
 /** Flat list for the ticker. */

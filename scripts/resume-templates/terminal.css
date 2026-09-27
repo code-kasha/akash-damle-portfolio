@@ -264,3 +264,17 @@ dt {
 .cert + .cert {
 	margin-top: 1mm;
 }
+
+/* One page: the same look, slightly closer set so it fits. */
+body.short section {
+	margin-top: 3.2mm;
+}
+
+body.short .keep + article,
+body.short article + article {
+	margin-top: 2.4mm;
+}
+
+body.short h2 {
+	margin-bottom: 1.6mm;
+}
