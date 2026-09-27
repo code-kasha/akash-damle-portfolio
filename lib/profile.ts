@@ -28,7 +28,7 @@ export const identity = {
 export const contact = {
 	email: "akashdamle07@gmail.com",
 	github: "https://github.com/code-kasha",
-	linkedin: "https://www.linkedin.com/in/akash-damle-58a808258/",
+	linkedin: "https://www.linkedin.com/in/akashdamle/",
 	site: "https://www.akashdamle.in",
 	/** RESUME ONLY. Already public via the linked PDF. */
 	phone: "+91 98333 58619",
