@@ -7,7 +7,7 @@
 import { execFileSync } from "node:child_process"
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
-import { join, resolve } from "node:path"
+import { basename, join, resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 
 import {
@@ -151,11 +151,12 @@ function educationSection(long) {
 	return section("Education", degrees) + section("Training and Certifications", courses)
 }
 
+/** The PDF viewer shows the document title, so it is the file name. */
 function page(long) {
 	const summary = long ? resumeSummary.long : [resumeSummary.short]
 	return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
-<title>${esc(identity.name)} — ${esc(identity.title)}${long ? " (long)" : ""}</title>
+<title>${esc(basename(long ? contact.resumeLongPdf : contact.resumePdf))}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=block" rel="stylesheet">
 <style>${readFileSync(join(import.meta.dirname, "resume.css"), "utf8")}</style>
