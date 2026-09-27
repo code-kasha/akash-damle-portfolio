@@ -1,0 +1,226 @@
+/* Classic: a serif, black-ink layout in the manner of an academic CV. */
+:root {
+	--ink: #1b1b1b;
+	--muted: #5c5c5c;
+	--accent: #7a2e1f;
+	--rule: #c9c4bb;
+	--serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+@page {
+	size: A4;
+	margin: 12mm 15mm 11mm;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+body {
+	font-family: var(--serif);
+	font-size: 9.1pt;
+	line-height: 1.33;
+	color: var(--ink);
+}
+
+body.long {
+	font-size: 10.2pt;
+	line-height: 1.42;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Header ----------------------------------------------------------- */
+
+header {
+	text-align: center;
+	padding-bottom: 2.4mm;
+	border-bottom: 0.6pt solid var(--ink);
+}
+
+header .name-row {
+	display: block;
+}
+
+h1 {
+	font-size: 24pt;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	line-height: 1.1;
+}
+
+.title {
+	margin-top: 0.6mm;
+	font-size: 9.6pt;
+	font-style: italic;
+	color: var(--accent);
+}
+
+.meta {
+	margin-top: 1.2mm;
+	color: var(--muted);
+}
+
+.meta .contact::before {
+	content: "·";
+	padding: 0 1.4mm;
+}
+
+.contact {
+	font-size: 8.8pt;
+}
+
+p.contact {
+	margin-top: 0.6mm;
+}
+
+.dot {
+	color: var(--muted);
+	padding: 0 1.4mm;
+}
+
+/* Sections --------------------------------------------------------- */
+
+section {
+	margin-top: 3mm;
+}
+
+body.long section {
+	margin-top: 4.4mm;
+}
+
+h2 {
+	font-size: 10pt;
+	font-weight: 700;
+	font-variant: small-caps;
+	text-transform: lowercase;
+	letter-spacing: 0.1em;
+	color: var(--accent);
+	border-bottom: 0.5pt solid var(--rule);
+	padding-bottom: 0.4mm;
+	margin-bottom: 1.6mm;
+}
+
+.keep > p + p {
+	margin-top: 1.4mm;
+}
+
+article,
+.keep {
+	break-inside: avoid;
+}
+
+.keep + article,
+article + article {
+	margin-top: 2.2mm;
+}
+
+body.long .keep + article,
+body.long article + article {
+	margin-top: 3mm;
+}
+
+.row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 4mm;
+}
+
+h3 {
+	font-size: 10.2pt;
+	font-weight: 700;
+}
+
+.at {
+	font-weight: 400;
+	font-style: italic;
+	color: var(--muted);
+	margin-left: 1mm;
+}
+
+.when {
+	flex-shrink: 0;
+	font-size: 8.8pt;
+	font-style: italic;
+	color: var(--muted);
+}
+
+.links {
+	font-size: 8.6pt;
+	color: var(--accent);
+	margin-top: 0.2mm;
+}
+
+.lede {
+	margin-top: 0.6mm;
+}
+
+ul {
+	margin-top: 0.8mm;
+	padding-left: 4.2mm;
+}
+
+li::marker {
+	content: "–  ";
+	color: var(--muted);
+}
+
+li + li {
+	margin-top: 0.4mm;
+}
+
+.stack {
+	margin-top: 0.8mm;
+	font-size: 8.6pt;
+	font-style: italic;
+	color: var(--muted);
+}
+
+.badge {
+	margin-left: 1.4mm;
+	font-size: 8.6pt;
+	font-weight: 400;
+	font-style: italic;
+	color: var(--accent);
+}
+
+.badge::before {
+	content: "(";
+}
+
+.badge::after {
+	content: ")";
+}
+
+/* Skills ----------------------------------------------------------- */
+
+.skills {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.8mm 8mm;
+}
+
+.skill {
+	display: flex;
+	gap: 3mm;
+}
+
+dt {
+	flex: 0 0 19mm;
+	font-weight: 700;
+}
+
+.cert + .cert {
+	margin-top: 0.6mm;
+}

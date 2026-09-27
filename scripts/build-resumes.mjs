@@ -3,9 +3,14 @@
  * lib/profile.ts and lib/projects.ts, so the résumés say exactly what the
  * site says. Run with `pnpm resume`; needs Chrome or Edge installed (set
  * CHROME_PATH if it is somewhere unusual).
+ *
+ * `--template <name>` styles the résumés with scripts/resume-templates/<name>.css
+ * instead of the default scripts/resume.css. `--out <dir>` writes the PDFs
+ * there instead of public/, for comparing templates without replacing the
+ * published files.
  */
 import { execFileSync } from "node:child_process"
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { basename, join, resolve } from "node:path"
 import { pathToFileURL } from "node:url"
@@ -22,9 +27,21 @@ import {
 import { projects, upcoming } from "../lib/projects.ts"
 
 const ROOT = resolve(import.meta.dirname, "..")
+
+/** The value after `--name` on the command line, if given. */
+const arg = (name) => {
+	const i = process.argv.indexOf(`--${name}`)
+	return i === -1 ? undefined : process.argv[i + 1]
+}
+
+const TEMPLATE = arg("template")
+const STYLES = TEMPLATE
+	? join(import.meta.dirname, "resume-templates", `${TEMPLATE}.css`)
+	: join(import.meta.dirname, "resume.css")
+const OUT_DIR = arg("out") ? resolve(arg("out")) : join(ROOT, "public")
 const OUT = {
-	short: join(ROOT, "public", contact.resumePdf),
-	long: join(ROOT, "public", contact.resumeLongPdf),
+	short: join(OUT_DIR, contact.resumePdf),
+	long: join(OUT_DIR, contact.resumeLongPdf),
 }
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -63,7 +80,8 @@ const bullets = (items) => `<ul>${items.map((item) => `<li>${esc(item)}</li>`).j
  */
 const section = (title, parts) => {
 	const [first, ...rest] = Array.isArray(parts) ? parts : [parts]
-	return `<section><div class="keep"><h2>${esc(title)}</h2>${first}</div>${rest.join("")}</section>`
+	const slug = title.toLowerCase().replace(/[^a-z]+/g, "-")
+	return `<section class="s-${slug}"><div class="keep"><h2>${esc(title)}</h2>${first}</div>${rest.join("")}</section>`
 }
 
 function header() {
@@ -158,8 +176,8 @@ function page(long) {
 <html lang="en"><head><meta charset="utf-8">
 <title>${esc(basename(long ? contact.resumeLongPdf : contact.resumePdf))}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=block" rel="stylesheet">
-<style>${readFileSync(join(import.meta.dirname, "resume.css"), "utf8")}</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>${readFileSync(STYLES, "utf8")}</style>
 </head><body class="${long ? "long" : "short"}">
 ${header()}
 ${section("Summary", summary.map((p) => `<p>${esc(p)}</p>`).join(""))}
@@ -187,6 +205,7 @@ function findChrome() {
 /** Counts pages in a Chrome-generated PDF. */
 const pageCount = (pdf) => (readFileSync(pdf, "latin1").match(/\/Type\s*\/Page\b/g) ?? []).length
 
+mkdirSync(OUT_DIR, { recursive: true })
 const chrome = findChrome()
 const work = mkdtempSync(join(tmpdir(), "resume-"))
 try {

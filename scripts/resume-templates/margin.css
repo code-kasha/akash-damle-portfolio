@@ -1,0 +1,250 @@
+/* Margin: section labels hang in a left column; the content aligns to the right of it. */
+:root {
+	--ink: #16181d;
+	--muted: #676d78;
+	--accent: #0f766e;
+	--rule: #dfe2e6;
+	--label: 27mm;
+	--sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+	--mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+
+@page {
+	size: A4;
+	margin: 13mm 14mm 12mm;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+body {
+	font-family: var(--sans);
+	font-size: 8.8pt;
+	line-height: 1.42;
+	color: var(--ink);
+}
+
+body.long {
+	font-size: 9.3pt;
+	line-height: 1.46;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Header ----------------------------------------------------------- */
+
+header {
+	position: relative;
+	padding-left: var(--label);
+	padding-bottom: 2.4mm;
+}
+
+header::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 2.4mm;
+	width: calc(var(--label) - 7mm);
+	height: 3pt;
+	background: var(--accent);
+}
+
+.name-row {
+	display: flex;
+	align-items: baseline;
+	gap: 4mm;
+}
+
+h1 {
+	font-size: 22pt;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.05;
+}
+
+.title {
+	font-size: 10pt;
+	font-weight: 500;
+	color: var(--accent);
+}
+
+.meta {
+	margin-top: 1mm;
+	flex-wrap: wrap;
+	gap: 0 4mm;
+	color: var(--muted);
+}
+
+.contact {
+	font-family: var(--mono);
+	font-size: 7.8pt;
+}
+
+p.contact {
+	margin-top: 0.8mm;
+}
+
+.dot {
+	color: var(--rule);
+	padding: 0 1.4mm;
+}
+
+/* Sections --------------------------------------------------------- */
+
+section {
+	position: relative;
+	padding-left: var(--label);
+	padding-top: 2.4mm;
+	margin-top: 2.4mm;
+	border-top: 0.5pt solid var(--rule);
+}
+
+body.long section {
+	padding-top: 3.2mm;
+	margin-top: 3.2mm;
+}
+
+h2 {
+	position: absolute;
+	left: 0;
+	width: calc(var(--label) - 5mm);
+	font-size: 7.6pt;
+	font-weight: 600;
+	line-height: 1.6;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+
+.keep > p + p {
+	margin-top: 1.4mm;
+}
+
+article,
+.keep {
+	break-inside: avoid;
+}
+
+.keep + article,
+article + article {
+	margin-top: 2.2mm;
+}
+
+body.long .keep + article,
+body.long article + article {
+	margin-top: 3mm;
+}
+
+.row {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 4mm;
+}
+
+h3 {
+	font-size: 9.8pt;
+	font-weight: 600;
+}
+
+.at {
+	font-weight: 400;
+	color: var(--muted);
+	margin-left: 1mm;
+}
+
+.when {
+	flex-shrink: 0;
+	font-family: var(--mono);
+	font-size: 7.6pt;
+	color: var(--muted);
+}
+
+.links {
+	font-family: var(--mono);
+	font-size: 7.4pt;
+	color: var(--accent);
+	margin-top: 0.2mm;
+}
+
+.lede {
+	margin-top: 0.7mm;
+	font-weight: 500;
+}
+
+ul {
+	list-style: none;
+	margin-top: 0.9mm;
+}
+
+li {
+	position: relative;
+	padding-left: 3.4mm;
+}
+
+li + li {
+	margin-top: 0.5mm;
+}
+
+li::before {
+	content: "";
+	position: absolute;
+	left: 0.4mm;
+	top: 0.66em;
+	width: 1.6mm;
+	height: 0.7pt;
+	background: var(--accent);
+}
+
+.stack {
+	margin-top: 0.9mm;
+	font-family: var(--mono);
+	font-size: 7.2pt;
+	color: var(--muted);
+}
+
+.badge {
+	margin-left: 1.6mm;
+	padding: 0.2mm 1.6mm;
+	border: 0.6pt solid var(--accent);
+	border-radius: 1mm;
+	color: var(--accent);
+	font-size: 6.8pt;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	vertical-align: 1pt;
+}
+
+/* Skills ----------------------------------------------------------- */
+
+.skills {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.9mm 7mm;
+}
+
+.skill {
+	display: flex;
+	gap: 3mm;
+}
+
+dt {
+	flex: 0 0 18mm;
+	font-weight: 600;
+}
+
+.cert + .cert {
+	margin-top: 0.7mm;
+}

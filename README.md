@@ -43,6 +43,8 @@ This project is open source and available under the MIT License.
 ## 🤝 Connect
 
 - GitHub: [@code-kasha](https://github.com/code-kasha)
+- LinkedIn: [akashdamle](https://www.linkedin.com/in/akashdamle/)
+- Website: [akashdamle.in](https://www.akashdamle.in)
 - Feel free to reach out with questions or collaboration opportunities!
 
 ## Search and sharing
