@@ -2,10 +2,16 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-09-27** · Live since 27 September: `v2` pushed and fast-forwarded into `main` at `8603f36`, Vercel deploy verified.
+Last updated: **2026-09-28** · Production at `a4004a2`; the project image update below is local on `v2` and awaits publication approval.
 
 ---
 
+
+## Project images — 28 September 2026
+
+Akash requested clean cover graphics in the project list, with real screenshots after clicking through. All four cards now use their existing 2:1 `cover` without hover cropping. Project pages use `screenshot` (src, width, height and descriptive alt) at its original aspect ratio; OG/Twitter metadata retains the cover. The ambiguous `image` field was replaced. The Webhook Delivery screenshot is a genuine unauthenticated capture of the live v1.0.0 Swagger UI at 1905x854, saved as `public/webhook-delivery-screenshot.jpg`; the other three existing captures remain 1280x800.
+
+Validation: production build and TypeScript passed; ESLint zero errors and the same 49 existing JSDoc warnings. Browser verified all four loaded card covers, click-through to Webhook Delivery and the Webhook/Operations screenshots. HTTP checks verified each project's optimized screenshot returns 200 and its social cover remains in metadata. `pnpm resume --out` regenerated both PDFs outside the repo: text and rendered pixels exactly match the existing one- and three-page PDFs, so there is no PDF content change to commit. Preview is at http://localhost:3003. New image work is local only; ask Akash before pushing or publishing.
 
 ## Webhook Delivery update — 28 September 2026
 
@@ -13,7 +19,7 @@ Prepared on `v2` at Akash's request after webhook-delivery v1.0.0 shipped. Webho
 
 Added the project narrative, a 16:10 vector flow card and a 2:1 cover matching the existing project covers. The project page now labels covers as covers rather than interfaces. New six-minute article: `content/blog/webhook-delivery-retries-and-restarts.mdx`, with metadata in `lib/posts.ts`. Akash authorized publication on 28 September 2026 after reviewing the prepared update; the article is marked published with that date. It covers the actual lease race, transactions, retries, signatures, SSRF, tests and hosted limitations, with repository evidence and AI collaboration credited. No unverifiable scale claims.
 
-Validation: Next production build and TypeScript passed; full ESLint has the same 49 pre-existing JSDoc warnings and zero errors. Draft article and project rendered locally in Brave; article body/code block and generated OG image inspected. Resume PDFs contain the selected projects and fit without clipping. Project images are 1280x800 and 1280x640. Publication authorized: run the final build, push v2, fast-forward main and verify the Vercel deployment. Record the verified live commit after it completes. Do not alter the career facts in lib/profile.ts.
+Validation: Next production build and TypeScript passed; full ESLint has the same 49 pre-existing JSDoc warnings and zero errors. Draft article and project rendered locally in Brave; article body/code block and generated OG image inspected. Resume PDFs contain the selected projects and fit without clipping. Project images are 1280x800 and 1280x640. Publication completed: v2 and main were pushed to `a4004a2`; Vercel production deployment `6702106556` succeeded. The project and article return 200, and both live PDFs match the verified local files. This approval covered that publication, not the subsequent image update. Do not alter the career facts in lib/profile.ts.
 
 ## 1. What this is
 
@@ -232,8 +238,8 @@ Full detail, with per-project expansion plans, is in
    entry; it is still in planning). bharat-post-dir (formerly Bharat) is
    the first write-up, with `public/bharat-post-dir.png` and its live demo,
    which ends 26 December 2026: drop the `demo` link then. Its write-up
-   uses a 2:1 `cover` (`public/bharat-post-dir-social.png`) as the article
-   and share image; the card keeps the screenshot. The shape is narrative —
+   uses a 2:1 `cover` (`public/bharat-post-dir-social.png`) for its card
+   and social preview; the project page shows its real screenshot. The shape is narrative —
    problem, constraint, approach, outcome — not a feature list.
 
    **Go-live gate (Akash, 26 September):** `v2` merges to `main` only after

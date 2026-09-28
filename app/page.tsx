@@ -202,14 +202,14 @@ export default function HomePage() {
 										className="group block h-full"
 									>
 										<Card className="h-full overflow-hidden rounded-3xl p-0 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-2xl">
-											{project.image && (
-												<div className="relative aspect-[16/10] overflow-hidden">
+											{project.cover && (
+												<div className="relative aspect-[2/1] overflow-hidden">
 													<Image
-														src={project.image}
+														src={project.cover}
 														alt=""
 														fill
 														sizes="(min-width: 768px) 50vw, 100vw"
-														className="object-cover transition-transform duration-700 group-hover:scale-105"
+														className="object-contain"
 													/>
 												</div>
 											)}

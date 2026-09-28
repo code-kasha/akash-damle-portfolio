@@ -152,19 +152,19 @@ export default async function ProjectPage({
 				</div>
 			</section>
 
-			{(project.cover || project.image) && (
+			{project.screenshot && (
 				<section className="px-6 pb-20">
 					<Reveal className="mx-auto max-w-5xl">
 						<div
-							className={`relative overflow-hidden rounded-3xl border ${project.cover ? "aspect-[2/1]" : "aspect-[16/9]"}`}
+							className="overflow-hidden rounded-3xl border"
 						>
 							<Image
-								src={project.cover ?? project.image!}
-								alt={`${project.title} ${project.cover ? "project cover" : "interface"}`}
-								fill
-								priority
+								src={project.screenshot.src}
+								alt={project.screenshot.alt}
+								width={project.screenshot.width}
+								height={project.screenshot.height}
 								sizes="(min-width: 1024px) 64rem, 100vw"
-								className="object-cover"
+								className="h-auto w-full"
 							/>
 						</div>
 					</Reveal>

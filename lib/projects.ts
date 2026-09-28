@@ -16,8 +16,14 @@ export type Project = {
 	highlights: string[]
 	repo?: string
 	demo?: string
-	image?: string
-	/** 2:1 article image for the write-up page and its share card; `image` is used when absent. */
+	/** Real interface capture displayed without cropping on the project page. */
+	screenshot?: {
+		src: string
+		width: number
+		height: number
+		alt: string
+	}
+	/** 2:1 graphic for the project card and social preview. */
 	cover?: string
 	featured?: boolean
 	/**
@@ -77,7 +83,12 @@ export const projects: Project[] = [
 		],
 		repo: "https://github.com/code-kasha/lead-platform",
 		demo: "https://lead-platform-c3mw.onrender.com/",
-		image: "/lead-platform.png",
+		screenshot: {
+			src: "/lead-platform.png",
+			width: 1280,
+			height: 800,
+			alt: "Lead Management Platform showing the sales pipeline with fictional leads",
+		},
 		cover: "/lead-platform-social.png",
 		featured: true,
 		resumeHighlights: [2, 4],
@@ -106,7 +117,12 @@ export const projects: Project[] = [
 		],
 		repo: "https://github.com/code-kasha/webhook-delivery",
 		demo: "https://webhook-delivery-demo.onrender.com/docs",
-		image: "/webhook-delivery.png",
+		screenshot: {
+			src: "/webhook-delivery-screenshot.jpg",
+			width: 1905,
+			height: 854,
+			alt: "Webhook Delivery 1.0.0 Swagger documentation showing endpoint and event operations",
+		},
 		cover: "/webhook-delivery-social.png",
 		featured: true,
 		resumeHighlights: [0, 1],
@@ -145,7 +161,12 @@ export const projects: Project[] = [
 		],
 		repo: "https://github.com/code-kasha/operations-api",
 		demo: "https://operations-api-ji51.onrender.com/",
-		image: "/operations-api.png",
+		screenshot: {
+			src: "/operations-api.png",
+			width: 1280,
+			height: 800,
+			alt: "Operations API Swagger documentation showing attendance operations",
+		},
 		cover: "/operations-api-social.png",
 		featured: true,
 		resumeHighlights: [1],
@@ -184,7 +205,12 @@ export const projects: Project[] = [
 		],
 		repo: "https://github.com/code-kasha/bharat-post-dir",
 		demo: "https://bharat-post-dir.onrender.com/",
-		image: "/bharat-post-dir.png",
+		screenshot: {
+			src: "/bharat-post-dir.png",
+			width: 1280,
+			height: 800,
+			alt: "bharat-post-dir lookup page showing Delhi results and the dataset source information",
+		},
 		cover: "/bharat-post-dir-social.png",
 		featured: true,
 		resumeHighlights: [1, 0],
