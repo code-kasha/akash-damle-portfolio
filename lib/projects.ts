@@ -83,6 +83,35 @@ export const projects: Project[] = [
 		resumeHighlights: [2, 4],
 	},
 	{
+		slug: "webhook-delivery",
+		title: "Webhook Delivery",
+		tagline:
+			"A Node.js and TypeScript service for signed webhooks, durable retries and delivery history, backed by PostgreSQL.",
+		year: "2026",
+		role: "Developer, with Claude and Codex as AI pair programmers",
+		problem:
+			"A CRM needs to tell other systems when something changes, even when a receiver is slow or offline. Sending an HTTP request inside the original business operation leaves no reliable record of what needs another attempt. I built a standalone delivery service as a precursor to the webhook and integration-log requirements of my planned CRM.",
+		constraint:
+			"A receiver can accept a request just before the sender crashes, so exactly-once delivery would be a false promise. The queue needed to survive restarts, competing workers and temporary database failures. User-supplied destinations also create an SSRF boundary: signed requests must not become a route into private networks. All demonstration data is fictional, and the free hosted worker sleeps when its API does.",
+		approach:
+			"PostgreSQL stores the event, subscription snapshot, delivery jobs and audit entry in one transaction. Workers claim short leases, release database locks before network I/O, and fence completion with a lease token. A review caught a race where the selection snapshot could predate another worker's claim; rechecking the live lease after locking the endpoint fixed it. Deliveries use timestamped HMAC signatures and encrypted signing secrets, with bounded I/O, DNS validation and address pinning. Eight attempts per replay cycle, a five-failure automatic pause and manual replay make recovery explicit. Zod drives validation and generated OpenAPI. Claude and Codex helped implement, review and test the service; the repository records the findings and verification.",
+		outcome:
+			"Released as v1.0.0 on 28 September 2026 under the MIT licence, with public amd64 and arm64 images on GHCR and a controlled Render and Neon demo until 28 December 2026. Real signed HTTPS delivery returned 204, and a Render restart preserved API keys, encrypted signing secrets, attempt history and queued work. The public demo exposes Swagger; credentials stay private. Free-tier sleep stops the background worker, so it is not an always-on delivery service.",
+		stack: ["Node.js", "TypeScript", "Fastify", "PostgreSQL", "Zod", "OpenAPI", "Docker", "GitHub Actions", "Vitest"],
+		highlights: [
+			"Transactional fan-out, fenced worker leases and bounded retries retain events and attempt history across failures; delivery is at least once, with no ordering guarantee.",
+			"85 tests run against PostgreSQL in CI on Node 22 and 24, including concurrent claims, worker crashes, database outages, HTTPS verification and SSRF boundaries.",
+			"Timestamped HMAC signatures, overlapping secret rotation and DNS/IP validation with address pinning protect the receiver and outbound request boundary.",
+			"A controlled Render restart retained credentials, signing secrets, queued deliveries and prior attempt history; the retained webhook then received HTTP 204.",
+		],
+		repo: "https://github.com/code-kasha/webhook-delivery",
+		demo: "https://webhook-delivery-demo.onrender.com/docs",
+		image: "/webhook-delivery.png",
+		cover: "/webhook-delivery-social.png",
+		featured: true,
+		resumeHighlights: [0, 1],
+	},
+	{
 		slug: "operations-api",
 		title: "Operations API",
 		tagline:

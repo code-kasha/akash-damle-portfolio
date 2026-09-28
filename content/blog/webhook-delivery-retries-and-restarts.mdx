@@ -1,0 +1,86 @@
+A receiver returning `204` is the easy part of webhook delivery. The harder question is what the sender should record when the receiver accepted a request but the sender disappeared before saving the result.
+
+I built [Webhook Delivery](https://github.com/code-kasha/webhook-delivery) as a standalone precursor to the webhook and integration-log requirements of my planned CRM. It is a Node.js and TypeScript service with PostgreSQL as its queue and history store. Claude and Codex worked with me as AI pair programmers on implementation, review and verification. The [verification record](https://github.com/code-kasha/webhook-delivery/blob/main/docs/verification.md) includes the defects found during that process, not just the final passing checks.
+
+This article walks through the decisions that survived those checks. All example traffic is fictional; this is not a claim about customer scale or production throughput.
+
+## Make acceptance a database fact
+
+Publishing an event stores its serialized body, its subscription snapshot, the delivery jobs and an audit entry in one transaction. A `202` response means that work is durable. It does not mean the receivers have accepted it.
+
+The snapshot includes subscribed endpoints that are disabled or automatically paused. Their jobs wait. Enabling an endpoint later releases that backlog; subscribing a new endpoint does not backfill earlier events.
+
+An idempotency key makes a retried publish resolve to the same event when the type and data match. Reusing it for different content returns a conflict. That closes one duplication window at the API boundary, but it cannot make a remote receiver's business operation exactly once.
+
+## Keep the network outside the transaction
+
+The worker uses three separate stages:
+
+```text
+Short transaction: claim a job, set a lease, record a started attempt
+No transaction:   resolve the destination and send the signed request
+Short transaction: record the outcome and next state
+```
+
+A slow receiver must not hold database locks for the duration of an HTTP request. PostgreSQL row locks and `SKIP LOCKED` let workers move past busy endpoints. The service allows one in-flight delivery per endpoint and uses a 60-second lease to recover work from a dead process.
+
+Each claim receives a fresh token. The completion query must match that token and the in-flight state. If another worker has recovered the job, the old worker cannot overwrite its result. This is lease fencing: ownership is checked when the outcome is committed, not inferred from a worker's memory.
+
+Explicit SQL makes these boundaries visible. It also leaves a trade-off: database rows are cast at the TypeScript boundary rather than inferred by a typed ORM. Strict TypeScript does not make every SQL result automatically type-safe.
+
+## A lock was necessary, but not sufficient
+
+Review uncovered a race in the claim path. The query that selected an endpoint could use a snapshot from before another worker's claim committed. By the time the endpoint lock was acquired, there could be a live delivery lease that the earlier selection had not seen.
+
+The recovery path treated that in-flight delivery as expired. It marked the attempt unknown and sent it again.
+
+The fix was to read the in-flight row again after acquiring the endpoint lock and explicitly test whether its lease was still live. If so, the worker backs off. A regression test runs competing claimers and checks that live leases are not recovered as unknown attempts.
+
+This was a useful distinction: serializing access to a row does not make an earlier observation of related state current. The decision must use the state checked under the lock.
+
+## An unknown outcome must remain unknown
+
+Consider this sequence:
+
+1. The receiver validates the signature and commits its work.
+2. It returns a success response.
+3. The sender crashes before persisting that response.
+4. The lease expires and another worker sends the event again.
+
+The second send may be a duplicate. The sender cannot safely infer success from having started a request, and the database cannot atomically commit the receiver's separate transaction. The service therefore promises **at-least-once delivery**, bounded retries and visible attempt history. It makes no ordering guarantee.
+
+Receivers should store the signed event ID with their business change in one transaction, and acknowledge duplicates without applying that change again. The bundled receiver demonstrates signature verification with in-memory deduplication; it deliberately is not a durable business receiver.
+
+A temporary database outage is a different case from a dead worker. When the worker still knows the HTTP outcome, it retries recording it with backoff within the lease. Fencing makes those repeated finalization attempts harmless. Tests exercise both a real killed worker and a temporary database connection outage.
+
+## Recovery needs separate controls
+
+Each delivery has eight attempts per replay cycle, with exponential backoff and jitter. Five consecutive known failures automatically pause the endpoint before the cycle is exhausted. Events continue to be retained while it is paused.
+
+Re-enabling an endpoint resumes pending work. Replaying an exhausted delivery starts a new cycle while preserving its event ID, delivery ID and lifetime attempt history. Those are distinct operations: clearing a pause must not silently reset retry budgets.
+
+Newer work can succeed while an older event waits for its next attempt. Consumers that require ordering need to account for that explicitly; one in-flight request per endpoint does not imply ordered delivery across retries.
+
+## A signed request still needs a safe destination
+
+The signature covers the exact timestamp, a period and the raw request body with HMAC-SHA256. Receivers check the timestamp's age before accepting the request. Signing secrets are encrypted at rest, and rotation permits a 24-hour overlap so receivers can move to the new secret without an immediate cutover.
+
+Signatures protect the receiving side. They do not make an arbitrary destination URL safe for the sender.
+
+The service validates URLs and resolved addresses at registration and on each attempt. It rejects forbidden address ranges, pins the selected address for the connection, and preserves the original hostname for HTTP Host and TLS verification. Redirects are refused. DNS and HTTP share a deadline, and response headers and bodies are bounded. Private destinations require an explicit configuration override; the hosted demo leaves it off.
+
+## What was actually verified
+
+The repository's 85 tests run in GitHub Actions on Node 22 and 24 with a real PostgreSQL service container. They include concurrent claims, competing replay, transaction rollback, worker crashes, database outages, signatures, destination boundaries and HTTPS certificate checks. CI also checks lint, types, the generated OpenAPI contract, the build and a running container.
+
+The hosted check used a dedicated Neon PostgreSQL database and two Render services: the API/worker and a controlled receiver. A fictional signed event received `204`. Reusing its publish key returned the same event. A publish-only API key was refused endpoint administration, and a private destination was rejected.
+
+Then the endpoint was disabled, another event was queued, and the API service was restarted through Render. The credentials, encrypted signing secret, earlier attempt history and queued delivery survived. Re-enabling the endpoint delivered that retained job successfully.
+
+The limits matter. The arm64 runtime was tested through emulation, not on physical ARM hardware. There is no throughput benchmark here. Render's free services sleep without inbound traffic, which also stops the worker; persisted jobs can resume on wake, but the demo is not evidence of continuously scheduled retries during idle periods. Its planned retirement is 28 December 2026, and its API credentials remain private.
+
+## Read the boundaries before adopting it
+
+The [project write-up](/projects/webhook-delivery) links the repository and controlled Swagger demo. The [design document](https://github.com/code-kasha/webhook-delivery/blob/main/docs/design.md) describes the queue and guarantees, and the [receiver guide](https://github.com/code-kasha/webhook-delivery/blob/main/docs/receiver.md) explains verification and deduplication.
+
+The service is useful because acceptance, ownership and outcomes have explicit records. A retry is an expected state transition, a crash leaves recoverable work, and uncertainty stays visible instead of being reported as success.

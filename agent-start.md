@@ -6,6 +6,15 @@ Last updated: **2026-09-27** · Live since 27 September: `v2` pushed and fast-fo
 
 ---
 
+
+## Webhook Delivery update — 28 September 2026
+
+Prepared on `v2` at Akash's request after webhook-delivery v1.0.0 shipped. Webhook Delivery is now the second project, after Lead Management Platform; Operations API and bharat-post-dir remain on the site and full résumé. Akash accepted Lead Platform + Webhook Delivery for the one-page résumé. Both generated PDFs were visually inspected: one page and three pages respectively.
+
+Added the project narrative, a 16:10 vector flow card and a 2:1 cover matching the existing project covers. The project page now labels covers as covers rather than interfaces. New six-minute article: `content/blog/webhook-delivery-retries-and-restarts.mdx`, with metadata in `lib/posts.ts`. It is a draft (`published: null`) pending portfolio publication. It covers the actual lease race, transactions, retries, signatures, SSRF, tests and hosted limitations, with repository evidence and AI collaboration credited. No unverifiable scale claims.
+
+Validation: Next production build and TypeScript passed; full ESLint has the same 49 pre-existing JSDoc warnings and zero errors. Draft article and project rendered locally in Brave; article body/code block and generated OG image inspected. Resume PDFs contain the selected projects and fit without clipping. Project images are 1280x800 and 1280x640. No portfolio push, merge or Vercel deployment performed yet. Publishing remains a separate explicit action under the branch workflow above; publish the article with the actual date, run the final build, then fast-forward main only when authorized. Do not alter the career facts in lib/profile.ts.
+
 ## 1. What this is
 
 Akash Damle's personal portfolio. Next.js **16.2.4**, App Router, TypeScript,

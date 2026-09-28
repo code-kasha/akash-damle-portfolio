@@ -29,6 +29,16 @@ export type Post = {
  */
 export const posts: Post[] = [
 	{
+		slug: 'webhook-delivery-retries-and-restarts',
+		title: 'Building webhook delivery that survives retries and restarts',
+		description: 'A PostgreSQL queue, signed requests, a live-lease race and the checks that caught it. The design and limits of my Node.js and TypeScript webhook service.',
+		published: null,
+		updated: '2026-09-28',
+		status: 'draft',
+		tags: ['Node.js', 'TypeScript', 'PostgreSQL', 'Webhooks'],
+		readingMinutes: 6,
+	},
+	{
 		slug: 'local-ai-on-a-12gb-gpu',
 		title: 'Local AI on a 12 GB GPU: what survived testing, and how to set it up',
 		description:

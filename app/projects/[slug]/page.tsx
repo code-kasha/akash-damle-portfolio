@@ -160,7 +160,7 @@ export default async function ProjectPage({
 						>
 							<Image
 								src={project.cover ?? project.image!}
-								alt={`${project.title} interface`}
+								alt={`${project.title} ${project.cover ? "project cover" : "interface"}`}
 								fill
 								priority
 								sizes="(min-width: 1024px) 64rem, 100vw"
