@@ -33,9 +33,9 @@ export const posts: Post[] = [
 		title: 'Rootstock: a Django starter you prune instead of generate',
 		description:
 			'A feature manifest, marker comments and a prune that verifies itself before it commits. How I made removing code from a Django starter reliable, and what testing every pruned shape found.',
-		published: null,
+		published: '2026-10-12',
 		updated: '2026-10-12',
-		status: 'draft',
+		status: 'published',
 		tags: ['Django', 'Python', 'Developer tools', 'CI'],
 		readingMinutes: 7,
 	},
