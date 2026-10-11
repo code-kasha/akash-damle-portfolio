@@ -1,0 +1,76 @@
+Every Django project I start begins with the same week of work: a custom user with email login, email verification, settings that differ per environment and fail when something is missing, a base layout, deploy files and the tests for all of it. None of it is the project. All of it has to be right.
+
+Rootstock is my answer to that week. It is a personal Django starter: you clone it, run `scripts/init-project`, and then remove the features you don't need. What is left is a working project with authentication already done. Claude (Anthropic) worked with me on it as an AI co-author, and the repository credits it as one.
+
+This article is about the part that turned out to be interesting: making removal reliable. Rootstock is at version 0.1.0 and its repository is private for now, so treat this as a design write-up rather than an invitation to clone it.
+
+## Why not a generator
+
+The usual answers to this problem each fail in a specific way.
+
+A project generator such as Copier or Cookiecutter asks questions once and writes out a project. It is clean on day one, but the template and the project drift apart, and a fix made in the template later is hard to bring across. A branch per feature combination grows combinatorially and fights over the lock file. Runtime feature flags keep every feature's code in every project, switched off but still imported, still upgraded and still part of the attack surface.
+
+I rejected all three. Rootstock is one inclusive repository that contains every feature at once, and pruning deletes what a project doesn't use. The rule is simple: a feature's code either exists and runs, or it has been removed.
+
+## A manifest that knows what each feature owns
+
+Removal only works if something knows exactly what a feature consists of. That is `features.toml`. Each of the 23 features declares its files, its tests, its docs, its Poetry dependency group, its environment variables and the features it depends on. `docs/features.md` is generated from it, so the description cannot drift from the manifest.
+
+Most of a feature lives in its own files, and the core never imports it. Settings fragments, URL includes and middleware are discovered from feature folders, so deleting a folder removes the feature from the running project. The few lines that must live in a shared file, such as a script tag in the base template or an import in an `__init__.py`, are fenced with marker comments:
+
+```python
+# >>> feature:task-celery
+# isort: split
+from .celery import app as celery_app
+
+# isort: split
+# <<< feature:task-celery
+```
+
+The `# isort: split` lines are there because Ruff's import sorter moves a comment along with the import beneath it, which pulls a marker away from its block. Small details like that decide whether a mechanical edit leaves valid code. The marker format has written rules: a block wraps whole statements, never part of a line, and never the only statement in a body, because removing it would leave an empty `if`.
+
+## Pruning is a verified commit
+
+`scripts/prune` takes feature IDs or a preset, and it is a dry run unless you pass `--apply`. It refuses to run on a dirty git tree and refuses to remove a feature while another feature that needs it stays. Then it deletes the files, strips the marked blocks, removes the dependency group and environment variables, and records what it removed in `.rootstock/pruned.json`.
+
+Deleting code is easy; knowing the result still works is the actual job. So after every prune the script formats, lints, compiles, runs `manage.py check` and runs the remaining tests, and only then makes one commit. If any step fails, you have a clean tree to return to.
+
+Pruning is deliberately one-way. Re-adding a feature would mean reapplying markers into files the project has since changed, which is a merge problem pretending to be a toggle. The documentation says so plainly, and git history is the way back.
+
+Four presets cover common shapes: `full`, `shared` for Passenger hosting, `api-only` and `minimal`.
+
+## Staying in sync after pruning
+
+A starter you can't update is a generator with extra steps. `scripts/init-project` renames the project's `origin` remote to `rootstock`, and `scripts/sync-rootstock` later merges new upstream work. A merge would bring pruned features straight back, so the script then runs `prune` again for every ID recorded in `pruned.json`, and lists any features that are new upstream so you can keep or remove each one. Conflicts are expected only in shared files near former marked blocks.
+
+## Two Django versions, one codebase
+
+The main target is Django 6.1 on the latest stable Python. Shared hosts often offer only Python 3.11 to 3.13, so the `shared` preset runs Django 5.2 LTS instead, through a small dependency overlay.
+
+The two versions disagree in ways that matter. Django 6.1 configures email through `MAILERS` and forbids mixing it with the older `EMAIL_*` settings, so the email settings module builds one shape or the other by version. Django 6.1 has template partials and Content Security Policy built in; on 5.2 they come from packages with different setting names and template variable names. Rootstock avoids inline scripts entirely, so no CSP nonce is ever needed and the difference stays in settings. Templates use one partials syntax, verified to render on both versions.
+
+The test suite has version-aware expectations where behaviour really differs, and a compatibility workflow installs and tests every supported combination. Its first run on GitHub passed all 18: Django 6.1 on Python 3.12 to 3.14 and Django 5.2 on 3.11 to 3.13, each on Linux, Windows and macOS.
+
+## Test what is left, not what you started with
+
+Most starters are tested in their full form, which is the one form nobody ships. The CI workflow therefore prunes every feature together with its dependents, prunes to every preset, and runs the suite that remains, alongside tests on Linux and Windows for each Python version and against real PostgreSQL, MySQL and MariaDB servers. That is 47 jobs.
+
+Running those prune simulations locally, before anything reached GitHub, found seven defects. A service worker precached a stylesheet that a prune had removed. The Dependabot configuration still watched the Docker folder after the Docker feature was pruned. Settings tests assumed a `postgres://` URL in a MySQL-only project. Tests for the Docker compose worker failed once Celery was gone. Each one would have reached the first person to prune that combination.
+
+Two more came from the real world. The first GitHub run failed eight tests with "Author identity unknown": the pruning scripts make git commits, and a bare CI runner has no git identity. And after a Dependabot bump of the compose database to PostgreSQL 18 was merged, the database stopped starting, because PostgreSQL 18 images refuse a volume mounted at the old data path. The mount moved, and a test now guards it.
+
+## Working with AI agents on a codebase like this
+
+Rootstock was built in more than 40 planned tasks, and much of the implementation was done by Claude working in separate threads. That only works with a written plan that settles arguments. The repository has a `plan/` folder with a precedence order: my latest instruction, then the specification, then the task list, then an append-only log. An agent that thinks a decision is wrong writes a proposal and stops; it does not change the decision on its own.
+
+Each task names the paths it may touch, and each finished task records what was run and, just as important, what was not. The log says "not verified" a lot, and I wanted that.
+
+I also learned not to trust a report of success. Two local models I tried on one task ignored explicit instructions and reported success anyway. From then on every agent's work was checked by running the quality gate myself, and the test suite was checked by planting deliberate bugs: across more than 60 of them, all were caught except two that were redundant or inert.
+
+The quality bar is fixed rather than aspirational: zero errors and zero warnings, more than 1,200 tests with 98 percent line coverage of `src`, a pre-push hook that fails below 90 percent, and a check that every class and function has a docstring and that no two are the same. The last rule sounds pedantic. In practice it stops copy-pasted code from hiding behind copy-pasted descriptions.
+
+## What is not verified yet
+
+The Docker image has been built and probed under compose: migrations, readiness checks, static files, a non-root user and a refused unknown host. The Fly.io and Railway files exist but have not been used on a live account. Media storage has been tested against a mock S3, not a real Cloudflare R2 bucket. Celery's idle traffic on a metered Redis such as Upstash is an estimate, not a measurement. Passenger has been worked out from host documentation, not run on a real shared host. Those checks are the next task in the plan.
+
+The [project write-up](/projects/rootstock) has the summary. The idea that held up across all of this is that a starter's real product is not its code but its ability to lose code safely.

@@ -2,9 +2,18 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-09-28** · Production at `a4004a2`; the project image update below is local on `v2` and awaits publication approval.
+Last updated: **2026-10-12** · Production at `a4004a2`; the project image update and the Rootstock update below are local on `v2` and await publication approval.
 
 ---
+
+
+## Rootstock update — 12 October 2026
+
+Added at Akash's request from `../rootstock/docs/website-listing.md` (the listing copy, checked against that repo by its own tests) plus facts from its `plan/SPEC.md` and `plan/log.md`. Rootstock is the fifth project, after bharat-post-dir, so the one-page résumé is unchanged; résumé PDFs were not regenerated. The GitHub repo `code-kasha/rootstock` is **private**, so the project has no `repo` or `demo` link; add `repo` once it is public. Cover `public/rootstock-social.svg` / `.png` (1280x640, same style as the others, rendered with sharp); screenshot `public/rootstock.png` is the real 1280x800 sign-in page capture from the Rootstock repo. Version 0.1.0; Fly.io, Railway, R2, Upstash and Passenger are stated as unverified, as the listing requires.
+
+New seven-minute article `content/blog/rootstock-a-django-starter-you-prune.mdx`, a **draft** (`published: null`) pending review: why not a generator, the feature manifest and markers, verified one-way pruning, sync-rootstock, Django 6.1 and 5.2, the prune simulations and CI findings, working with AI agents, and what is not verified. Claude is credited as AI co-author.
+
+Validation: TypeScript and production build passed; the new project page, the draft post (under `next dev`), the blog index and the home grid return 200.
 
 
 ## Project images — 28 September 2026

@@ -215,6 +215,55 @@ export const projects: Project[] = [
 		featured: true,
 		resumeHighlights: [1, 0],
 	},
+	{
+		slug: "rootstock",
+		title: "Rootstock",
+		tagline:
+			"A Django starter you prune down to what you need: accounts, HTMX and Tailwind templates and optional APIs, with every feature removable in one verified commit.",
+		year: "2026",
+		role: "Developer, with Claude as an AI co-author",
+		problem:
+			"Every Django project I start repeats the same first week: a custom user, email verification, settings that differ per environment, a base layout, deploy files and tests. Starter templates either include everything forever or generate a project once and can't be updated afterwards. I wanted one starter for my own projects, from an API on a VPS to a site on shared hosting.",
+		constraint:
+			"Code that a project doesn't use should not exist in it: no runtime feature flags and no dead imports. A project must still be able to take later improvements from the starter. Shared hosts often offer only Python 3.11 to 3.13 under Passenger with no Docker, while the main target is Django 6.1 on the latest Python. Everything had to work on Windows as well as Linux and macOS.",
+		approach:
+			"One inclusive repository, not a generator; Copier, branches per feature and runtime flags were all rejected. A features.toml manifest declares, for each of 23 features, the files, tests, docs, Poetry dependency group and environment variables it owns. Core code never imports a feature: settings fragments, URLs and middleware are discovered from feature folders, and the few lines that must live in shared files are fenced with marker comments. scripts/prune deletes a feature or a preset, strips its marked blocks, then formats, lints, runs Django's checks and the remaining tests before making one commit. scripts/sync-rootstock merges new upstream work and re-prunes what the project removed. Business rules sit in one service layer under thin DRF and Django Ninja adapters that share one error envelope, rate limiting and a merged OpenAPI 3.1 document.",
+		outcome:
+			"Version 0.1.0, in early development and MIT licensed; the repository is private for now. More than 1,200 tests with 98 percent line coverage of src. A 47-job GitHub Actions workflow runs the suite on Linux and Windows for Python 3.12 to 3.14, every preset, every feature pruned with its dependents, and PostgreSQL, MySQL and MariaDB servers. A compatibility workflow passed all 18 combinations of Django 6.1 and 5.2 across Python versions on Linux, Windows and macOS. The Docker image has been built and probed; deploy files for Fly.io and Railway exist but have not yet been used on a live account.",
+		stack: [
+			"Python",
+			"Django",
+			"django-allauth",
+			"Django REST Framework",
+			"Django Ninja",
+			"OpenAPI",
+			"HTMX",
+			"Tailwind CSS",
+			"Celery",
+			"PostgreSQL",
+			"MySQL",
+			"Docker",
+			"Poetry",
+			"GitHub Actions",
+			"pytest",
+		],
+		highlights: [
+			"Twenty-three removable features and four presets (full, shared, api-only and minimal). Pruning is dry-run by default, needs a clean git tree, checks feature dependencies and is deliberately one-way.",
+			"CI prunes every feature and preset and runs what remains. Doing that before the first push found seven defects, including a service worker that precached a stylesheet a prune had removed.",
+			"Accounts use django-allauth with a UUID email user and required verification, as HTML pages and headless JSON. Hosted settings refuse to start without a secret key, allowed hosts, admin URL, database URL or email provider.",
+			"A Django 5.2 LTS preset for shared hosting, with a Passenger upload bundle and a standard-library host probe that reports what a host can run before anything is installed.",
+			"Every class and function has a docstring and no two are identical, enforced by a pre-commit check; a pre-push hook fails below 90 percent coverage.",
+		],
+		screenshot: {
+			src: "/rootstock.png",
+			width: 1280,
+			height: 800,
+			alt: "The sign-in page of a new Rootstock project, captured from the development server",
+		},
+		cover: "/rootstock-social.png",
+		featured: true,
+		resumeHighlights: [0, 1],
+	},
 ]
 
 /** A product still being built, so there is nothing to write up yet. */

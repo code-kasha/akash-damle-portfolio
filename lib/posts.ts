@@ -29,6 +29,17 @@ export type Post = {
  */
 export const posts: Post[] = [
 	{
+		slug: 'rootstock-a-django-starter-you-prune',
+		title: 'Rootstock: a Django starter you prune instead of generate',
+		description:
+			'A feature manifest, marker comments and a prune that verifies itself before it commits. How I made removing code from a Django starter reliable, and what testing every pruned shape found.',
+		published: null,
+		updated: '2026-10-12',
+		status: 'draft',
+		tags: ['Django', 'Python', 'Developer tools', 'CI'],
+		readingMinutes: 7,
+	},
+	{
 		slug: 'webhook-delivery-retries-and-restarts',
 		title: 'Building webhook delivery that survives retries and restarts',
 		description: 'A PostgreSQL queue, signed requests, a live-lease race and the checks that caught it. The design and limits of my Node.js and TypeScript webhook service.',

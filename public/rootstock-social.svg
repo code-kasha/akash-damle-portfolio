@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>Rootstock</title><desc>Clone, init, prune, sync and deploy. A Django starter with accounts, HTMX and Tailwind templates and optional APIs, pruned down to what a project needs.</desc>
+<rect width="1280" height="640" fill="#103e35"/><rect x="56" y="56" width="1168" height="528" rx="8" fill="#fff"/><path d="M64 56H72V584H64Q56 584 56 576V64Q56 56 64 56" fill="#198c73"/>
+<g font-family="Segoe UI,Arial,sans-serif"><text x="136" y="135" fill="#17816e" font-family="Consolas,monospace" font-weight="700" font-size="23" letter-spacing="1">CLONE → INIT → PRUNE → SYNC → DEPLOY</text>
+<text x="132" y="236" fill="#202020" font-weight="700" font-size="76">rootstock</text>
+<text x="136" y="305" fill="#424242" font-size="29">A Django starter with accounts already done,</text><text x="136" y="349" fill="#424242" font-size="29">pruned down to the features a project needs.</text>
+<g fill="#f1f3f4" stroke="#cdd3d7" stroke-width="2"><rect x="136" y="474" width="220" height="54" rx="4"/><rect x="370" y="474" width="246" height="54" rx="4"/><rect x="630" y="474" width="190" height="54" rx="4"/><rect x="834" y="474" width="136" height="54" rx="4"/><rect x="984" y="474" width="214" height="54" rx="4"/></g>
+<g fill="#172124" font-weight="700" font-size="20"><text x="154" y="509">Django 6.1 · 5.2 LTS</text><text x="388" y="509">23 removable features</text><text x="648" y="509">HTMX · Tailwind</text><text x="852" y="509">1,222 tests</text><text x="1002" y="509">Docker · Passenger</text></g></g></svg>
