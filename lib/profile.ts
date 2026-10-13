@@ -68,15 +68,19 @@ export const metaDescription =
  * The unverifiable claims that used to sit on both the site and the résumé
  * ("2000+ users", "20-35% performance improvement") are deliberately absent:
  * nothing backs them, and a reviewer who probes one of them discredits the
- * rest. Replacements are traceable — the test count is checkable in the
- * lead-platform v1.0.0 release (99 backend + 74 frontend), the client count
- * comes from the CV's own 27+ CRM deployments.
+ * rest. Replacements are traceable. The test count is the sum over the four
+ * public v1.0.0 releases, each checkable at its tag: lead-platform 173 (99
+ * backend + 74 frontend), webhook-delivery 85, operations-api 346 and
+ * bharat-post-dir 119 (checked 2026-10-13). Private repos (Rootstock, Pro Meet
+ * Desk) are left out because a reviewer cannot check them. The client count
+ * comes from the CV's own 27+ CRM deployments. Years of experience is already
+ * the hero headline, so it is not repeated here.
  */
 export const stats = [
-	{ value: "173", label: "Tests on my latest release" },
+	{ value: "723", label: "Tests across my 4 open-source releases" },
 	{ value: "27+", label: "Client systems built and self-hosted" },
-	{ value: "8+", label: "Years of total experience" },
-	{ value: "3", label: "Stacks in production: Django, Node, TS" },
+	{ value: "4", label: "Open-source v1.0.0 releases in 2026" },
+	{ value: "2", label: "Production stacks: Django and Node.js/TypeScript" },
 ] as const
 
 export const skills = [

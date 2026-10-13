@@ -2,9 +2,14 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-10-13** · Production includes the Rootstock update (deployed 12 October 2026). The Pro Meet Desk update and the project reorder below are local on `v2` and await deployment approval.
+Last updated: **2026-10-13** · Production includes the Rootstock update (deployed 12 October 2026). The Pro Meet Desk update, the project reorder and the homepage stats below are local on `v2` and await deployment approval.
 
 ---
+
+
+## Homepage stats — 13 October 2026
+
+At Akash's request the four hero stats in `lib/profile.ts` were refreshed: "723 · Tests across my 4 open-source releases" (lead-platform 173, webhook-delivery 85, operations-api 346, bharat-post-dir 119, each at its v1.0.0 tag, all MIT), "27+ · Client systems built and self-hosted" (unchanged), "4 · Open-source v1.0.0 releases in 2026" (replaces "8+ years", which the hero headline already states) and "2 · Production stacks: Django and Node.js/TypeScript" (replaces "3 stacks"). Private projects are excluded because a reviewer cannot check them. The years figure is unchanged everywhere else. Note: operations-api `docs/deployment.md` says 345 tests ran against PostgreSQL, while 346 are collected; the site uses 346.
 
 
 ## Project order and ecosystem framing — 13 October 2026
