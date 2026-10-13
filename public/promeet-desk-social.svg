@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>Pro Meet Desk</title><desc>Publish, book, confirm, meet and follow up. A Django booking and meeting workspace where the database prevents double booking and private notes stay with the professional.</desc>
+<rect width="1280" height="640" fill="#103e35"/><rect x="56" y="56" width="1168" height="528" rx="8" fill="#fff"/><path d="M64 56H72V584H64Q56 584 56 576V64Q56 56 64 56" fill="#198c73"/>
+<g font-family="Segoe UI,Arial,sans-serif"><text x="136" y="135" fill="#17816e" font-family="Consolas,monospace" font-weight="700" font-size="23" letter-spacing="1">PUBLISH → BOOK → CONFIRM → MEET → FOLLOW UP</text>
+<text x="132" y="236" fill="#202020" font-weight="700" font-size="76">promeet-desk</text>
+<text x="136" y="305" fill="#424242" font-size="29">Appointments without double booking,</text><text x="136" y="349" fill="#424242" font-size="29">and notes only the professional can read.</text>
+<g fill="#f1f3f4" stroke="#cdd3d7" stroke-width="2"><rect x="136" y="474" width="232" height="54" rx="4"/><rect x="382" y="474" width="224" height="54" rx="4"/><rect x="620" y="474" width="196" height="54" rx="4"/><rect x="830" y="474" width="120" height="54" rx="4"/><rect x="964" y="474" width="184" height="54" rx="4"/></g>
+<g fill="#172124" font-weight="700" font-size="20"><text x="154" y="509">Django · PostgreSQL</text><text x="400" y="509">No double booking</text><text x="638" y="509">Encrypted fields</text><text x="848" y="509">589 tests</text><text x="982" y="509">HTMX · Tailwind</text></g></g></svg>

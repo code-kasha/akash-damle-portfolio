@@ -2,9 +2,18 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-10-12** · Production includes the Rootstock update below (deployed 12 October 2026 at Akash's request).
+Last updated: **2026-10-13** · Production includes the Rootstock update (deployed 12 October 2026). The Pro Meet Desk update below is local on `v2` and awaits deployment approval.
 
 ---
+
+
+## Pro Meet Desk update — 13 October 2026
+
+Added at Akash's request "in the same way" as Rootstock. There was no listing doc, so facts come from `../promeet-desk/README.md`, `plan/SPEC.md` (decisions and change log), `plan/road_to_full_version.md`, its tests and git history (60 commits, 12–13 October 2026, tag `v0.6.0`, all co-authored by Claude). The GitHub repo `code-kasha/promeet-desk` is **private and stays private** (Akash's instruction): no `repo` or `demo` link. Sixth project, after Rootstock. Cover `public/promeet-desk-social.svg` / `.png` (1280x640); screenshot `public/promeet-desk.png` is a real 1280x800 headless-Chrome capture of the local app's booking page with seeded fictional demo data. 589 tests passed locally on 13 October.
+
+Article `content/blog/promeet-desk-booking-and-private-notes.mdx` (six minutes), published 13 October 2026, so it heads the blog and the homepage's latest-post link. It covers the exclusion constraint and advisory lock, the pure slot generator, scoped queries and the canary privacy test, encryption, audit trigger, guest verification, consent and retention, assistants, AI collaboration, and the unverified parts (runbooks, legal review, payments, SMS).
+
+Validation: production build passed; `/`, `/blog`, the article, the project page and both images return 200 from `next start`. The home grid now has seven cards (one upcoming plus six projects).
 
 
 ## Rootstock update — 12 October 2026

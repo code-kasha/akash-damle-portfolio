@@ -264,6 +264,49 @@ export const projects: Project[] = [
 		featured: true,
 		resumeHighlights: [0, 1],
 	},
+	{
+		slug: "promeet-desk",
+		title: "Pro Meet Desk",
+		tagline:
+			"A Django booking and meeting workspace for professionals: guests book without an account, the database rules out double booking, and private notes never leave the professional's desk.",
+		year: "2026",
+		role: "Developer, with Claude as an AI pair programmer",
+		problem:
+			"Doctors, consultants, engineers and other professionals take appointments from people who will not create an account to book one. After the meeting they keep notes that are among the most private data they hold. I wanted to prove the core loop for an India-first product: publish services and hours, let a visitor book a slot, approve, move or cancel it, and record notes afterwards.",
+		constraint:
+			"Correct booking and privacy mattered more than breadth. Two guests can press Book on the same slot at the same moment, and an application-level check cannot settle that. A street address or meeting link must not reach a guest before the booking is confirmed, and meeting notes must never reach a client page, an email or the Django admin. It was built as a demonstration with fictional data, so every step towards real use had to be stated rather than implied.",
+		approach:
+			"PostgreSQL holds the final guarantee: an exclusion constraint on each professional's time ranges rejects overlapping pending or confirmed appointments, and writes that claim time queue behind a per-professional advisory lock, with a bounded retry if the database still aborts one. Slots come from a pure, table-driven generator that handles time zones and DST. Every owner query goes through a manager scoped to the signed-in user, so another professional's data returns 404. A privacy test plants a canary string in every private field and checks every page, email and admin search. Later versions added an append-only audit trail enforced by a database trigger, field encryption with key rotation and a blind index for lookups, verified guest emails, retention, export and erasure. The frontend is server-rendered with Tailwind and HTMX, and runs without Node.",
+		outcome:
+			"Closed at version 0.6.0 on 13 October 2026 as a demonstration; the repository is private. 589 tests pass against PostgreSQL. It includes demo-scope versions of a calendar feed, generated video rooms, passwordless client links, SMS reminders, payment records and assistants. Deployment runbooks for a VM, cPanel and Render with Neon are written but not yet run on a live host, and the privacy wording has not had legal review.",
+		stack: [
+			"Python",
+			"Django",
+			"PostgreSQL",
+			"HTMX",
+			"Tailwind CSS",
+			"cryptography",
+			"Brevo",
+			"Poetry",
+			"pytest",
+		],
+		highlights: [
+			"Double booking is impossible at the database: a btree_gist exclusion constraint, a per-professional advisory lock and threaded tests of simultaneous bookings and moves.",
+			"Guests see only an area label until a booking is confirmed; the full address and meeting link arrive with the confirmation. A canary-string test checks that notes never reach any client-facing page, email or the admin.",
+			"Client names, contact details, messages, addresses and notes are encrypted at rest with rotatable keys; clients are matched by a keyed hash of their email.",
+			"An append-only audit trail, versioned consent, verified guest emails, and retention, export and erasure flows, at demo scope with the remaining legal work listed.",
+			"Assistants can manage appointments and payments but never read notes; owner-only pages answer them with 403.",
+		],
+		screenshot: {
+			src: "/promeet-desk.png",
+			width: 1280,
+			height: 800,
+			alt: "Pro Meet Desk booking page with a day picker, time slots and the guest details form, using fictional demo data",
+		},
+		cover: "/promeet-desk-social.png",
+		featured: true,
+		resumeHighlights: [0, 1],
+	},
 ]
 
 /** A product still being built, so there is nothing to write up yet. */

@@ -1,0 +1,55 @@
+A booking page looks like a calendar with buttons on it. The interesting part is everything the buttons have to refuse: a slot someone else took a millisecond earlier, an address the guest isn't entitled to yet, a note that must never appear anywhere except the professional's own screen.
+
+Pro Meet Desk is a booking and meeting workspace I built for an India-first product idea. A professional publishes services and weekly hours, a visitor books a slot without creating an account, and the professional approves, moves or cancels it and keeps private notes afterwards. I built it over two days in October 2026, in 60 commits, with Claude as an AI pair programmer. It is closed at version 0.6.0 as a demonstration, runs on fictional data, and its repository is private.
+
+The specification put two things above breadth or polish: bookings must be correct, and private data must stay private. This article is about how each of those was enforced, and how I checked.
+
+## Let the database refuse a double booking
+
+The obvious approach is to check whether a slot is free and then insert the appointment. Two guests pressing Book on the same slot at the same moment can both pass that check before either insert commits. No amount of care in the view fixes a race between two requests.
+
+So the final guarantee lives in PostgreSQL. An exclusion constraint, using the `btree_gist` extension, covers each professional's appointments as time ranges and rejects any overlap among pending or confirmed ones. Cancelled, declined and expired appointments fall outside it, so their time is free again. A violation is reported to the guest as "That time was just taken", which is exactly what happened.
+
+That decided correctness, but not how it felt. With two overlapping inserts in flight, PostgreSQL could abort one with a deadlock rather than a clean constraint violation. Writes that claim time now take a transaction-scoped advisory lock keyed by the professional, so simultaneous attempts on one calendar are decided one at a time and the later ones meet the constraint as an ordinary conflict. If a deadlock still happens, the write is retried a bounded number of times, and reported as taken if the time has gone in the meantime.
+
+A threaded test releases six guests at the same slot through a barrier and expects exactly one booking. A second threaded test does the same for owners moving two appointments into one slot.
+
+## Keep slot generation pure
+
+Which times to offer is a separate question from whether a time can be held. The slot generator is a pure module: weekly windows, time off, buffers, minimum notice and the booking horizon go in, and start times come out, with no database access. That makes it cheap to test from a table of cases, including the days daylight saving starts and ends, when a window from midnight to 06:00 is five real hours long.
+
+Times are stored in UTC, and each professional has an IANA time zone that defaults to `Asia/Kolkata`. A booking is accepted only if its time is one the generator offers, and only then does the constraint get the final word.
+
+## Decide who can see what, once
+
+Visibility rules spread across templates are rules that will eventually be missed. Every owner query goes through a manager scoped to the signed-in user, never to an ID from the URL, so another professional's appointment returns 404 rather than revealing that it exists.
+
+Addresses are the subtler case. Before a booking is confirmed, a guest sees only a location's area label. The street address and meeting link appear on confirmation, on the booking page and in the email alike, because both read them through the same two functions.
+
+Meeting notes are never shown to clients, never put in an email and never registered in the Django admin. A privacy test plants a unique canary string in every private field, then requests every public page, booking page, email and admin search and checks that the canary appears nowhere. It also checks that the canary does appear on the owner's own page. Without that positive control, a test that searched the wrong thing would pass forever.
+
+## Trust features have trade-offs
+
+The later versions added what a real deployment would need first, at demo scope.
+
+**Encryption at rest.** Client names, emails, phones, messages, address lines and notes are encrypted before they reach PostgreSQL, with keys that can be rotated. The cost is real: encrypted columns cannot be filtered, ordered or searched. Clients are found by a keyed hash of their email, client lists sort by creation time, and admin search no longer covers names. The key lives in the same environment as the database password, so this protects dumps and backups, not a compromised server. The README says so.
+
+**An audit trail the application cannot rewrite.** Viewing, saving and deleting notes, and superusers opening client records in the admin, are recorded without their content. A PostgreSQL trigger rejects any update or delete on the audit table, so the trail does not depend on application code behaving.
+
+**Verified guest emails.** Without verification, anyone could book under someone else's email address. A new booking now holds its time for 30 minutes but stays hidden from the professional until the guest confirms. Confirming is a button that sends a POST, not a link, because mail scanners open links. Unconfirmed time is released quietly, without emailing an address that may not belong to the person who booked.
+
+**Consent, retention, export and erasure.** Each booking records the consent version the guest agreed to. Professionals and guests can download data, a guest can erase their own details, and clients are anonymised automatically three years after their last appointment unless kept. Every export, erasure and anonymisation is in the audit trail.
+
+**Assistants.** An assistant can manage appointments and payments but never reads notes. Owner-only pages answer an assistant with 403, because they work on that desk and the page plainly exists; another professional's data is still a 404.
+
+## Working with an AI pair programmer
+
+Claude wrote much of the code under a fixed set of rules in the repository. Decisions live in a specification that an agent may not change; it proposes, I approve, and the change is logged with its date. Business logic stays in services so views remain thin. Every task ends with the same gate: Ruff, Django's checks, a missing-migrations check and the full test suite, all clean.
+
+The rule that mattered most was in reporting: say what was verified and what was not. The specification's change log is full of lines like "Checked in a browser for the day strip and the calendar; the decision and follow-up announcements are covered by tests only". That made it easy to see where the evidence stopped.
+
+## What is not done
+
+The suite has 589 tests and passes against PostgreSQL. Beyond that, the limits are plain. The deployment runbooks for a VM, cPanel and Render with Neon are written but have not been run on a live host. The privacy notice and consent text are drafts that have not had legal review under India's DPDP Act. Payments are records with a demo checkout where no money moves. SMS goes through a Twilio backend that has never sent a real message, and calendar sync is a one-way feed. The repository holds a separate list of everything a full version would still need.
+
+The [project write-up](/projects/promeet-desk) has the summary. What I would carry into any booking system is the order of trust: the database decides what is possible, one scoped query decides who can see it, and a test with a positive control proves the rest.
