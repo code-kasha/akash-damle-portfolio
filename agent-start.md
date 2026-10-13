@@ -2,7 +2,7 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-10-13** · Production includes the Rootstock update (deployed 12 October 2026). The Pro Meet Desk update, the project reorder and the homepage stats below are local on `v2` and await deployment approval.
+Last updated: **2026-10-13** · Production at `16fb97c`: Rootstock (deployed 12 October), and Pro Meet Desk, the project reorder and the homepage stats (deployed 13 October at Akash's request).
 
 ---
 
