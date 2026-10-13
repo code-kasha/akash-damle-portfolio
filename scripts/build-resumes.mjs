@@ -140,7 +140,7 @@ function projectsSection(long) {
 		return `<article>
 			<div class="row"><h3>${esc(project.title)}</h3><span class="when">${esc(project.year)}</span></div>
 			<p class="links">${links.join('<span class="dot">·</span>')}</p>
-			<p class="lede">${esc(project.tagline)}</p>
+			<p class="lede">${esc(project.resumeTagline ?? project.tagline)}</p>
 			${bullets(highlights)}
 			<p class="stack">${stack.map(esc).join(" · ")}</p>
 		</article>`
@@ -154,9 +154,19 @@ function projectsSection(long) {
 	return section("Selected Projects", [...shipped, ...coming])
 }
 
-function skillsSection() {
+/**
+ * Skills left off the one-page résumé. Its skills column fits about 44
+ * characters a row, and these would wrap onto extra lines and push the résumé
+ * to two pages. The long résumé and the site list them all.
+ */
+const ONE_PAGE_SKILL_CUTS = ["REST", "MongoDB", "Query tuning", "Field encryption", "Audit trails"]
+
+function skillsSection(long) {
 	const rows = skills
-		.map((group) => `<div class="skill"><dt>${esc(group.group)}</dt><dd>${group.items.map(esc).join(" · ")}</dd></div>`)
+		.map((group) => {
+			const items = long ? group.items : group.items.filter((item) => !ONE_PAGE_SKILL_CUTS.includes(item))
+			return `<div class="skill"><dt>${esc(group.group)}</dt><dd>${items.map(esc).join(" · ")}</dd></div>`
+		})
 		.join("")
 	return section("Skills", `<dl class="skills">${rows}</dl>`)
 }
@@ -190,7 +200,7 @@ ${header()}
 ${section("Summary", summary.map((p) => `<p>${esc(p)}</p>`).join(""))}
 ${experienceSection(long)}
 ${projectsSection(long)}
-${skillsSection()}
+${skillsSection(long)}
 ${educationSection(long)}
 </body></html>`
 }

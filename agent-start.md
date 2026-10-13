@@ -396,3 +396,15 @@ robots, sitemap, PNG dimensions/content type, OG/Twitter image metadata and
 8+ total-experience text. The social image was visually inspected. New route
 files pass ESLint with zero warnings; full-repo ESLint has 49 pre-existing
 JSDoc warnings and zero errors. No push, merge to main or deployment.
+
+## 10. Résumé refresh — 13 October 2026
+
+Akash approved the résumé proposal in `Ideas/personal_cv_project/RESUME_REVIEW_20261013.md` (all recommended, with the one-page trims below). Stat `723` was already live from `16fb97c`.
+
+- **Skills** (`lib/profile.ts`): added Fastify, HTMX, "Constraints & locking", "Field encryption" and "Audit trails". The site and long résumé show them all.
+- **One-page résumé only** (`ONE_PAGE_SKILL_CUTS` in `scripts/build-resumes.mjs`): REST, MongoDB, Query tuning, Field encryption and Audit trails are left off, because their rows would wrap and push the résumé to two pages.
+- **Summary** (`resumeSummary.short`, one-page only): now leads with the database and test rules and the pruned Django foundation. The long summary is unchanged.
+- **Taglines** (`resumeTagline`, one-page and long résumé): Lead Platform, Webhook Delivery, Operations API and Pro Meet Desk gained a "what it is" prefix. Site taglines are unchanged.
+- **PDFs:** `Resume.pdf` is one page; `Resume(Long).pdf` is now four pages (was three), with the last page mostly empty. Both rendered and were checked visually.
+
+Checks: `pnpm build` passed; ESLint shows the same three pre-existing JSDoc warnings and no errors. Not pushed or deployed. Publication to `main` is still Akash's call.

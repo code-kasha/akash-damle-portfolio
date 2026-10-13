@@ -5,6 +5,11 @@ export type Project = {
 	part: string
 	/** One sentence on what is unique to this project. */
 	tagline: string
+	/**
+	 * RESUME ONLY. The résumé lede, when it should name the kind of thing the
+	 * project is ("Django REST API: …"). Falls back to `tagline`.
+	 */
+	resumeTagline?: string
 	year: string
 	role: string
 	/** One-line framing of the problem the project solves. */
@@ -104,6 +109,8 @@ export const projects: Project[] = [
 		part: "Bookings",
 		tagline:
 			"Guests book without an account, PostgreSQL rules out double booking, and private notes never leave the professional.",
+		resumeTagline:
+			"Django booking app: guests book without an account, PostgreSQL rules out double booking, and private notes never leave the professional.",
 		year: "2026",
 		role: "Developer, with Claude as an AI pair programmer",
 		problem:
@@ -148,6 +155,8 @@ export const projects: Project[] = [
 		part: "Sales",
 		tagline:
 			"Leads move through a validated pipeline with every change on a timeline, and the React app is typed from the API schema.",
+		resumeTagline:
+			"Django REST API: leads move through a validated pipeline with every change on a timeline, and the React app is typed from the API schema.",
 		year: "2026",
 		role: "Sole developer",
 		problem:
@@ -197,6 +206,8 @@ export const projects: Project[] = [
 		part: "Integrations",
 		tagline:
 			"Signed webhooks with durable retries and a full attempt history, in Node.js and TypeScript on PostgreSQL.",
+		resumeTagline:
+			"Node.js and TypeScript service: signed webhooks with durable retries and a full attempt history, on PostgreSQL.",
 		year: "2026",
 		role: "Developer, with Claude and Codex as AI pair programmers",
 		problem:
@@ -232,6 +243,8 @@ export const projects: Project[] = [
 		part: "Operations",
 		tagline:
 			"Staff, shifts, leave, overtime and working-day payroll, where a finished pay run can never change.",
+		resumeTagline:
+			"Django REST API: staff, shifts, leave, overtime and working-day payroll, where a finished pay run can never change.",
 		year: "2026",
 		role: "Sole developer",
 		problem:

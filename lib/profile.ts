@@ -44,7 +44,7 @@ export const contact = {
  */
 export const resumeSummary = {
 	short:
-		"Backend engineer with 8+ years of total experience, building and operating systems in Django and Node/TypeScript. I ship the unglamorous parts properly: typed API contracts, integration tests that run in CI, and deployments I maintain myself.",
+		"Backend engineer with 8+ years of total experience, building and operating systems in Django and Node/TypeScript. I put the rules that must hold into the database and the tests, and I start projects from my own pruned, fully tested Django foundation.",
 	long: [
 		"Backend engineer with 8+ years of total experience, building and operating systems in Django and Node/TypeScript. On client work I own the whole backend, sometimes as the only engineer and sometimes alongside a frontend developer, which means I have owned schema design, API surface, deployment and support rather than one slice of it.",
 		"Recent work has focused on making that ownership repeatable: typed API contracts generated from a single schema definition, integration test suites that run against a real database in CI, and infrastructure I can rebuild from scratch.",
@@ -84,12 +84,12 @@ export const stats = [
 ] as const
 
 export const skills = [
-	{ group: "Backend", items: ["Django", "DRF", "Node.js", "Express", "REST"] },
+	{ group: "Backend", items: ["Django", "DRF", "Node.js", "Express", "Fastify", "REST"] },
 	{ group: "Languages", items: ["Python", "TypeScript", "JavaScript", "SQL"] },
-	{ group: "Data", items: ["PostgreSQL", "MongoDB", "Redis", "Query tuning"] },
+	{ group: "Data", items: ["PostgreSQL", "Constraints & locking", "MongoDB", "Redis", "Query tuning"] },
 	{ group: "Platform", items: ["Docker", "CI/CD", "Linux", "AWS", "Vercel"] },
-	{ group: "Quality", items: ["Vitest", "Pytest", "Zod", "OpenAPI"] },
-	{ group: "Frontend", items: ["React", "Next.js", "Tailwind", "Redux"] },
+	{ group: "Quality", items: ["Vitest", "Pytest", "Zod", "OpenAPI", "Field encryption", "Audit trails"] },
+	{ group: "Frontend", items: ["React", "Next.js", "Tailwind", "Redux", "HTMX"] },
 	{ group: "AI tools", items: ["Claude Code", "OpenAI Codex", "ChatGPT"] },
 ] as const
 
