@@ -120,7 +120,7 @@ export const projects: Project[] = [
 		approach:
 			"PostgreSQL holds the final guarantee: an exclusion constraint on each professional's time ranges rejects overlapping pending or confirmed appointments, and writes that claim time queue behind a per-professional advisory lock, with a bounded retry if the database still aborts one. Slots come from a pure, table-driven generator that handles time zones and DST. Every owner query goes through a manager scoped to the signed-in user, so another professional's data returns 404. A privacy test plants a canary string in every private field and checks every page, email and admin search. Later versions added an append-only audit trail enforced by a database trigger, field encryption with key rotation and a blind index for lookups, verified guest emails, retention, export and erasure. The frontend is server-rendered with Tailwind and HTMX, and runs without Node.",
 		outcome:
-			"Closed at version 0.6.0 on 13 October 2026 as a demonstration; the repository is private. 589 tests pass against PostgreSQL. It includes demo-scope versions of a calendar feed, generated video rooms, passwordless client links, SMS reminders, payment records and assistants. Deployment runbooks for a VM, cPanel and Render with Neon are written but not yet run on a live host, and the privacy wording has not had legal review.",
+			"A demonstration at version 0.6.0, live on Render's free plan with a Neon database since 13 October 2026; the repository is private. Anyone can try it with the shared demo login (site-admin@promeet.desk, password root1234!@#$): switch to any of ten dummy professionals from the avatar menu, or book as a guest in a private window. Everything there is dummy data that anyone can change. 615 tests pass against PostgreSQL. It includes demo-scope versions of a calendar feed, generated video rooms, passwordless client links, SMS reminders, payment records and assistants. The runbooks for a VM and cPanel are not yet run on a live host, and the privacy wording has not had legal review.",
 		stack: [
 			"Python",
 			"Django",
@@ -138,12 +138,14 @@ export const projects: Project[] = [
 			"Client names, contact details, messages, addresses and notes are encrypted at rest with rotatable keys; clients are matched by a keyed hash of their email.",
 			"An append-only audit trail, versioned consent, verified guest emails, and retention, export and erasure flows, at demo scope with the remaining legal work listed.",
 			"Assistants can manage appointments and payments but never read notes; owner-only pages answer them with 403.",
+			"The public demo login is an ordinary account, not a superuser: it may switch only into ordinary dummy accounts, never staff, and the Django admin refuses it. The switcher is behind a setting that must be off before real data is held.",
 		],
+		demo: "https://promeet-desk.onrender.com/accounts/login/",
 		screenshot: {
 			src: "/promeet-desk.png",
 			width: 1280,
 			height: 800,
-			alt: "Pro Meet Desk booking page with a day picker, time slots and the guest details form, using fictional demo data",
+			alt: "Pro Meet Desk live demo booking page with a day picker, time slots and the guest details form, using dummy data",
 		},
 		cover: "/promeet-desk-social.png",
 		featured: true,

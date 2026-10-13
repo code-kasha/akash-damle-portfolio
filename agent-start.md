@@ -7,6 +7,11 @@ Last updated: **2026-10-13** · Production at `16fb97c`: Rootstock (deployed 12 
 ---
 
 
+## Pro Meet Desk live demo — 13 October 2026
+
+Akash deployed promeet-desk to Render (free plan) with Neon and a public shared login: https://promeet-desk.onrender.com, `site-admin@promeet.desk` / `root1234!@#$` (public by design, from the promeet-desk README). Verified before publishing it: `/healthz` 200, the login reaches `/desk/` with the Switch user menu, and `/admin/` redirects it to the admin login (not staff). The repo stays private. Project entry: `demo` link to the login page, outcome rewritten (live since 13 October, 615 tests, VM and cPanel runbooks still unrun), a sixth highlight on the non-superuser demo login, and a new screenshot captured from the live demo in light mode. Article: a "Try it" section with the login, a new section "A public demo is its own security problem" (switcher behind `DEMO_USER_SWITCHER`, allowlist `DEMO_SWITCHER_EMAILS`, no switching into staff, the switcher can read dummy notes, local `seed-live.ps1` with key validation, fake email domain), 72 commits, 615 tests; seven minutes. The long résumé PDF was regenerated (adds the demo link and that highlight); the one-page PDF's text was unchanged, so it was left as is.
+
+
 ## Homepage stats — 13 October 2026
 
 At Akash's request the four hero stats in `lib/profile.ts` were refreshed: "723 · Tests across my 4 open-source releases" (lead-platform 173, webhook-delivery 85, operations-api 346, bharat-post-dir 119, each at its v1.0.0 tag, all MIT), "27+ · Client systems built and self-hosted" (unchanged), "4 · Open-source v1.0.0 releases in 2026" (replaces "8+ years", which the hero headline already states) and "2 · Production stacks: Django and Node.js/TypeScript" (replaces "3 stacks"). Private projects are excluded because a reviewer cannot check them. The years figure is unchanged everywhere else. Note: operations-api `docs/deployment.md` says 345 tests ran against PostgreSQL, while 346 are collected; the site uses 346.

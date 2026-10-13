@@ -1,6 +1,19 @@
 A booking page looks like a calendar with buttons on it. The interesting part is everything the buttons have to refuse: a slot someone else took a millisecond earlier, an address the guest isn't entitled to yet, a note that must never appear anywhere except the professional's own screen.
 
-Pro Meet Desk is a booking and meeting workspace I built for an India-first product idea. A professional publishes services and weekly hours, a visitor books a slot without creating an account, and the professional approves, moves or cancels it and keeps private notes afterwards. I built it over two days in October 2026, in 60 commits, with Claude as an AI pair programmer. It is closed at version 0.6.0 as a demonstration, runs on fictional data, and its repository is private.
+Pro Meet Desk is a booking and meeting workspace I built for an India-first product idea. A professional publishes services and weekly hours, a visitor books a slot without creating an account, and the professional approves, moves or cancels it and keeps private notes afterwards. I built it over two days in October 2026, in 72 commits, with Claude as an AI pair programmer. It is a demonstration at version 0.6.0 with fictional data. The repository is private, but the app is live.
+
+## Try it
+
+The demo runs at [promeet-desk.onrender.com](https://promeet-desk.onrender.com). Sign in with the shared demo account:
+
+```text
+Email:    site-admin@promeet.desk
+Password: root1234!@#$
+```
+
+Then open the avatar menu and use **Switch user** to act as any of ten dummy professionals: their overview, appointments, calendar, services, notes, payments and team. To see the guest side, open a professional's public page in a private window and book a time. The booking page shows a **Yes, this is my email** button; press it, because the demo may not deliver email.
+
+Everything there is dummy data, so please don't enter real details. Anyone can change it, and it can be reset at any time. The site runs on a free plan, so the first visit after a quiet spell can take about a minute.
 
 The specification put two things above breadth or polish: bookings must be correct, and private data must stay private. This article is about how each of those was enforced, and how I checked.
 
@@ -42,6 +55,16 @@ The later versions added what a real deployment would need first, at demo scope.
 
 **Assistants.** An assistant can manage appointments and payments but never reads notes. Owner-only pages answer an assistant with 403, because they work on that desk and the page plainly exists; another professional's data is still a 404.
 
+## A public demo is its own security problem
+
+Letting strangers try the desk side means letting them sign in as a professional. The easy way, a shared superuser, would also give every visitor the Django admin: change or delete anything, create more superusers.
+
+The shared login is an ordinary account instead. A user switcher in the avatar menu lets it act as any of ten dummy professionals. The switcher exists only when the `DEMO_USER_SWITCHER` setting is on; only superusers and accounts named in `DEMO_SWITCHER_EMAILS` may use it; and it refuses to switch into a staff or superuser account, which closes the obvious way to climb. I checked the live site: the shared login reaches the desk and the switcher, and `/admin/` sends it back to a login page.
+
+That switcher deliberately breaks the privacy story above. Acting as a professional, a visitor can read that professional's notes. That is acceptable only because every note is dummy data, and the deployment guide says to remove the setting before any real person's data is held.
+
+Seeding needed the same care. Render's free plan has no shell, and the seed command refuses to run in production, so a local script seeds the live database over a direct connection. It asks for the connection string and the live encryption keys with hidden input, and rejects a key pasted with quotes or a `NAME=` prefix before running anything: data encrypted with the wrong key would be unreadable to the site. The demo accounts live on a domain that doesn't exist, so a reset can never remove a real account.
+
 ## Working with an AI pair programmer
 
 Claude wrote much of the code under a fixed set of rules in the repository. Decisions live in a specification that an agent may not change; it proposes, I approve, and the change is logged with its date. Business logic stays in services so views remain thin. Every task ends with the same gate: Ruff, Django's checks, a missing-migrations check and the full test suite, all clean.
@@ -50,6 +73,6 @@ The rule that mattered most was in reporting: say what was verified and what was
 
 ## What is not done
 
-The suite has 589 tests and passes against PostgreSQL. Beyond that, the limits are plain. The deployment runbooks for a VM, cPanel and Render with Neon are written but have not been run on a live host. The privacy notice and consent text are drafts that have not had legal review under India's DPDP Act. Payments are records with a demo checkout where no money moves. SMS goes through a Twilio backend that has never sent a real message, and calendar sync is a one-way feed. The repository holds a separate list of everything a full version would still need.
+The suite has 615 tests and passes against PostgreSQL. The demo runs on Render's free plan with a Neon database; the runbooks for a VM with nginx and for cPanel are written but have not been run on a live host. Beyond that, the limits are plain. The privacy notice and consent text are drafts that have not had legal review under India's DPDP Act. Payments are records with a demo checkout where no money moves. SMS goes through a Twilio backend that has never sent a real message, and calendar sync is a one-way feed. The repository holds a separate list of everything a full version would still need.
 
 The [project write-up](/projects/promeet-desk) has the summary. What I would carry into any booking system is the order of trust: the database decides what is possible, one scoped query decides who can see it, and a test with a positive control proves the rest.

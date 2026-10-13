@@ -32,12 +32,12 @@ export const posts: Post[] = [
 		slug: 'promeet-desk-booking-and-private-notes',
 		title: 'Pro Meet Desk: a booking app where the database refuses double bookings',
 		description:
-			'An exclusion constraint, advisory locks, scoped queries and a canary test for private notes. How a Django booking workspace keeps bookings correct and client data private, and where the demo stops.',
+			'An exclusion constraint, advisory locks, scoped queries and a canary test for private notes, plus a public demo you can sign in to. How a Django booking workspace keeps bookings correct and client data private.',
 		published: '2026-10-13',
 		updated: '2026-10-13',
 		status: 'published',
 		tags: ['Django', 'PostgreSQL', 'Privacy', 'Python'],
-		readingMinutes: 6,
+		readingMinutes: 7,
 	},
 	{
 		slug: 'rootstock-a-django-starter-you-prune',
