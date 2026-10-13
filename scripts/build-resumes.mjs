@@ -114,11 +114,20 @@ function experienceSection(long) {
 	return section("Experience", roles)
 }
 
-/** The one-page résumé has room for this many projects: the first ones, strongest first. */
-const ONE_PAGE_PROJECTS = 2
+/**
+ * The one-page résumé has room for two projects. They are chosen by slug, not
+ * position, because the site orders projects by the ecosystem, not for a résumé.
+ */
+const ONE_PAGE_PROJECTS = ["lead-platform", "webhook-delivery"]
 
 function projectsSection(long) {
-	const listed = long ? projects : projects.slice(0, ONE_PAGE_PROJECTS)
+	const listed = long
+		? projects
+		: ONE_PAGE_PROJECTS.map((slug) => {
+				const project = projects.find((p) => p.slug === slug)
+				if (!project) throw new Error(`ONE_PAGE_PROJECTS names an unknown project: ${slug}`)
+				return project
+			})
 	const shipped = listed.map((project) => {
 		const picks = project.resumeHighlights ?? [0, 1]
 		const highlights = long ? project.highlights : picks.map((i) => project.highlights[i])

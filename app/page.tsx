@@ -163,8 +163,9 @@ export default function HomePage() {
 							</h2>
 						</div>
 						<p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
-							Each one is written as problem, constraint, tradeoff and
-							outcome — not a feature list.
+							Each project is small and solves one part well. Together they
+							form an ecosystem: a shared foundation, bookings, sales,
+							integrations, operations and reference data.
 						</p>
 					</Reveal>
 
@@ -214,7 +215,10 @@ export default function HomePage() {
 												</div>
 											)}
 											<CardContent className="flex flex-col gap-4 p-7">
-												<div className="flex items-baseline justify-between gap-4">
+												<span className="text-primary font-mono text-xs tracking-widest uppercase">
+													{project.part}
+												</span>
+												<div className="-mt-2 flex items-baseline justify-between gap-4">
 													<h3 className="font-display text-2xl font-bold tracking-tight">
 														{project.title}
 													</h3>

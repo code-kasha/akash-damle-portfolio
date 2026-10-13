@@ -2,9 +2,16 @@
 
 Context handoff for this repository. Read this first, then `AGENTS.md`.
 
-Last updated: **2026-10-13** · Production includes the Rootstock update (deployed 12 October 2026). The Pro Meet Desk update below is local on `v2` and awaits deployment approval.
+Last updated: **2026-10-13** · Production includes the Rootstock update (deployed 12 October 2026). The Pro Meet Desk update and the project reorder below are local on `v2` and await deployment approval.
 
 ---
+
+
+## Project order and ecosystem framing — 13 October 2026
+
+Akash's direction: Rootstock first (it will become open source once finished), then Pro Meet Desk, with bharat-post-dir last. Projects are small on their own but form an ecosystem, so each card says only what is unique to it. Order: Rootstock, Pro Meet Desk, Lead Platform, Webhook Delivery, Operations API, bharat-post-dir; the CRM "Main product" banner stays above the grid. New required `part` field (Foundation, Bookings, Sales, Integrations, Operations, Reference data) shown as a label on each card. Taglines cut to one sentence each. The section intro now describes the ecosystem.
+
+The one-page résumé now picks projects by slug (`ONE_PAGE_PROJECTS = ["lead-platform", "webhook-delivery"]` in `scripts/build-resumes.mjs`), so the site order no longer changes it. `pnpm resume --out <temp>` builds one and four pages; the committed PDFs were not regenerated, so they still carry the old taglines and do not list Rootstock or Pro Meet Desk.
 
 
 ## Pro Meet Desk update — 13 October 2026
