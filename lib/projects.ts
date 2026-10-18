@@ -370,6 +370,7 @@ export const projects: Project[] = [
 			"Calls are peer-to-peer WebRTC with a signalling server that keeps no call state. Only members may join, and removing someone ends their call.",
 			"240 tests run against PostgreSQL, including the socket tests for live messages, invitations, membership removal and calls.",
 		],
+		cover: "/roomwave-social.png",
 		featured: true,
 	},
 ]

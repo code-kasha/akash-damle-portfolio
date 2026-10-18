@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>Roomwave</title><desc>Real-time chat rooms where a removal reaches every open tab, with peer-to-peer video calls for members. A Django chat app with public and private rooms.</desc>
+<rect width="1280" height="640" fill="#1d2a44"/><rect x="56" y="56" width="1168" height="528" rx="8" fill="#fff"/><path d="M64 56H72V584H64Q56 584 56 576V64Q56 56 64 56" fill="#3b5bdb"/>
+<g font-family="Segoe UI,Arial,sans-serif"><text x="136" y="135" fill="#3b5bdb" font-family="Consolas,monospace" font-weight="700" font-size="23" letter-spacing="1">ROOMS · INVITATIONS · CALLS</text>
+<text x="132" y="236" fill="#202020" font-weight="700" font-size="76">roomwave</text>
+<text x="136" y="305" fill="#424242" font-size="29">Real-time rooms where a removal reaches</text><text x="136" y="349" fill="#424242" font-size="29">every open tab, with calls for members.</text>
+<rect x="736" y="150" width="416" height="250" rx="6" fill="#f4f6fb" stroke="#d6dcea" stroke-width="2"/>
+<rect x="760" y="172" width="356" height="52" rx="10" fill="#e3e9f8"/><text x="778" y="204" fill="#172124" font-weight="700" font-size="18">Ada: the design doc is in #planning</text>
+<rect x="840" y="244" width="296" height="52" rx="10" fill="#3b5bdb"/><text x="858" y="276" fill="#ffffff" font-weight="700" font-size="18">Sent live, no reload.</text>
+<rect x="760" y="316" width="368" height="52" rx="10" fill="#fbe9e9" stroke="#e5b5b5" stroke-width="2"/><text x="778" y="348" fill="#8a1c1c" font-weight="700" font-size="18">Removed by owner: tab reloads.</text></g>
+<g fill="#f1f3f4" stroke="#cdd3d7" stroke-width="2"><rect x="136" y="474" width="232" height="54" rx="4"/><rect x="382" y="474" width="224" height="54" rx="4"/><rect x="620" y="474" width="196" height="54" rx="4"/><rect x="830" y="474" width="150" height="54" rx="4"/></g>
+<g fill="#172124" font-weight="700" font-size="20" font-family="Segoe UI,Arial,sans-serif"><text x="154" y="509">Django · Channels</text><text x="400" y="509">Redis fan-out</text><text x="638" y="509">WebRTC calls</text><text x="848" y="509">PostgreSQL</text></g>
+</svg>
