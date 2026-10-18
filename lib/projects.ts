@@ -331,6 +331,47 @@ export const projects: Project[] = [
 		featured: true,
 		resumeHighlights: [1, 0],
 	},
+	{
+		slug: "roomwave",
+		title: "Roomwave",
+		part: "Communication",
+		tagline:
+			"Real-time chat rooms where a removal reaches every open tab, with peer-to-peer video calls for members.",
+		resumeTagline:
+			"Django chat app: real-time rooms where a removal reaches every open tab, with peer-to-peer video calls for members.",
+		year: "2026",
+		role: "Developer, with Claude as an AI pair programmer",
+		problem:
+			"Small groups want rooms where members talk in text and sometimes face to face, and where some rooms are open to anyone while others are by invitation only. Most chat demos skip the hard part: who may read, post or join at each moment, and what happens to someone already connected when that changes.",
+		constraint:
+			"Access had to hold on the server for every HTTP view and every WebSocket. A private room must not reveal that it exists to a non-member, even one who has its UUID. The interface is server-rendered with HTMX and no client-side framework, PostgreSQL is the only permanent store, and video calls had to work without a new media service.",
+		approach:
+			"Every access decision lives in one module that views and services call; nothing re-implements a membership check. Messages are posted over HTTP so CSRF and validation run once, and the WebSocket only pushes rendered fragments. Leaving or being removed deletes the membership and closes that person's live sockets for the room, so an open page reloads to what it now shows. Calls are peer-to-peer WebRTC in a mesh, with a stateless signalling server that stamps each sender itself and keeps no call table. The mesh caps a call at four people, a limit the page enforces and the server does not.",
+		outcome:
+			"Working locally and not yet deployed: there is no hosted demo, no release and the repository is private. The suite passes with 240 tests against PostgreSQL. Two browser tabs with separate accounts have been checked for invitations, live removal, pagination and calls, and a PC and a phone on the same Wi-Fi made a working call over HTTPS. Production has not been run, and calls across different networks need a TURN relay that has not been tested.",
+		stack: [
+			"Python",
+			"Django",
+			"Django Channels",
+			"Daphne",
+			"Redis",
+			"PostgreSQL",
+			"HTMX",
+			"WebRTC",
+			"Tailwind CSS",
+			"Vite",
+			"pytest",
+			"Docker Compose",
+		],
+		highlights: [
+			"Access is decided in one module. A private room returns 404 to non-members even with its UUID, and a public-room ban stops joining and posting.",
+			"Removing a member or a member leaving closes their live sockets for the room, so their open page reloads to what they can now see. A check with two server processes confirmed it across Redis.",
+			"Messages go over HTTP, so CSRF and validation run in one place. A reconnecting page fetches what it missed, or reloads itself after more than 100 messages.",
+			"Calls are peer-to-peer WebRTC with a signalling server that keeps no call state. Only members may join, and removing someone ends their call.",
+			"240 tests run against PostgreSQL, including the socket tests for live messages, invitations, membership removal and calls.",
+		],
+		featured: true,
+	},
 ]
 
 /** A product still being built, so there is nothing to write up yet. */

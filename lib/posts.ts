@@ -29,6 +29,17 @@ export type Post = {
  */
 export const posts: Post[] = [
 	{
+		slug: 'roomwave-rooms-where-removal-reaches-open-tabs',
+		title: 'Roomwave: rooms where a removal reaches every open tab',
+		description:
+			'Access decided in one module, live removal that closes open sockets, and peer-to-peer calls that the server never relays media for. How a Django chat app keeps its rules in step with connected tabs, and what is still open.',
+		published: '2026-10-18',
+		updated: '2026-10-18',
+		status: 'published',
+		tags: ['Django', 'Channels', 'WebRTC', 'WebSockets'],
+		readingMinutes: 6,
+	},
+	{
 		slug: 'promeet-desk-booking-and-private-notes',
 		title: 'Pro Meet Desk: a booking app where the database refuses double bookings',
 		description:

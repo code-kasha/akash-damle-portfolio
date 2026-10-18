@@ -1,0 +1,57 @@
+A chat app looks simple from the outside: a text box, a list of messages and a button. The hard part is the set of rules around it. Who may read a room, who may post, who may join, and what happens to someone who is already connected when any of those change.
+
+Roomwave is a server-rendered chat app with public and private rooms, persistent messages, invitations, bans and peer-to-peer video calls for members. It is a modular Django monolith on Python 3.13, Django 6.0 and Django Channels, with HTMX for the interface and PostgreSQL as the only permanent store. I built it in October 2026 with Claude as an AI pair programmer. The repository is private and nothing is hosted yet. This article is about the parts that were hard to get right, and what I checked.
+
+## Rules in one module
+
+Every decision about access is made in one file, `apps/rooms/access.py`. Views and services call its functions and none of them repeats a membership check. That matters most for private rooms: a non-member gets a 404, not a 403, so the room's existence is not revealed even to someone who has its UUID.
+
+Joining and inviting are separate operations. Anyone signed in may join a public room. Only a member may invite someone to a private room, and an invitation grants nothing until the invitee accepts it. Invitations expire after seven days, and an open invitation shows as a badge in the header, pushed live.
+
+## One write path, pushed reads
+
+Messages are posted over plain HTTP, like any form. That means CSRF protection and validation run in exactly one place. After the message is saved, the server renders its fragment and pushes it to everyone with the room's WebSocket open. The tab that sent it skips the push, because it has already received the same fragment in the HTTP response.
+
+The sender is always `request.user`. A sender ID in the request is ignored, and message bodies are escaped by the template engine and never marked safe. A WebSocket is only a channel for pushes; it does not accept messages from the browser.
+
+## Removal has to reach open tabs
+
+Leaving a room and being removed from one are services, not row deletes. Each one deletes the membership and then closes that person's live sockets for the room with close code 4403. Their page reloads and shows what they can now see: a 404 for a private room, or the join prompt for a public one.
+
+The check does not stop at the membership row. A socket is authorised when it connects, and it is refused for anonymous users and for non-members of a private room. The removal path also has to work across server processes. Redis fans the events out through the Channels layer, and I checked it with two server processes: an owner removed a member whose tab was open on the other one, and that tab reloaded itself to the 404.
+
+The first version of this flow had a bug worth recording. When someone left a room, their socket closed and the page reloaded on the close code, and that reload beat the redirect back to the directory. The leaver landed on a 404. The fix was to skip the reload on a page that is already navigating away.
+
+## Catching up after a dropped connection
+
+A WebSocket can close while a message is posted. So every time the socket opens, including on reconnect, the page asks for messages newer than the last one it shows. If there are more than 100 of them, the server tells the page to reload, so the list never has a hole in it. The page drops duplicates and keeps the order straight if a live push races the catch-up response.
+
+The same care applies to reading old messages. A room opens at the newest 100, and "Load earlier messages" adds older ones above the current position without moving what the reader is looking at.
+
+## Bans, and what they leave open
+
+Removing someone from a public room also bans them. A banned person can still read the room, since public rooms are readable by anyone, but cannot join or post until the owner lifts the ban. Private rooms need no ban, because returning requires a new invitation.
+
+That leaves a gap I have not closed. Read access for a banned person is a deliberate choice for now, and it is listed as a known gap rather than hidden.
+
+## Calls without a media server
+
+Video and audio go straight between browsers, using WebRTC in a mesh. The server only relays the setup messages, the offers, answers and ICE candidates, over a socket at `/ws/rooms/<id>/call/`. It keeps no call state and there is no calls table: nothing needs to outlive a connection, and a table could go stale after a crash.
+
+The signalling server sets the sender on every relayed message itself and ignores any sender the client claims. Messages are checked for shape and size, and a message from a different room cannot reach a call because peer groups include the room ID. Only members may join a call, and removing someone ends their call through the same event that closes their sockets.
+
+A mesh means every person uploads one stream per other person, so the page caps a call at four people. That cap is enforced by the browser, not the server, and I list that as a limit. A media server such as LiveKit would have been the usual choice for more people, but it adds a service to run for rooms that are meant to be small. The "who may call" rule lives in `access.py` and would carry over to a media server unchanged.
+
+Browsers allow the camera and microphone only on `localhost` or over HTTPS. Behind strict corporate or mobile networks, a direct connection may fail altogether, and then a TURN relay is needed. TURN is optional and configured through environment variables. I have not tested it across networks.
+
+## What was checked
+
+- The test suite passes with 240 tests against PostgreSQL 18, including the socket tests for live messages, invitations, membership removal and calls. I ran it again for this article on the current working tree.
+- In two browser tabs with separate accounts, I checked invitations, live removal, leaving, pagination and scrolling. Calls were checked with a synthetic camera, and a PC and a phone on the same Wi-Fi made a working call over HTTPS.
+- Setup instructions were followed from a clean copy using Docker Compose for PostgreSQL and Redis, including each troubleshooting row.
+
+## What is not done
+
+There is no hosted demo, no release and no production run. Static file serving for production is not decided yet, between WhiteNoise and a reverse proxy. Redis has been tested only against local containers on Windows. TURN has not been tested across networks, and the TURN credential is shared and static for now, when time-limited credentials would be better. Browser-side scripts for the room, the live updates and the call have no automated tests; I checked them by hand. On iPhone Safari, per-person volume does not work, so only the mute button shows there.
+
+The [project write-up](/projects/roomwave) has the summary. The lesson I would carry into any real-time app is to decide access in one place, let the server choose identity, and treat an open socket as a session that must be re-checked when the rules change.

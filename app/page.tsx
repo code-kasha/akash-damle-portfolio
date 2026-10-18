@@ -165,7 +165,7 @@ export default function HomePage() {
 						<p className="text-muted-foreground max-w-sm text-sm leading-relaxed">
 							Each project is small and solves one part well. Together they
 							form an ecosystem: a shared foundation, bookings, sales,
-							integrations, operations and reference data.
+							integrations, operations, reference data and live chat.
 						</p>
 					</Reveal>
 
