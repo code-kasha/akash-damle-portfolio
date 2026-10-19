@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>Fuelora</title><desc>Petrol, diesel, kerosene and crude oil prices by Indian state and by country, cross-checked against a second source and run on your own computer.</desc>
+<rect width="1280" height="640" fill="#0f172a"/><rect x="56" y="56" width="1168" height="528" rx="8" fill="#fff"/><path d="M64 56H72V584H64Q56 584 56 576V64Q56 56 64 56" fill="#d97706"/>
+<g font-family="Segoe UI,Arial,sans-serif"><text x="136" y="135" fill="#b45309" font-family="Consolas,monospace" font-weight="700" font-size="23" letter-spacing="1">PETROL · DIESEL · KEROSENE · CRUDE</text>
+<text x="132" y="236" fill="#202020" font-weight="700" font-size="76">fuelora</text>
+<text x="136" y="305" fill="#424242" font-size="29">Fuel prices by Indian state and by</text><text x="136" y="349" fill="#424242" font-size="29">country, cross-checked, run locally.</text>
+<rect x="736" y="150" width="416" height="250" rx="6" fill="#fbf8f3" stroke="#e7dccb" stroke-width="2"/>
+<text x="760" y="190" fill="#6b5a44" font-weight="700" font-size="16" letter-spacing="1">STATE · PER LITRE</text>
+<text x="760" y="234" fill="#172124" font-weight="700" font-size="20">Delhi</text><text x="1128" y="234" text-anchor="end" fill="#172124" font-weight="700" font-size="20">₹102.12</text>
+<rect x="760" y="246" width="368" height="8" rx="4" fill="#efe7da"/><rect x="760" y="246" width="150" height="8" rx="4" fill="#f59e0b"/>
+<text x="760" y="294" fill="#172124" font-weight="700" font-size="20">Bihar</text><rect x="826" y="276" width="150" height="24" rx="4" fill="#e0f2fe"/><text x="836" y="294" fill="#075985" font-weight="700" font-size="14">2nd source ₹115.06</text><text x="1128" y="294" text-anchor="end" fill="#172124" font-weight="700" font-size="20">₹113.37</text>
+<rect x="760" y="306" width="368" height="8" rx="4" fill="#efe7da"/><rect x="760" y="306" width="252" height="8" rx="4" fill="#f97316"/>
+<text x="760" y="354" fill="#172124" font-weight="700" font-size="20">Andaman &amp; Nicobar</text><text x="1128" y="354" text-anchor="end" fill="#172124" font-weight="700" font-size="20">₹88.66</text>
+<rect x="760" y="366" width="368" height="8" rx="4" fill="#efe7da"/><rect x="760" y="366" width="40" height="8" rx="4" fill="#fbbf24"/></g>
+<g fill="#f1f3f4" stroke="#cdd3d7" stroke-width="2"><rect x="136" y="474" width="222" height="54" rx="4"/><rect x="372" y="474" width="182" height="54" rx="4"/><rect x="568" y="474" width="210" height="54" rx="4"/><rect x="792" y="474" width="150" height="54" rx="4"/></g>
+<g fill="#172124" font-weight="700" font-size="20" font-family="Segoe UI,Arial,sans-serif"><text x="154" y="509">36 states &amp; UTs</text><text x="390" y="509">170 countries</text><text x="586" y="509">ECB currency</text><text x="810" y="509">Brent · WTI</text></g>
+</svg>

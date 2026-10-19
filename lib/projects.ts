@@ -373,6 +373,51 @@ export const projects: Project[] = [
 		cover: "/roomwave-social.png",
 		featured: true,
 	},
+	{
+		slug: "fuelora",
+		title: "Fuelora",
+		part: "Price data",
+		tagline:
+			"Petrol, diesel, kerosene and crude oil prices by Indian state and by country, cross-checked against a second source and run on your own computer.",
+		resumeTagline:
+			"Python fuel price app: petrol, diesel, kerosene and crude oil by Indian state and by country, cross-checked against a second source.",
+		year: "2026",
+		role: "Developer, with Claude as an AI pair programmer",
+		problem:
+			"Fuel prices in India differ by state, mostly through state VAT, and the figures are spread across aggregator sites that disagree with each other by a rupee or two. World prices sit on yet another site in US dollars. I wanted one page that puts both side by side, in any currency, and says how fresh and how trustworthy each figure is.",
+		constraint:
+			"No official free feed covers state-wise or country-wise retail prices, so the data comes from third-party pages whose layout can change at any time and whose terms of use I have not reviewed. That rules out a public hosted site: it runs on the user's own computer, needs only Python 3.10 or newer, and must not commit any fetched data to the repository.",
+		approach:
+			"A standard-library HTTP server renders the page with HTMX, and the only dependency is truststore, so HTTPS works behind Windows and corporate certificate stores. Each source has a small parser that refuses rather than guesses: prices must fall within sanity bounds, and the world table, which lists names and prices separately, is paired only when the counts match and the prices ascend. Goodreturns is the primary India table; Cardekho fills Andhra Pradesh, which Goodreturns lacks, and flags any state where the two differ by a rupee or more. The server refreshes India at most every three hours and world prices once a day, keeps the last good data when a fetch fails, and says so on the page.",
+		outcome:
+			"Published on GitHub on 19 October 2026 as a personal research project, with a landing page on GitHub Pages. One start script for Windows or Linux and macOS sets up its own environment, fetches the prices and opens the page. It shows all 36 Indian states and union territories for petrol and diesel, 170 countries for petrol, 169 for diesel and 62 for kerosene, and Brent and WTI from the EIA once a free key is set. Nine parser tests pass on synthetic snippets. Only the Windows script has been run; the Linux and macOS script has been syntax-checked, not run. It is not an official price source.",
+		stack: [
+			"Python",
+			"http.server",
+			"HTMX",
+			"Tailwind CSS",
+			"EIA API",
+			"ECB reference rates",
+			"unittest",
+			"PowerShell",
+		],
+		highlights: [
+			"Parsers refuse rather than guess: out-of-range prices or a world table whose names and prices don't pair cleanly stop the refresh, and the last good data stays on the page.",
+			"A second India source fills the one state the first lacks and badges every state where the two differ by ₹1 or more.",
+			"Search, sort, currency conversion with ECB rates and CSV export of exactly the current view, in light or dark.",
+			"A freshness badge per dataset, and one saved snapshot per day for future trend views.",
+			"Nothing fetched is committed: the data folder and any EIA key stay on the user's machine, and the tests use small synthetic snippets.",
+		],
+		repo: "https://github.com/code-kasha/fuelora",
+		screenshot: {
+			src: "/fuelora.png",
+			width: 1500,
+			height: 1000,
+			alt: "Fuelora running locally in dark mode, showing petrol prices for Indian states with the India average, lowest, highest and spread, and second-source badges",
+		},
+		cover: "/fuelora-social.png",
+		featured: true,
+	},
 ]
 
 /** A product still being built, so there is nothing to write up yet. */
