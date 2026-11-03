@@ -29,6 +29,17 @@ export type Post = {
  */
 export const posts: Post[] = [
 	{
+		slug: 'a-context-pack-for-ai-sessions-measured',
+		title: 'One task, one commit, one pack update: running a long project across fresh AI threads',
+		description:
+			'A workflow for a twelve-phase project: commit only when a task is done, update a 10 KB context pack after the commit, and start each phase in a new thread. How it relates to Cline Memory Bank and handoff files, and what it cost and saved when measured.',
+		published: '2026-11-03',
+		updated: '2026-11-03',
+		status: 'published',
+		tags: ['AI agents', 'Claude Code', 'Workflow'],
+		readingMinutes: 5,
+	},
+	{
 		slug: 'roomwave-rooms-where-removal-reaches-open-tabs',
 		title: 'Roomwave: rooms where a removal reaches every open tab',
 		description:
