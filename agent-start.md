@@ -7,6 +7,14 @@ Last updated: **2026-10-13** · Production at `16fb97c`: Rootstock (deployed 12 
 ---
 
 
+## sk8r landing page — 16 November 2026
+
+At Akash's request: a landing page at `/sk8r` (`app/sk8r/page.tsx`), on branch `sk8r-landing` from `v2`, local only. Sections: hero ("Keep your momentum.", what sk8r does, `uv tool install sk8r` with a copy button, GitHub and PyPI buttons, one line of facts), the README's real one-approval exchange with its caveat (about 11 seconds, packages already installed) and a link to the field results, three benefits (one plan, one yes; a real start, not a guess; safe to try), the shipped presets, three start steps, and a closing call to action (GitHub, the build article, the case study). New `components/copy-command.tsx` (client; clipboard with a prompt fallback, like the share buttons). `/sk8r` added to the sitemap; projects gain an optional `product` link, shown as a "Product page" button on `/projects/sk8r`. Open Graph and Twitter use `/sk8r-social.png`. Checked in light, dark and at 390 px (long lines in the run example now wrap instead of clipping). Known, not changed: the site header cuts "Experience" at 390 px on every page.
+
+**Planned, not started:** a landing page for Crono at `/crono` in the same pattern when Crono launches (Akash, 2026-11-16: "it's still in plan, no need to act on it yet").
+
+---
+
 ## sk8r launch updated for 1.0 — 16 November 2026
 
 On `sk8r-launch`, after merging `origin/main` (`a77e834`, the cover redesign), for local review only; nothing pushed. sk8r 1.0.1 is on PyPI. The article now says 1.0 on PyPI and installs with `uv tool install sk8r`; it adds "A fresh install: Rootstock" (the 88-second trial and its five findings, fixed in 1.0) and "Deciding what a cloned repository may run" (approval of a project's commands, the Windows/Python 3.11 program-substitution bug found while GitHub showed no clones and fixed before republishing, loopback-only start check, Git's fsmonitor off); buttons now appear in T3 without a reload; macOS: no Mac, platform reports invited; three field results. Published and updated dates 2026-11-16; reading time 10 minutes (2,283 words at about 220 a minute). Project entry: approach mentions approvals, outcome is 1.0 on PyPI (Beta), two new highlights, CI line mentions release install checks, screenshot alt says 1.0.1 prints the same.

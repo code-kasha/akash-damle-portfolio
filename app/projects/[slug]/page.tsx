@@ -117,9 +117,14 @@ export default async function ProjectPage({
 						</div>
 					</Reveal>
 
-					{(project.repo || project.demo) && (
+					{(project.repo || project.demo || project.product) && (
 						<Reveal delay={0.18}>
 							<div className="mt-10 flex flex-wrap gap-3">
+								{project.product && (
+									<Button asChild className="h-11 rounded-full px-6">
+										<Link href={project.product}>Product page</Link>
+									</Button>
+								)}
 								{project.demo && (
 									<Button asChild className="h-11 rounded-full px-6">
 										<a

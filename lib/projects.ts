@@ -24,6 +24,8 @@ export type Project = {
 	highlights: string[]
 	/** Article explaining the project and its limits. */
 	article?: string
+	/** The product's own page on this site, when it has one. */
+	product?: string
 	repo?: string
 	demo?: string
 	/** Real interface capture displayed without cropping on the project page. */
@@ -78,6 +80,7 @@ export const projects: Project[] = [
 		],
 		repo: "https://github.com/code-kasha/sk8r",
 		article: "/blog/sk8r-from-clone-to-running-app",
+		product: "/sk8r",
 		cover: "/sk8r-social.png",
 		screenshot: { src: "/sk8r.png", width: 1280, height: 800, alt: "Real sk8r dry-run output from a disposable Django marker layout (sk8r 1.0.1 prints the same): numbered plan and four states, all incomplete; no application was launched" },
 		featured: true,

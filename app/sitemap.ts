@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	const posts = getPublishedPosts()
 	return [
 		{ url: new URL("/", contact.site).href },
+		{ url: new URL("/sk8r", contact.site).href },
 		...projects.map((project) => ({
 			url: new URL(`/projects/${project.slug}`, contact.site).href,
 		})),
