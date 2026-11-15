@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>Pro Meet Desk</title><desc>Time reserved. Privacy preserved.</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#000" stroke-opacity=".04"/></pattern></defs>
+<rect width="1280" height="640" fill="#f4f3f0"/><rect width="1280" height="640" fill="url(#grid)"/>
+<circle cx="1050" cy="300" r="246" fill="#a6dcd5" fill-opacity=".10"/>
+<path d="M64 70H104" stroke="#5b7975" stroke-width="5"/>
+<g font-family="Segoe UI, Arial, sans-serif"><text x="122" y="78" fill="#5b7975" font-size="20" font-weight="600" letter-spacing="4">BOOKINGS</text>
+<text x="64" y="300" fill="#1b2123" font-size="68" font-weight="700" letter-spacing="-2">Pro Meet Desk</text>
+<text x="68" y="358" fill="#56615f" font-size="26">Time reserved. Privacy preserved.</text>
+<text x="68" y="568" fill="#7a8584" font-family="Consolas, monospace" font-size="16" letter-spacing="2">AKASH DAMLE / SELECTED WORK</text></g>
+<path d="M770 120V520" stroke="#000" stroke-opacity=".1"/>
+<g transform="translate(830 110)" color="#5b7975"><rect x="45" y="65" width="280" height="280" rx="20" fill="none" stroke="currentColor" stroke-width="5"/><path d="M45 140H325M115 45V90M255 45V90" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect x="83" y="175" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/><rect x="159" y="175" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/><rect x="235" y="175" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/><rect x="83" y="227" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/><rect x="159" y="227" width="40" height="28" rx="12" fill="currentColor" fill-opacity="1"/><rect x="235" y="227" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/><rect x="83" y="279" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/><rect x="159" y="279" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/><rect x="235" y="279" width="40" height="28" rx="12" fill="currentColor" fill-opacity="0.2"/></g>
+</svg>

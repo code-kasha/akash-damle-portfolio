@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>Fuelora</title><desc>Fuel prices. A clearer perspective.</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#000" stroke-opacity=".04"/></pattern></defs>
+<rect width="1280" height="640" fill="#f4f3f0"/><rect width="1280" height="640" fill="url(#grid)"/>
+<circle cx="1050" cy="300" r="246" fill="#bbd98e" fill-opacity=".10"/>
+<path d="M64 70H104" stroke="#67774e" stroke-width="5"/>
+<g font-family="Segoe UI, Arial, sans-serif"><text x="122" y="78" fill="#67774e" font-size="20" font-weight="600" letter-spacing="4">PRICE DATA</text>
+<text x="64" y="300" fill="#1b2123" font-size="68" font-weight="700" letter-spacing="-2">Fuelora</text>
+<text x="68" y="358" fill="#56615f" font-size="26">Fuel prices. A clearer perspective.</text>
+<text x="68" y="568" fill="#7a8584" font-family="Consolas, monospace" font-size="16" letter-spacing="2">AKASH DAMLE / SELECTED WORK</text></g>
+<path d="M770 120V520" stroke="#000" stroke-opacity=".1"/>
+<g transform="translate(830 110)" color="#67774e"><rect x="30" y="245" width="38" height="65" rx="12" fill="currentColor" fill-opacity="0.16"/><rect x="95" y="195" width="38" height="115" rx="12" fill="currentColor" fill-opacity="0.32"/><rect x="160" y="215" width="38" height="95" rx="12" fill="currentColor" fill-opacity="0.48"/><rect x="225" y="125" width="38" height="185" rx="12" fill="currentColor" fill-opacity="0.64"/><rect x="290" y="75" width="38" height="235" rx="12" fill="currentColor" fill-opacity="0.8"/><path d="M35 185L110 145L175 170L240 90L310 45" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

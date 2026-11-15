@@ -37,6 +37,8 @@ export type Project = {
 	}
 	/** 2:1 graphic for the project card and social preview. */
 	cover?: string
+	/** Light-mode version of the cover; the dark cover stays the social preview. */
+	coverLight?: string
 	featured?: boolean
 	/**
 	 * RESUME ONLY. Which `highlights`, by index, the one-page résumé shows.
@@ -82,6 +84,7 @@ export const projects: Project[] = [
 		article: "/blog/sk8r-from-clone-to-running-app",
 		product: "/sk8r",
 		cover: "/sk8r-social.png",
+		coverLight: "/sk8r-social-light.png",
 		screenshot: { src: "/sk8r.png", width: 1280, height: 800, alt: "Real sk8r dry-run output from a disposable Django marker layout (sk8r 1.0.1 prints the same): numbered plan and four states, all incomplete; no application was launched" },
 		featured: true,
 	},
@@ -132,6 +135,7 @@ export const projects: Project[] = [
 			alt: "The sign-in page of a new Rootstock project, captured from the development server",
 		},
 		cover: "/rootstock-social.png",
+		coverLight: "/rootstock-social-light.png",
 		featured: true,
 		resumeHighlights: [0, 1],
 	},
@@ -180,6 +184,7 @@ export const projects: Project[] = [
 			alt: "Pro Meet Desk live demo booking page with a day picker, time slots and the guest details form, using dummy data",
 		},
 		cover: "/promeet-desk-social.png",
+		coverLight: "/promeet-desk-social-light.png",
 		featured: true,
 		resumeHighlights: [0, 1],
 	},
@@ -231,6 +236,7 @@ export const projects: Project[] = [
 			alt: "Lead Management Platform showing the sales pipeline with fictional leads",
 		},
 		cover: "/lead-platform-social.png",
+		coverLight: "/lead-platform-social-light.png",
 		featured: true,
 		resumeHighlights: [2, 4],
 	},
@@ -268,6 +274,7 @@ export const projects: Project[] = [
 			alt: "Webhook Delivery 1.0.0 Swagger documentation showing endpoint and event operations",
 		},
 		cover: "/webhook-delivery-social.png",
+		coverLight: "/webhook-delivery-social-light.png",
 		featured: true,
 		resumeHighlights: [0, 1],
 	},
@@ -315,6 +322,7 @@ export const projects: Project[] = [
 			alt: "Operations API Swagger documentation showing attendance operations",
 		},
 		cover: "/operations-api-social.png",
+		coverLight: "/operations-api-social-light.png",
 		featured: true,
 		resumeHighlights: [1],
 	},
@@ -360,6 +368,7 @@ export const projects: Project[] = [
 			alt: "bharat-post-dir lookup page showing Delhi results and the dataset source information",
 		},
 		cover: "/bharat-post-dir-social.png",
+		coverLight: "/bharat-post-dir-social-light.png",
 		// Not on the home grid, so it shows an even number of cards; its page and résumé entry stay.
 		featured: false,
 		resumeHighlights: [1, 0],
@@ -404,6 +413,7 @@ export const projects: Project[] = [
 			"240 tests run against PostgreSQL, including the socket tests for live messages, invitations, membership removal and calls.",
 		],
 		cover: "/roomwave-social.png",
+		coverLight: "/roomwave-social-light.png",
 		featured: true,
 	},
 	{
@@ -449,6 +459,7 @@ export const projects: Project[] = [
 			alt: "Fuelora running locally in dark mode, showing petrol prices for Indian states with the India average, lowest, highest and spread, and second-source badges",
 		},
 		cover: "/fuelora-social.png",
+		coverLight: "/fuelora-social-light.png",
 		featured: true,
 	},
 ]

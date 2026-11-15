@@ -30,21 +30,38 @@ function illustration(type) {
   }
 }
 
-for (const [slug, titles, category, subtitle, accent, type] of projects) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
-<title>${titles.join(' ')}</title><desc>${subtitle}</desc>
-<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern></defs>
-<rect width="1280" height="640" fill="#151d20"/><rect width="1280" height="640" fill="url(#grid)"/>
-<circle cx="1050" cy="300" r="246" fill="${accent}" fill-opacity=".035"/>
-<path d="M64 70H104" stroke="${accent}" stroke-width="5"/>
-<g font-family="Segoe UI, Arial, sans-serif"><text x="122" y="78" fill="${accent}" font-size="20" font-weight="600" letter-spacing="4">${category}</text>
-${titles.map((t,i)=>`<text x="64" y="${titles.length===1?300:255+i*76}" fill="#f3f3ed" font-size="${t.length>16?58:68}" font-weight="700" letter-spacing="-2">${t}</text>`).join('')}
-<text x="68" y="${titles.length===1?358:389}" fill="#adb8b9" font-size="26">${subtitle}</text>
-<text x="68" y="568" fill="#7f9194" font-family="Consolas, monospace" font-size="16" letter-spacing="2">AKASH DAMLE / SELECTED WORK</text></g>
-<path d="M770 120V520" stroke="#fff" stroke-opacity=".1"/>
-<g transform="translate(830 110)" color="${accent}">${illustration(type)}</g>
-</svg>`
-  await writeFile(new URL(`../public/${slug}-social.svg`, import.meta.url), svg)
-  await sharp(Buffer.from(svg)).png().toFile(new URL(`../public/${slug}-social.png`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'))
+// Dark covers are also the social previews; light covers are shown on the site in light mode.
+const themes = {
+  dark: { suffix: '', bg: '#151d20', grid: '#fff', gridOpacity: '.035', title: '#f3f3ed', subtitle: '#adb8b9', footer: '#7f9194', divider: '#fff', glow: '.035' },
+  light: { suffix: '-light', bg: '#f4f3f0', grid: '#000', gridOpacity: '.04', title: '#1b2123', subtitle: '#56615f', footer: '#7a8584', divider: '#000', glow: '.10' },
 }
-console.log(`Generated ${projects.length} project covers (SVG + PNG).`)
+
+/** A deeper shade of a pastel accent, readable on the light background. */
+function deepen(hex, keep = 0.55) {
+  const n = parseInt(hex.slice(1), 16)
+  const channel = (shift) => Math.round(((n >> shift) & 255) * keep).toString(16).padStart(2, '0')
+  return `#${channel(16)}${channel(8)}${channel(0)}`
+}
+
+for (const [slug, titles, category, subtitle, accent, type] of projects) {
+  for (const theme of Object.values(themes)) {
+    const ink = theme.suffix ? deepen(accent) : accent
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>${titles.join(' ')}</title><desc>${subtitle}</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="${theme.grid}" stroke-opacity="${theme.gridOpacity}"/></pattern></defs>
+<rect width="1280" height="640" fill="${theme.bg}"/><rect width="1280" height="640" fill="url(#grid)"/>
+<circle cx="1050" cy="300" r="246" fill="${accent}" fill-opacity="${theme.glow}"/>
+<path d="M64 70H104" stroke="${ink}" stroke-width="5"/>
+<g font-family="Segoe UI, Arial, sans-serif"><text x="122" y="78" fill="${ink}" font-size="20" font-weight="600" letter-spacing="4">${category}</text>
+${titles.map((t,i)=>`<text x="64" y="${titles.length===1?300:255+i*76}" fill="${theme.title}" font-size="${t.length>16?58:68}" font-weight="700" letter-spacing="-2">${t}</text>`).join('')}
+<text x="68" y="${titles.length===1?358:389}" fill="${theme.subtitle}" font-size="26">${subtitle}</text>
+<text x="68" y="568" fill="${theme.footer}" font-family="Consolas, monospace" font-size="16" letter-spacing="2">AKASH DAMLE / SELECTED WORK</text></g>
+<path d="M770 120V520" stroke="${theme.divider}" stroke-opacity=".1"/>
+<g transform="translate(830 110)" color="${ink}">${illustration(type)}</g>
+</svg>`
+    const name = `${slug}-social${theme.suffix}`
+    await writeFile(new URL(`../public/${name}.svg`, import.meta.url), svg)
+    await sharp(Buffer.from(svg)).png().toFile(new URL(`../public/${name}.png`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'))
+  }
+}
+console.log(`Generated ${projects.length} project covers in dark and light (SVG + PNG).`)

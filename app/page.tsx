@@ -217,10 +217,7 @@ export default function HomePage() {
 							))}
 							{featured.map((project) => (
 								<StaggerItem key={project.slug}>
-									<Link
-										href={`/projects/${project.slug}`}
-										className="group block h-full"
-									>
+									<div className="group relative h-full">
 										<Card className="h-full overflow-hidden rounded-3xl p-0 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-2xl">
 											{project.cover && (
 												<div className="relative aspect-[2/1] overflow-hidden">
@@ -229,8 +226,17 @@ export default function HomePage() {
 														alt=""
 														fill
 														sizes="(min-width: 768px) 50vw, 100vw"
-														className="object-contain"
+														className={`object-contain ${project.coverLight ? "hidden [[data-theme=dark]_&]:block" : ""}`}
 													/>
+													{project.coverLight && (
+														<Image
+															src={project.coverLight}
+															alt=""
+															fill
+															sizes="(min-width: 768px) 50vw, 100vw"
+															className="object-contain [[data-theme=dark]_&]:hidden"
+														/>
+													)}
 												</div>
 											)}
 											<CardContent className="flex flex-col gap-4 p-7">
@@ -239,7 +245,13 @@ export default function HomePage() {
 												</span>
 												<div className="-mt-2 flex items-baseline justify-between gap-4">
 													<h3 className="font-display text-2xl font-bold tracking-tight">
-														{project.title}
+														{/* The title's link covers the whole card; the product link sits above it. */}
+														<Link
+															href={`/projects/${project.slug}`}
+															className="after:absolute after:inset-0 after:rounded-3xl after:content-['']"
+														>
+															{project.title}
+														</Link>
 													</h3>
 													<span className="text-muted-foreground font-mono text-xs">
 														{project.year}
@@ -259,15 +271,25 @@ export default function HomePage() {
 														</Badge>
 													))}
 												</div>
-												<span className="text-primary mt-2 inline-flex items-center gap-1.5 text-sm font-semibold">
-													Read the write-up
-													<span className="transition-transform duration-300 group-hover:translate-x-1">
-														→
+												<div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2">
+													<span className="text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
+														Read the write-up
+														<span className="transition-transform duration-300 group-hover:translate-x-1">
+															→
+														</span>
 													</span>
-												</span>
+													{project.product && (
+														<Link
+															href={project.product}
+															className="text-primary relative z-10 inline-flex items-center gap-1.5 rounded-full text-sm font-semibold underline-offset-4 hover:underline"
+														>
+															Product page <span aria-hidden>→</span>
+														</Link>
+													)}
+												</div>
 											</CardContent>
 										</Card>
-									</Link>
+									</div>
 								</StaggerItem>
 							))}
 						</Stagger>
