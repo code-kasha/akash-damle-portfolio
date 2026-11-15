@@ -4,6 +4,7 @@ import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
 const sharp = createRequire(require.resolve('next/package.json'))('sharp')
 const projects = [
+  ['sk8r', ['sk8r'], 'DEVELOPER TOOLING', 'Keep your momentum.', '#f2a99b', 'terminal'],
   ['rootstock', ['Rootstock'], 'FOUNDATION', 'Start complete. Prune to fit.', '#b9df98', 'tree'],
   ['promeet-desk', ['Pro Meet Desk'], 'BOOKINGS', 'Time reserved. Privacy preserved.', '#a6dcd5', 'calendar'],
   ['lead-platform', ['Lead Management', 'Platform'], 'SALES', 'From first contact to next action.', '#d3bcf2', 'columns'],
@@ -24,6 +25,7 @@ function illustration(type) {
     case 'nodes': return line('M75 195H170M200 195H290M185 180V85H290M185 210V305H290') + box(25,160,70,70) + [60,170,280].map(y=>box(280,y,60,50,.55)).join('') + `<circle cx="185" cy="195" r="24" fill="currentColor"/>`
     case 'pin': return `<path d="M185 350C155 310 65 225 65 150a120 120 0 0 1 240 0c0 75-90 160-120 200Z" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="5"/><circle cx="185" cy="150" r="40" fill="none" stroke="currentColor" stroke-width="5"/>` + line('M75 365H295')
     case 'chat': return `<path d="M30 80H280V235H120L60 285V235H30Z" fill="currentColor" fill-opacity=".15" stroke="currentColor" stroke-width="5"/><path d="M145 275H280L330 320V165" fill="none" stroke="currentColor" stroke-width="5"/>` + [85,150,215].map(x=>`<circle cx="${x}" cy="155" r="9" fill="currentColor"/>`).join('')
+    case 'terminal': return `<rect x="35" y="50" width="300" height="220" rx="18" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-width="5"/>` + line('M35 95H335') + [62,87,112].map(x=>`<circle cx="${x}" cy="73" r="7" fill="currentColor" fill-opacity=".6"/>`).join('') + line('M68 135L95 155L68 175') + box(115,149,130,12,.6) + box(68,200,190,12,.25) + box(68,228,150,12,.25) + line('M35 350C135 352 205 342 255 326S318 304 335 298') + `<circle cx="335" cy="298" r="11" fill="currentColor"/>`
     case 'chart': return [0,1,2,3,4].map((c)=>box(30+c*65,310-[65,115,95,185,235][c],38,[65,115,95,185,235][c],.16+c*.16)).join('') + line('M35 185L110 145L175 170L240 90L310 45')
   }
 }

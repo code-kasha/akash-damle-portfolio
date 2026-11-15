@@ -31,12 +31,12 @@ export const posts: Post[] = [
 	{
 		slug: 'sk8r-from-clone-to-running-app',
 		title: 'sk8r: from a fresh clone to a running app in one approval',
-		description: 'Four attempts on Lead Platform shaped a setup tool; Operations API then reached HTTP 200 after one approval. What sk8r verifies, what it can undo, and what remains untested.',
-		published: '2026-11-15',
-		updated: '2026-11-15',
+		description: 'Four attempts on Lead Platform shaped a setup tool; Operations API and a fresh install on Rootstock then reached HTTP 200 after one approval. What sk8r 1.0 verifies, what it asks before running, what it can undo, and what remains untested.',
+		published: '2026-11-16',
+		updated: '2026-11-16',
 		status: 'published',
 		tags: ['Python', 'Developer tools', 'AI agents', 'T3 Code'],
-		readingMinutes: 8,
+		readingMinutes: 10,
 	},
 	{
 		slug: 'a-context-pack-for-ai-sessions-measured',

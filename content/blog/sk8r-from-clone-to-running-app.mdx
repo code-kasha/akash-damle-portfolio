@@ -2,7 +2,7 @@ Cloning a project is easy. Getting it running is where I lose momentum. Which Py
 
 An AI coding assistant can do this work, but it can also guess its way through it. I wanted the decisions visible before it changed anything, and a result that meant more than a plausible command. That became [sk8r](https://github.com/code-kasha/sk8r), pronounced skat-r: identify a project, check it, install its dependencies, fill local settings, add run buttons and verify a start after one approval.
 
-The first public release is 0.1.0, under MIT. It is young, and the most useful part of its story is the setup that failed before another one succeeded.
+sk8r 1.0 is out on PyPI, under MIT. The most useful part of its story is still the setup that failed before another one succeeded, and what a fresh install taught me after that.
 
 ## From keeping context to keeping momentum
 
@@ -14,7 +14,7 @@ I wanted a tool an assistant could follow without making the assistant part of t
 
 The assistant follows `sk8r guide`, inspects the project and shows the whole plan. File inference supplies choices: `uv.lock` points to uv, `requirements.txt` to a project virtual environment, and `pnpm-lock.yaml` to pnpm. Those are evidence for a proposed command, rather than permission to execute it silently.
 
-The plan includes configuration, editor buttons, setup commands, missing app-setting names and start checks. I review that together. Once approved, sk8r writes the configuration, runs the declared setup, fills missing local-development settings and registers the buttons. In T3 Code, a reload makes the buttons visible. A terminal workflow is available too; T3 is the editor integration today.
+The plan includes configuration, editor buttons, setup commands, missing app-setting names and start checks. When the project's commands are new on this machine, it also lists every one of them with the full path of the program it will run. I review that together. Once approved, sk8r writes the configuration, runs the declared setup, fills missing local-development settings and registers the buttons. In T3 Code, the buttons appear in the project as soon as they are written. A terminal workflow is available too; T3 is the editor integration today.
 
 The last step starts a server, waits for an HTTP answer, stops the process tree it created and confirms that its port is free. A port already in use is a refusal, not an invitation to kill whatever owns it. That is especially useful when I have other work running beside the project I am setting up.
 
@@ -43,7 +43,7 @@ Clicking the backend button failed with `ModuleNotFoundError` for `decouple`. It
 
 An empty virtual environment was another false positive waiting to happen. Its directory could exist without a completed install. Setup is now recorded after its commands succeed, with hashes of its declared input files. A changed input makes that record stale. Start refuses dependent tabs until setup is complete. Python and Node setup entries are independent, so failure in one does not prevent trying the other.
 
-The buttons also needed a manual import before they appeared. sk8r now writes them directly into T3's project settings, with a backup first. The user still reloads T3. Without a project identifier there is a file-import route, but the guided path should not leave an unexplained manual step at the end.
+The buttons also needed a manual import before they appeared. sk8r now writes them directly into T3's project settings, with a backup first. At the time I still had to reload T3; it now shows them on its own. Without a project identifier there is a file-import route, but the guided path should not leave an unexplained manual step at the end.
 
 Repairing the profile and installing the dependencies got further: Django ran migrations, then stopped because it had no usable database setting. Local SQLite configuration let migrations run in the next attempt. Missing local-development defaults are now part of setup, alongside a generated secret key and the other required Django settings. Existing values are preserved; diagnostics show names, never values.
 
@@ -56,6 +56,20 @@ The next [field run](https://github.com/code-kasha/sk8r/blob/main/results/operat
 That timing needs its caveat beside it. The project already had a virtual environment with its packages installed. This was not a measurement of downloading and installing a fresh clone's dependencies. It measured the path from approval through setup and configuration to a verified start on that machine. A cold install would add work that this run did not measure.
 
 The project's own checks subsequently passed, including its 346 tests. Clicking the server-check button later produced another HTTP 200. That is useful evidence that the button did what it said, but it does not turn one project's result into a guarantee for every Django repository.
+
+## A fresh install: Rootstock
+
+To see what a newcomer meets, I uninstalled sk8r, installed it from GitHub like anyone else would, and set up [Rootstock](/projects/rootstock), a Django starter sk8r had never seen. One sentence and one approval later, the [field run](https://github.com/code-kasha/sk8r/blob/main/results/rootstock.md) had inferred Poetry from the lock file, installed nothing new because the packages were current, added three missing settings by name and seen the app answer HTTP 200. The whole session took 88 seconds.
+
+It still found five things to fix. `sk8r status` failed in a project that keeps its task list in `plan/todo.md` rather than a root `TODO.md`, and doctor told me to "restore" files I had never set up. Setup listed all 28 keys from `.env.example` as required, although only four were. The Django preset listened on every network interface by default rather than on localhost. And the assistant told me to press Ctrl+R although the buttons had already appeared. Each of those is fixed in 1.0, along with one more found while reviewing them: projects whose main branch is called `master`.
+
+## Deciding what a cloned repository may run
+
+Running a project's declared commands is sk8r's purpose, so the question for 1.0 was not whether it runs them but when. A repository someone else wrote can put anything in `sk8r.toml`. sk8r now shows every command with the full path of the program it will run, and runs them only after I have approved them once on my machine. A later change, say after a `git pull`, shows what was added and removed and asks again. The approval lives in my user settings, not in the repository, so a copied project cannot arrive pre-approved. Configuration sk8r writes itself counts as approved, because I just approved the plan that wrote it.
+
+Designing this turned up a real bug. On Windows with Python 3.11, the standard way to find a program on `PATH` also looks in the current folder first, so a repository could ship its own `git.exe` and have it run instead of Git, while the plan said `git`. The first public version had that bug. I found it while GitHub still showed no clones of the repository, fixed it and republished from the fixed code. Programs are now found only in the folders on `PATH`. The start check also connects only to this machine, and sk8r turns off Git's file-system monitor hook, which a copied repository could otherwise use to start a program.
+
+None of this sandboxes the project itself. Approving `python manage.py runserver` trusts that project's code, as running it by hand would.
 
 ## Small decisions that keep setup inspectable
 
@@ -71,7 +85,7 @@ Secrets need an equally narrow boundary. sk8r fills missing or empty local-setti
 
 The [public macOS fix](https://github.com/code-kasha/sk8r/commit/f5e1cc3) and its regression test document a process-group edge case: a group that has exited but has not yet been reaped can produce `EPERM` rather than the expected missing-process result. That affected the start check's cleanup. The implementation handles that case, and a regression test preserves it. This is exactly the sort of boundary I wanted platform CI to exercise before describing the tool as portable.
 
-CI now runs on Linux, macOS and Windows with Python 3.11 and 3.15. That is test coverage, not equivalent field experience. macOS has not been tried by hand. The field reports are two projects on one Windows machine, with only Operations API confirmed launched. There is more evidence to collect before claiming a generally reliable fresh-clone experience.
+CI runs on Linux, macOS and Windows with Python 3.11 and 3.15, and every release is installed and run on all three before it is published. That is test coverage, not equivalent field experience. I do not have a Mac, so macOS has not been tried by hand; if you have one, a [platform report](https://github.com/code-kasha/sk8r/issues/new?template=platform_report.yml) is very welcome. The field reports are three projects on one Windows machine: Operations API and Rootstock reached HTTP 200, and Lead Platform's launch remains unconfirmed. There is more evidence to collect before claiming a generally reliable fresh-clone experience.
 
 ## Built with agents, checked against applications
 
@@ -81,10 +95,10 @@ The interesting lesson for me is how much the real applications changed the tool
 
 ## Try it, and bring a preset
 
-It is not on PyPI yet. With uv available, install from GitHub:
+With uv available, install it from PyPI:
 
 ```sh
-uv tool install git+https://github.com/code-kasha/sk8r
+uv tool install sk8r
 sk8r --version
 ```
 
@@ -94,6 +108,6 @@ In T3 Code, open your project and ask: “Set this project up with sk8r; follow 
 sk8r run --dry-run
 ```
 
-That previews the work without running setup or launching the application. The screenshot on the [project page](/projects/sk8r) is real dry-run output from a disposable marker-file layout, rendered as a terminal-style image. Its incomplete states are intentional; it is not evidence of an application launch.
+That previews the work without running setup or launching the application. The screenshot on the [project page](/projects/sk8r) is real dry-run output from a disposable marker-file layout, rendered as a terminal-style image; sk8r 1.0.1 prints the same plan and states. Its incomplete states are intentional; it is not evidence of an application launch.
 
 If your stack is missing, a [preset](https://github.com/code-kasha/sk8r/blob/main/docs/contributing-presets.md) is the most welcome contribution: a small data file and a test. I would also like field reports that distinguish configuration, installation, readiness and a real start, especially where the plan makes a wrong assumption. That is how this release became more useful, and it is the evidence the next one needs.

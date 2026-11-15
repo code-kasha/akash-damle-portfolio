@@ -7,6 +7,16 @@ Last updated: **2026-10-13** · Production at `16fb97c`: Rootstock (deployed 12 
 ---
 
 
+## sk8r launch updated for 1.0 — 16 November 2026
+
+On `sk8r-launch`, after merging `origin/main` (`a77e834`, the cover redesign), for local review only; nothing pushed. sk8r 1.0.1 is on PyPI. The article now says 1.0 on PyPI and installs with `uv tool install sk8r`; it adds "A fresh install: Rootstock" (the 88-second trial and its five findings, fixed in 1.0) and "Deciding what a cloned repository may run" (approval of a project's commands, the Windows/Python 3.11 program-substitution bug found while GitHub showed no clones and fixed before republishing, loopback-only start check, Git's fsmonitor off); buttons now appear in T3 without a reload; macOS: no Mac, platform reports invited; three field results. Published and updated dates 2026-11-16; reading time 10 minutes (2,283 words at about 220 a minute). Project entry: approach mentions approvals, outcome is 1.0 on PyPI (Beta), two new highlights, CI line mentions release install checks, screenshot alt says 1.0.1 prints the same.
+
+Cover: `scripts/build-project-covers.mjs` gained sk8r (`DEVELOPER TOOLING`, "Keep your momentum.", accent `#f2a99b`, a new `terminal` illustration); `public/sk8r-social.svg` and `.png` generated. Running the script rewrites the other SVGs with LF line endings only (content and PNGs identical), so those were restored. Screenshot `public/sk8r.png` kept: sk8r 1.0.1, installed from PyPI into a throwaway uv tool folder, prints exactly the captured plan and states on the same disposable layout (`manage.py`, `uv.lock`, `pyproject.toml`).
+
+Validation: `pnpm lint` 0 errors (existing warnings); `pnpm build` passes and generates `/projects/sk8r` and the article; light-mode Playwright captures of the home grid, project page and article checked. Not published: waits for Akash's go (push `sk8r-launch` into `v2` and `main`; `main` deploys).
+
+---
+
 ## sk8r launch prepared — 15 November 2026
 
 Added on `sk8r-launch` from `v2` (`66fcadc`), for local review only. New sk8r project entry, public source link, cover and real dry-run screenshot, plus an eight-minute article (`sk8r-from-clone-to-running-app`). The optional project `article` field links the write-up from the case-study route. Order: first in the projects grid (Akash, 15 November 2026: "First"), ahead of Rootstock, part “Developer tooling”; the existing relative order is otherwise unchanged. Post metadata follows `lib/posts.ts` (no MDX YAML front matter): 15 November 2026, newest post. Its published flag enables production-build review; nothing was pushed or deployed.
