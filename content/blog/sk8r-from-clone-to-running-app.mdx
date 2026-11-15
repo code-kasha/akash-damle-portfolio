@@ -1,0 +1,99 @@
+Cloning a project is easy. Getting it running is where I lose momentum. Which Python does it need? Does this repository use uv, Poetry or requirements? Is the virtual environment usable, or merely present? Where does the database setting come from? When the assistant says it is ready, has anything actually answered a request?
+
+An AI coding assistant can do this work, but it can also guess its way through it. I wanted the decisions visible before it changed anything, and a result that meant more than a plausible command. That became [sk8r](https://github.com/code-kasha/sk8r), pronounced skat-r: identify a project, check it, install its dependencies, fill local settings, add run buttons and verify a start after one approval.
+
+The first public release is 0.1.0, under MIT. It is young, and the most useful part of its story is the setup that failed before another one succeeded.
+
+## From keeping context to keeping momentum
+
+I wrote earlier about [keeping a context pack across fresh AI sessions](/blog/a-context-pack-for-ai-sessions-measured). That article covers the workflow and its measurements; I will leave those there. sk8r also has project status and context-pack commands, but its launch workflow addresses the next practical interruption: knowing what to do does not make a project runnable.
+
+I wanted a tool an assistant could follow without making the assistant part of the runtime. sk8r itself calls no model and no online service. It uses Python's standard library. Package managers it starts can go online, and its start check talks to the local application. The boundary matters: a repeatable setup should not depend on which model happens to be reading the repository today.
+
+## What one approval covers
+
+The assistant follows `sk8r guide`, inspects the project and shows the whole plan. File inference supplies choices: `uv.lock` points to uv, `requirements.txt` to a project virtual environment, and `pnpm-lock.yaml` to pnpm. Those are evidence for a proposed command, rather than permission to execute it silently.
+
+The plan includes configuration, editor buttons, setup commands, missing app-setting names and start checks. I review that together. Once approved, sk8r writes the configuration, runs the declared setup, fills missing local-development settings and registers the buttons. In T3 Code, a reload makes the buttons visible. A terminal workflow is available too; T3 is the editor integration today.
+
+The last step starts a server, waits for an HTTP answer, stops the process tree it created and confirms that its port is free. A port already in use is a refusal, not an invitation to kill whatever owns it. That is especially useful when I have other work running beside the project I am setting up.
+
+## Four states instead of “ready”
+
+I now want four separate answers:
+
+| State | What it establishes |
+|---|---|
+| Configured | The configuration exists. |
+| Dependencies installed | The declared setup has been recorded as complete. |
+| Dry-run verified | The readiness checks for programs and paths passed. |
+| Launched | The application actually started and answered the start check. |
+
+These claims get stronger as you move down the table. A Python executable existing on PATH says nothing about whether it has the project's packages. A successful install says nothing about whether the database configuration works. An HTTP answer establishes a start, not that every feature of the application works.
+
+That distinction came from using the tool on Lead Platform. The [field report](https://github.com/code-kasha/sk8r/blob/main/results/lead-platform.md) records four attempts, with each failure changing what sk8r checks or does next.
+
+## Lead Platform: the failures were the specification
+
+The first attempt stopped before setup. Doctor treated a missing `sk8r.toml` as a blocking invalid configuration. The guide told the assistant to stop on blocks, so it did exactly that. A fresh project normally has no sk8r file; treating that as exceptional made the first step impossible. Missing configuration is now a warning so identification can proceed.
+
+The next attempt exposed a more dangerous gap. The preview proposed uv even though the backend used `requirements.txt`. The assistant then explicitly chose plain Python. The backend button used the global interpreter, setup installed only the Node dependencies, and doctor passed because Python existed.
+
+Clicking the backend button failed with `ModuleNotFoundError` for `decouple`. It was also the wrong Django environment. This was partly an assistant decision, but a setup tool that silently makes that decision easy has work to do. Preset choices now come from the project's manifests, requirements projects get a local venv, commands use its interpreter directly, and choosing plain Python beside requirements produces a warning.
+
+An empty virtual environment was another false positive waiting to happen. Its directory could exist without a completed install. Setup is now recorded after its commands succeed, with hashes of its declared input files. A changed input makes that record stale. Start refuses dependent tabs until setup is complete. Python and Node setup entries are independent, so failure in one does not prevent trying the other.
+
+The buttons also needed a manual import before they appeared. sk8r now writes them directly into T3's project settings, with a backup first. The user still reloads T3. Without a project identifier there is a file-import route, but the guided path should not leave an unexplained manual step at the end.
+
+Repairing the profile and installing the dependencies got further: Django ran migrations, then stopped because it had no usable database setting. Local SQLite configuration let migrations run in the next attempt. Missing local-development defaults are now part of setup, alongside a generated secret key and the other required Django settings. Existing values are preserved; diagnostics show names, never values.
+
+There is an important limit to this account. Lead Platform was not rerun end to end with the final fixes, and no HTTP answer was recorded. Its configuration, dependencies and dry run were established. Its launch remains unconfirmed. I am keeping that result in the story because it explains why the final state must be measured rather than inferred from progress.
+
+## Operations API: the result, with its denominator
+
+The next [field run](https://github.com/code-kasha/sk8r/blob/main/results/operations-api.md) was Operations API, a Django project that had never been configured with sk8r. The assistant showed the plan, I approved it once, and about 11 seconds later the app answered HTTP 200. The result reported all four states separately. The check stopped its own server and reported the port free afterwards.
+
+That timing needs its caveat beside it. The project already had a virtual environment with its packages installed. This was not a measurement of downloading and installing a fresh clone's dependencies. It measured the path from approval through setup and configuration to a verified start on that machine. A cold install would add work that this run did not measure.
+
+The project's own checks subsequently passed, including its 346 tests. Clicking the server-check button later produced another HTTP 200. That is useful evidence that the button did what it said, but it does not turn one project's result into a guarantee for every Django repository.
+
+## Small decisions that keep setup inspectable
+
+Presets are data files, copied into the project's configuration. The committed configuration remains what runs. That gives me a file to review and change rather than hidden behaviour that depends on a model remembering the original conversation.
+
+Recorded setup addresses a different kind of memory: whether the install actually completed for the current inputs. It does not install on its own when start notices a missing record. It points back to the setup command, keeping installation an explicit action.
+
+Undo is part of that same contract. sk8r journals its changes in Git's own project storage, including configuration, setup-created files and editor buttons it replaced. `sk8r undo --dry-run` previews the reversal. Changes someone made afterwards are reported and left alone. I want to be able to try the setup without losing the distinction between what the tool wrote and what I edited later.
+
+Secrets need an equally narrow boundary. sk8r fills missing or empty local-setting keys without printing their values or putting them in its journal. That is not a promise about what an arbitrary application's own logs might contain. It is a rule for sk8r's handling of settings. Similarly, stopping the process tree it started for verification is different from freeing a port belonging to another server; the latter is refused.
+
+## What macOS CI caught
+
+The [public macOS fix](https://github.com/code-kasha/sk8r/commit/f5e1cc3) and its regression test document a process-group edge case: a group that has exited but has not yet been reaped can produce `EPERM` rather than the expected missing-process result. That affected the start check's cleanup. The implementation handles that case, and a regression test preserves it. This is exactly the sort of boundary I wanted platform CI to exercise before describing the tool as portable.
+
+CI now runs on Linux, macOS and Windows with Python 3.11 and 3.15. That is test coverage, not equivalent field experience. macOS has not been tried by hand. The field reports are two projects on one Windows machine, with only Operations API confirmed launched. There is more evidence to collect before claiming a generally reliable fresh-clone experience.
+
+## Built with agents, checked against applications
+
+Claude Opus 5.5 (Anthropic) orchestrated and reviewed the work, GPT-6.1 Sol (OpenAI) built assigned implementation steps, and GPT-6.1 Terra (OpenAI) generated the logo concept. The repository's brand notes record the image provenance. I made the product decisions and approved the steps.
+
+The interesting lesson for me is how much the real applications changed the tool. A guide can look complete while a missing configuration blocks its first command. A doctor can be correct about finding Python while being useless about finding the right Python. Keeping those failures visible gives the next test something concrete to disprove.
+
+## Try it, and bring a preset
+
+It is not on PyPI yet. With uv available, install from GitHub:
+
+```sh
+uv tool install git+https://github.com/code-kasha/sk8r
+sk8r --version
+```
+
+In T3 Code, open your project and ask: “Set this project up with sk8r; follow `sk8r guide`.” Read the plan before approving. From a terminal in your project, start with:
+
+```sh
+sk8r run --dry-run
+```
+
+That previews the work without running setup or launching the application. The screenshot on the [project page](/projects/sk8r) is real dry-run output from a disposable marker-file layout, rendered as a terminal-style image. Its incomplete states are intentional; it is not evidence of an application launch.
+
+If your stack is missing, a [preset](https://github.com/code-kasha/sk8r/blob/main/docs/contributing-presets.md) is the most welcome contribution: a small data file and a test. I would also like field reports that distinguish configuration, installation, readiness and a real start, especially where the plan makes a wrong assumption. That is how this release became more useful, and it is the evidence the next one needs.

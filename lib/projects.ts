@@ -22,6 +22,8 @@ export type Project = {
 	outcome: string
 	stack: string[]
 	highlights: string[]
+	/** Article explaining the project and its limits. */
+	article?: string
 	repo?: string
 	demo?: string
 	/** Real interface capture displayed without cropping on the project page. */
@@ -102,6 +104,31 @@ export const projects: Project[] = [
 		cover: "/rootstock-social.png",
 		featured: true,
 		resumeHighlights: [0, 1],
+	},
+	{
+		slug: "sk8r",
+		title: "sk8r",
+		part: "Developer tooling",
+		tagline: "Set a project up, install it and verify it starts after one approval, with a plan you can preview and undo.",
+		year: "2026",
+		role: "Developer, with Claude and GPT-6.1 Sol as AI co-authors",
+		problem: "Momentum dies between cloning a project and getting it running: the interpreter, package manager, missing settings and start command all need decisions, and an AI assistant can guess wrong at each one.",
+		constraint: "A readiness check cannot prove a server started. Setup must be reviewable, preserve existing settings and leave other people's processes alone.",
+		approach: "Data-only presets and inference from project files produce a numbered plan. After approval, sk8r records setup, fills missing local settings without printing values, adds T3 Code buttons and checks for an HTTP answer. A journal supports undo while leaving later user edits alone. Configured, dependencies installed, dry-run verified and launched are reported separately.",
+		outcome: "Released as 0.1.0 under MIT; not on PyPI yet, install from GitHub with uv. T3 Code-centred, with field results from two projects on one Windows machine. Operations API reached HTTP 200 in about 11 seconds after one approval with packages already installed; Lead Platform's launch is unconfirmed. macOS is verified in CI only, not by hand.",
+		stack: ["Python", "Standard library", "TOML", "unittest", "T3 Code", "GitHub Actions"],
+		highlights: [
+			"The Operations API field report records one approval to HTTP 200 in about 11 seconds; dependencies were already present.",
+			"sk8r undo previews and reverses journalled changes, including replaced editor buttons, while keeping later user edits.",
+			"App settings diagnostics show key names only; sk8r never prints or journals .env values.",
+			"CI runs on Linux, macOS and Windows with Python 3.11 and 3.15.",
+			"MIT licensed, with Python's standard library as the only runtime dependency.",
+		],
+		repo: "https://github.com/code-kasha/sk8r",
+		article: "/blog/sk8r-from-clone-to-running-app",
+		cover: "/sk8r-social.png",
+		screenshot: { src: "/sk8r.png", width: 1280, height: 800, alt: "Real sk8r dry-run output from a disposable Django marker layout: numbered plan and four states, all incomplete; no application was launched" },
+		featured: true,
 	},
 	{
 		slug: "promeet-desk",

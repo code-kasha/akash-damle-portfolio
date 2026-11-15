@@ -186,6 +186,12 @@ export default async function ProjectPage({
 						</Reveal>
 					))}
 
+					{project.article && (
+						<p className="border-t py-10">
+							<Link href={project.article} className="underline underline-offset-4">Read the build story →</Link>
+						</p>
+					)}
+
 					{project.highlights.length > 0 && (
 						<Reveal>
 							<div className="border-t py-10">
