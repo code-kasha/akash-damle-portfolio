@@ -1,4 +1,4 @@
-My CRM project, [Crono](https://github.com/code-kasha/crono), has a build plan with twelve phases, from identity and organizations through teams, billing and industry templates. The plan is too long for one AI conversation, and I do not want to compress a conversation and keep going until the details blur. So each phase gets its own fresh thread in T3 Code, and I use a small set of rules to bring each new thread up to speed.
+My CRM project, Crono, has a build plan with twelve phases, from identity and organizations through teams, billing and industry templates. The plan is too long for one AI conversation, and I do not want to compress a conversation and keep going until the details blur. So each phase gets its own fresh thread in T3 Code, and I use a small set of rules to bring each new thread up to speed.
 
 This article describes that workflow, where it comes from, and what I measured when I tested it. I had Claude, the AI agent that works for me, run the measurements. It is not a replacement for anything. It is a way of working I settled on for large projects, and saving tokens turned out to be the smaller part of the benefit.
 
@@ -13,7 +13,7 @@ The workflow has three rules, applied in order:
 The pack is one Markdown file, `docs/context-pack.md`, kept under 10 KB. It holds what a newcomer needs: what is true now, decisions that change how people work, open questions, and above all the details of the next task and what follows it. Reasoning goes to the research notes, tasks go to `todo.md`, and finished history stays in Git. Four pieces keep it honest:
 
 - **A size cap.** Over 10 KB, a commit prints a warning and the rules say to trim. Without a cap the file turns into the context it was meant to replace.
-- **A generated status section.** A pre-commit hook rewrites the branch, the last five commits, the task count and the next open tasks. Code produces the facts that go stale fastest.
+- **A generated status section.** A pre-commit hook rewrites the branch, the last five commits, the task count and the next open tasks. Code produces the facts that go stale fastest. If the hook fails, it only prints a warning, so it can never block a commit.
 - **A commit reminder.** A Claude Code hook fires after any `git commit` and asks the agent to update the hand-written sections. Because commits only happen at task boundaries, each reminder means a task has just finished.
 - **An entry point.** `AGENTS.md` tells a new thread to read the pack and `todo.md`, then check `git status` and the last few commits, and not to scan the rest. Where the pack and Git disagree, Git wins.
 
@@ -107,3 +107,15 @@ This is one project, one model, three phase starts and one run per condition, so
 ## Using it on another project
 
 The idea suits any project with many phases or modules, where each gets its own thread and the background material is much larger than a thread can reread. The pieces carry over: a capped file, a rules file, a pre-commit script that rebuilds the status section, a post-commit reminder hook and a pointer in `AGENTS.md`. The one project-specific part is how the script reads your task list. Mine expects `## Phase` headings and `- [ ]` checkboxes.
+
+I have since turned that setup into one command in [sk8r](https://github.com/code-kasha/sk8r), a small open-source tool I am building. In a Git repository, `sk8r pack init --dry-run` shows the whole plan and changes nothing, and `sk8r pack init` carries it out after one confirmation:
+
+- it creates `docs/context-pack.md` from a template that includes the rules and the 10 KB trimming guidance;
+- it finds your task list, `TODO.md` or `todo.md`, or creates a starter one in the expected format;
+- it records the task list, the pack and the branch the pack is refreshed on in a small settings file, `sk8r.toml`;
+- it adds a start-here block to `AGENTS.md` and keeps everything already there; and
+- only if you ask, it adds the pre-commit refresh (`--hook`), extending an existing hook instead of replacing it, and the Claude Code commit reminder (`--remind claude`), merged into your existing settings.
+
+Every change is recorded, and `sk8r undo` reverses it. One deliberate difference from Crono's script: sk8r's generated section leaves out the list of recent commits by default, so the pack changes only when the plan's facts change, not with every commit. For agents without hooks, `sk8r pack --check` reports whether the pack is stale.
+
+sk8r is early, at version 0.1, so I will update this section as it matures.

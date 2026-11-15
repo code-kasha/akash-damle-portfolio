@@ -184,7 +184,26 @@ export default function HomePage() {
 												</Badge>
 											</div>
 											<h3 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
-												{project.title}
+												{project.logo ? (
+													<>
+														<Image
+															src={project.logo.light}
+															alt={project.title}
+															width={1750}
+															height={444}
+															className="h-10 w-auto md:h-12 [[data-theme=dark]_&]:hidden"
+														/>
+														<Image
+															src={project.logo.dark}
+															alt=""
+															width={1750}
+															height={444}
+															className="hidden h-10 w-auto md:h-12 [[data-theme=dark]_&]:block"
+														/>
+													</>
+												) : (
+													project.title
+												)}
 											</h3>
 											<p className="text-muted-foreground max-w-2xl leading-relaxed">
 												{project.tagline}

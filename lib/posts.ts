@@ -44,10 +44,10 @@ export const posts: Post[] = [
 		description:
 			'A workflow for a twelve-phase project: commit only when a task is done, update a 10 KB context pack after the commit, and start each phase in a new thread. How it relates to Cline Memory Bank and handoff files, and what it cost and saved when measured.',
 		published: '2026-11-03',
-		updated: '2026-11-03',
+		updated: '2026-11-15',
 		status: 'published',
 		tags: ['AI agents', 'Claude Code', 'Workflow'],
-		readingMinutes: 5,
+		readingMinutes: 11,
 	},
 	{
 		slug: 'roomwave-rooms-where-removal-reaches-open-tabs',

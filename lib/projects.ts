@@ -454,6 +454,8 @@ export type UpcomingProject = {
 	tagline: string
 	/** Where it stands, stated plainly. */
 	status: string
+	/** Wordmark shown instead of the title: navy letters for the light theme, white for the dark. */
+	logo?: { light: string; dark: string }
 }
 
 /**
@@ -462,11 +464,12 @@ export type UpcomingProject = {
  */
 export const upcoming: UpcomingProject[] = [
 	{
-		slug: "crm",
-		title: "CRM",
+		slug: "crono",
+		title: "Crono",
 		tagline:
 			"A CRM that arrives already set up for how your business works — sales, agency, real estate or field services — instead of making you configure it first.",
 		status: "In research and planning",
+		logo: { light: "/crono-wordmark-light.svg", dark: "/crono-wordmark-dark.svg" },
 	},
 ]
 

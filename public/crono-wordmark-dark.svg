@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="75 34 1750 444" role="img" aria-label="Crono">
+  <g fill="none" stroke="#06C7E8" stroke-width="66" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Kappa, drawn as a C -->
+    <path d="M150 130 Q118 256 150 382"/>
+    <path d="M136 256 C210 250 214 92 310 92 C350 92 382 106 402 128"/>
+    <path d="M136 256 C210 262 214 420 310 420 C350 420 382 406 402 384"/>
+  </g>
+  <g fill="none" stroke="#FFFFFF" stroke-width="66" stroke-linecap="round" stroke-linejoin="round">
+    <!-- R -->
+    <path d="M530 420 V92 H630 C690 92 726 130 726 180 C726 230 690 268 630 268 H530"/>
+    <path d="M624 268 C680 272 690 388 744 420"/>
+    <!-- O -->
+    <path d="M980 92 C1070 92 1110 170 1110 256 C1110 342 1070 420 980 420 C890 420 850 342 850 256 C850 170 890 92 980 92 Z"/>
+    <!-- N -->
+    <path d="M1216 420 V92 L1400 420 V92"/>
+    <!-- O -->
+    <path d="M1636 92 C1726 92 1766 170 1766 256 C1766 342 1726 420 1636 420 C1546 420 1506 342 1506 256 C1506 170 1546 92 1636 92 Z"/>
+  </g>
+  <!-- Hourglass, inside the middle O -->
+  <g fill="none" stroke="#06C7E8" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M935.4 189.8 H1024.6 C1024.6 231.5 993 237.3 980 256 C967 237.3 935.4 231.5 935.4 189.8 Z M935.4 322.2 H1024.6 C1024.6 280.5 993 274.7 980 256 C967 274.7 935.4 280.5 935.4 322.2 Z"/>
+  </g>
+</svg>
