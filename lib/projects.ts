@@ -357,7 +357,8 @@ export const projects: Project[] = [
 			alt: "bharat-post-dir lookup page showing Delhi results and the dataset source information",
 		},
 		cover: "/bharat-post-dir-social.png",
-		featured: true,
+		// Not on the home grid, so it shows an even number of cards; its page and résumé entry stay.
+		featured: false,
 		resumeHighlights: [1, 0],
 	},
 	{
