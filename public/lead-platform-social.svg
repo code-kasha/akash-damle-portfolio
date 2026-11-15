@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+<title>Lead Management Platform</title><desc>From first contact to next action.</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern></defs>
+<rect width="1280" height="640" fill="#151d20"/><rect width="1280" height="640" fill="url(#grid)"/>
+<circle cx="1050" cy="300" r="246" fill="#d3bcf2" fill-opacity=".035"/>
+<path d="M64 70H104" stroke="#d3bcf2" stroke-width="5"/>
+<g font-family="Segoe UI, Arial, sans-serif"><text x="122" y="78" fill="#d3bcf2" font-size="20" font-weight="600" letter-spacing="4">SALES</text>
+<text x="64" y="255" fill="#f3f3ed" font-size="68" font-weight="700" letter-spacing="-2">Lead Management</text><text x="64" y="331" fill="#f3f3ed" font-size="68" font-weight="700" letter-spacing="-2">Platform</text>
+<text x="68" y="389" fill="#adb8b9" font-size="26">From first contact to next action.</text>
+<text x="68" y="568" fill="#7f9194" font-family="Consolas, monospace" font-size="16" letter-spacing="2">AKASH DAMLE / SELECTED WORK</text></g>
+<path d="M770 120V520" stroke="#fff" stroke-opacity=".1"/>
+<g transform="translate(830 110)" color="#d3bcf2"><rect x="30" y="70" width="94" height="270" rx="12" fill="currentColor" fill-opacity="0.08"/><rect x="45" y="90" width="62" height="7" rx="12" fill="currentColor" fill-opacity="0.5"/><rect x="44" y="125" width="66" height="48" rx="12" fill="currentColor" fill-opacity="0.25"/><rect x="44" y="190" width="66" height="48" rx="12" fill="currentColor" fill-opacity="0.25"/><rect x="44" y="255" width="66" height="48" rx="12" fill="currentColor" fill-opacity="0.25"/><rect x="140" y="70" width="94" height="270" rx="12" fill="currentColor" fill-opacity="0.08"/><rect x="155" y="90" width="62" height="7" rx="12" fill="currentColor" fill-opacity="0.5"/><rect x="154" y="125" width="66" height="48" rx="12" fill="currentColor" fill-opacity="0.48"/><rect x="154" y="190" width="66" height="48" rx="12" fill="currentColor" fill-opacity="0.48"/><rect x="250" y="70" width="94" height="270" rx="12" fill="currentColor" fill-opacity="0.08"/><rect x="265" y="90" width="62" height="7" rx="12" fill="currentColor" fill-opacity="0.5"/><rect x="264" y="125" width="66" height="48" rx="12" fill="currentColor" fill-opacity="0.71"/></g>
+</svg>
