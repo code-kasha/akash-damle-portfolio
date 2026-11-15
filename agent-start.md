@@ -9,7 +9,7 @@ Last updated: **2026-10-13** · Production at `16fb97c`: Rootstock (deployed 12 
 
 ## sk8r launch prepared — 15 November 2026
 
-Added on `sk8r-launch` from `v2` (`66fcadc`), for local review only. New sk8r project entry, public source link, cover and real dry-run screenshot, plus an eight-minute article (`sk8r-from-clone-to-running-app`). The optional project `article` field links the write-up from the case-study route. Order choice: immediately after Rootstock, part “Developer tooling”; existing relative order is unchanged. Post metadata follows `lib/posts.ts` (no MDX YAML front matter): 15 November 2026, newest post. Its published flag enables production-build review; nothing was pushed or deployed.
+Added on `sk8r-launch` from `v2` (`66fcadc`), for local review only. New sk8r project entry, public source link, cover and real dry-run screenshot, plus an eight-minute article (`sk8r-from-clone-to-running-app`). The optional project `article` field links the write-up from the case-study route. Order: first in the projects grid (Akash, 15 November 2026: "First"), ahead of Rootstock, part “Developer tooling”; the existing relative order is otherwise unchanged. Post metadata follows `lib/posts.ts` (no MDX YAML front matter): 15 November 2026, newest post. Its published flag enables production-build review; nothing was pushed or deployed.
 
 Sources: sk8r README, CHANGELOG, docs/reference, both public field reports and results index, public CI workflow and green run 43725645276, public macOS fix f5e1cc3 and its regression test, brand README provenance; AI role credits supplied in the approved L4 brief. No private records or settings values used. Read the installed Next MDX guide before changes.
 
