@@ -87,18 +87,15 @@ export default function HomePage() {
 						</div>
 					</Reveal>
 
-					{/* Newest blog post, surfaced in the hero because posts are a
-					    main route in from search and social. Hidden when none exist. */}
-					{latestPost && (
-						<Reveal delay={0.95} y={16}>
-							<Link
-								href={`/blog/${latestPost.slug}`}
-								className="group surface-glass hover:border-primary mt-8 inline-flex max-w-full items-center gap-3 rounded-full border py-1.5 pr-4 pl-1.5 text-sm shadow-lg shadow-black/5 transition-colors"
-							>
+					{/* Newest tool and newest blog post, surfaced in the hero because they are
+					    the main routes in from search and social. The post chip hides when none exist. */}
+					<Reveal delay={0.95} y={16}>
+						<div className="mt-8 flex flex-wrap gap-3">
+							<Link href="/sk8r" className="group surface-glass hover:border-primary inline-flex max-w-full items-center gap-3 rounded-full border py-1.5 pr-4 pl-1.5 text-sm shadow-lg shadow-black/5 transition-colors">
 								<span className="bg-primary text-primary-foreground shrink-0 rounded-full px-2.5 py-1 font-mono text-[0.65rem] tracking-widest uppercase">
-									New post
+									New tool
 								</span>
-								<span className="truncate">{latestPost.title}</span>
+								<span className="truncate">sk8r 1.0: set a project up so it runs, after one approval</span>
 								<span
 									aria-hidden
 									className="text-primary shrink-0 transition-transform group-hover:translate-x-0.5"
@@ -106,8 +103,22 @@ export default function HomePage() {
 									→
 								</span>
 							</Link>
-						</Reveal>
-					)}
+							{latestPost && (
+								<Link href={`/blog/${latestPost.slug}`} className="group surface-glass hover:border-primary inline-flex max-w-full items-center gap-3 rounded-full border py-1.5 pr-4 pl-1.5 text-sm shadow-lg shadow-black/5 transition-colors">
+									<span className="bg-primary text-primary-foreground shrink-0 rounded-full px-2.5 py-1 font-mono text-[0.65rem] tracking-widest uppercase">
+										New post
+									</span>
+									<span className="truncate">{latestPost.title}</span>
+									<span
+										aria-hidden
+										className="text-primary shrink-0 transition-transform group-hover:translate-x-0.5"
+									>
+										→
+									</span>
+								</Link>
+							)}
+						</div>
+					</Reveal>
 
 					<Reveal delay={0.8}>
 						<dl className="mt-20 grid max-w-4xl grid-cols-2 gap-8 lg:grid-cols-4">

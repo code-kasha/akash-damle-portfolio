@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -80,7 +81,8 @@ export default function Sk8rPage() {
 		<main id="main">
 			<section className="relative overflow-hidden px-6 pt-36 pb-24">
 				<Aurora className="opacity-60" />
-				<div className="relative mx-auto max-w-4xl">
+				<div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
+					<div>
 					<Reveal y={12}>
 						<p className="text-muted-foreground mb-8 font-mono text-xs tracking-widest uppercase">
 							sk8r · open-source developer tool
@@ -112,6 +114,30 @@ export default function Sk8rPage() {
 							<p className="text-muted-foreground font-mono text-xs">
 								Free and open source (MIT) · Python 3.11+ · Linux, macOS and Windows · no model, no account
 							</p>
+						</div>
+					</Reveal>
+					</div>
+					<Reveal delay={0.18}>
+						<div className="overflow-hidden rounded-3xl border shadow-2xl">
+							{/* The cover follows the site theme, like the project cards. */}
+							<Image
+								src="/sk8r-social-light.png"
+								alt="sk8r: Keep your momentum."
+								width={1280}
+								height={640}
+								priority
+								sizes="(min-width: 1024px) 45vw, 100vw"
+								className="h-auto w-full [[data-theme=dark]_&]:hidden"
+							/>
+							<Image
+								src="/sk8r-social.png"
+								alt="sk8r: Keep your momentum."
+								width={1280}
+								height={640}
+								priority
+								sizes="(min-width: 1024px) 45vw, 100vw"
+								className="hidden h-auto w-full [[data-theme=dark]_&]:block"
+							/>
 						</div>
 					</Reveal>
 				</div>
